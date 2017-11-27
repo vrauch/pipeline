@@ -1,0 +1,5 @@
+<% if @question.errors.any? %>
+  $("#manage-question").html("<%= j(render 'new') %>")
+<% else %>
+  $("#manage-question, #questions").empty()
+<% end %>

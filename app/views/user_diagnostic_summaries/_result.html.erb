@@ -1,0 +1,53 @@
+<div class="page_container container_table">
+  <div class="left_block half_block <%= @act.diagnostic_type.title.downcase %>">
+    <div class="left_block_content half_block_content">
+      <h2 class="result_help_text">YOUR RESULTS</h2>
+				<span class="icon_wreath_holder">
+					<i class="icon icon_wreath"></i>
+				</span>
+      <h1 class="result_value"><%= @act.diagnostic_type.title.upcase %></h1>
+      <div class="result_text">
+        <%= @act.diagnostic_type.highlights %>
+      </div>
+      <% if @brief %>
+        <%= link_to 'CONTINUE', dashboard_path, class: 'btn btn_white' %>
+      <% else %>
+        <%= link_to 'CONTINUE', new_brand_brief_summary_path(invite_token: @invite.token), class: 'btn btn_white' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="right_block half_block">
+    <div class="right_block_content half_block_content">
+      <div class="text_block">
+        <h3 class="h3_title">INSIGHT</h3>
+        <%= @act.diagnostic_type.description %>
+      </div>
+      <div class="graph_list_holder">
+        <div class="graph_list_name">INNOVATION SPECTRUM</div>
+        <ul class="graph_list">
+          <% @diagnostic_types.each do |type| %>
+            <% @active = false %>
+            <% @user.insight_summaries.each do |summary| %>
+              <% if type == summary.diagnostic_type %>
+                <% @active = true %>
+                <% @group_title = summary.insight_group.title %>
+              <% end %>
+            <% end %>
+            <li class="<%= type.title.downcase %>_item <%= 'active' if @active %>"><%= type.title.upcase %>
+              <span class="innovator_item_letter"><%= type.initial %></span>
+              <% if @active %>
+                <span class="innovator_item_additional">
+                  <span class="hidden-xs hidden-sm"><%= @group_title %></span>
+                </span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <!--<div class="text_block">-->
+        <!--<h3 class="h3_title">WE RECOMEND</h3>-->
+        <!--Digital ads are ignored. Influencer, advocate, and content marketing have quickly become staples in a marketing stack. There are no end-to-end solutions available for marketers that reduce overhead costs, time, and biased marketing analytics.-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>

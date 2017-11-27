@@ -1,0 +1,2 @@
+module BrandUsersHelper
+end

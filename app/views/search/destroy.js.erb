@@ -1,0 +1,9 @@
+$("#notification").html("<%= j(render('layouts/flash_message')) %>");
+$('.top_notification').showFlashMessage();
+<% if @search.destroyed? %>
+  <% if @searches_count > 0 %>
+    $("#search-<%= @search.id %>").remove();
+  <% else %>
+    $("#saved_searches").html("<%= j(render('empty_saved')) %>");
+  <% end %>
+<% end %>

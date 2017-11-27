@@ -1,0 +1,2 @@
+module BrandQuestionsHelper
+end

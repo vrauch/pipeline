@@ -1,0 +1,10 @@
+<div class="top_panel clearfix">
+  <div class="top_panel_text_holder pull-left">
+    <div class="top_panel_text">
+      <%= tag.title %>
+    </div>
+  </div>
+  <%= link_to @back_link || tags_path, class: "close_panel" do %>
+    <i class="icon icon_close"></i>
+  <% end %>
+</div>

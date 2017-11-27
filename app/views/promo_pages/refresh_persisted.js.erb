@@ -1,0 +1,11 @@
+<% if @promo_page.current_step == PromoPage::STEPS.second %>
+  <% if remotipart_submitted? %>
+    $("#promo_page_<%= @promo_page.current_step %>").html("<%= j "#{render('new')}" %>");
+  <% else %>
+    $("#promo_page_<%= @promo_page.current_step %>").html("<%= j(render 'new') %>");
+  <% end %>
+  $.promoPageMethods.videoBlock();
+<% end %>
+$('.cover-image-input').previewImage('.cover-image-preview-image');
+$('.form-image-input').previewImage('.form-image-preview-image');
+<%= render 'partials/disable_spinner' %>

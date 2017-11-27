@@ -1,0 +1,11 @@
+<% if params[:action] == 'view_questions' %>
+  <div class="close_panel_icon dismiss_one_panel">
+    X
+  </div>
+  <h1 class="h1_title">Brand Questions</h1>
+<% end %>
+<ol id="question-list" class="question_list">
+  <% @brand.brand_questions.each_with_index do |question, index| %>
+    <%= render('created_question', question: question, index: index, edit: edit) %>
+  <% end %>
+</ol>

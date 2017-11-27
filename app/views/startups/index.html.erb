@@ -1,0 +1,13 @@
+<div id="startups-wrapper">
+  <% if @startups.any? %>
+    <%= render partial: 'present_startups' %>
+  <% else %>
+    <% if params[:unconfirmed] %>
+      <%= render partial: 'empty_unconfirmed' %>
+    <% elsif params[:type] && params[:type] == 'founder' %>
+      <%= render partial: 'empty_type_founder' %>
+    <% else %>
+      <%= render partial: 'empty_startups' %>
+    <% end %>
+  <% end %>
+</div>

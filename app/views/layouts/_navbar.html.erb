@@ -1,0 +1,149 @@
+<nav role="navigation" class="navbar-collapse">
+  <ul class="nav navbar-nav">
+    <% if can? :index, :dashboard %>
+      <%= active_link_to dashboard_path, wrap_tag: :li do %>
+        <span>Home</span>
+      <% end %>
+    <% end %>
+    <li class="<%= is_active_link?(startups_path, :inclusive) ? 'has_active_child' : '' %>">
+      <%= link_to startups_path,
+                  class: is_active_link?(startups_path, :inclusive) ? 'collapsed' : '',
+                  data: { toggle: 'collapse', target: '#startups', parent: '#sidenav01' },
+                  html: { 'aria-expanded' => is_active_link?(startups_path, :inclusive) ? 'true' : 'false' } do %>
+        <span>Startups</span>
+      <% end %>
+      <div class="collapse <%= is_active_link?(startups_path, :inclusive) ? 'in' : '' %>" id="startups">
+        <ul class="nav nav-list">
+          <%= active_link_to startups_path, wrap_tag: :li, active: :exact do %>
+            <span>All Startups</span>
+          <% end %>
+          <% if current_user.evo_team? %>
+            <%= active_link_to startups_path(type: :founder_evolution), wrap_tag: :li, active: :exact do %>
+              <span>Founder Evol8tion</span>
+            <% end %>
+            <%= active_link_to startups_path(type: :founder_brand), wrap_tag: :li, active: :exact do %>
+              <span>Founder - Brand</span>
+            <% end %>
+            <%= active_link_to startups_path(type: :evo_generated), wrap_tag: :li, active: :exact do %>
+              <span>Evol8tion Generated</span>
+            <% end %>
+          <% else %>
+            <%= active_link_to startups_path(type: :founder), wrap_tag: :li, active: :exact do %>
+              <span>Founder Submitted</span>
+            <% end %>
+            <%= active_link_to startups_path(type: :evolution), wrap_tag: :li, active: :exact do %>
+              <span>Evol8tion Curated</span>
+            <% end %>
+          <% end %>
+          <%= active_link_to watchlist_startups_path, wrap_tag: :li do %>
+            <span>Startup Watchlist</span>
+          <% end %>
+          <% if current_user.evo_team? %>
+            <%= active_link_to startups_path(unconfirmed: true), wrap_tag: :li, active: :exact do %>
+              <span>Unverified Profiles</span>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </li>
+    <% if can? :index, Brand %>
+      <%= active_link_to brands_path, wrap_tag: :li do %>
+        <span>Brands</span>
+      <% end %>
+    <% end %>
+    <% if can? :saved, Search %>
+      <li class="<%= is_active_link?(advanced_search_index_path, /^\/search/) ? 'has_active_child' : '' %>">
+        <%= link_to advanced_search_index_path,
+                    class: is_active_link?(advanced_search_index_path, /^\/search/) ? 'collapsed' : '',
+                    data: { toggle: 'collapse', target: '#search' },
+                    html: { 'aria-expanded' => is_active_link?(advanced_search_index_path, /^\/search/) ? 'true' : 'false' } do %>
+          <span>Search</span>
+        <% end %>
+        <div class="collapse <%= is_active_link?(saved_search_index_path, /^\/search/) ? 'in' : '' %>" id="search">
+          <ul class="nav nav-list">
+            <%= active_link_to advanced_search_index_path, wrap_tag: :li do %>
+              <span>Advanced Search</span>
+            <% end %>
+            <%= active_link_to saved_search_index_path, wrap_tag: :li do %>
+              <span>Saved Searches</span>
+            <% end %>
+            <%= active_link_to tags_path, wrap_tag: :li do %>
+              <span>Tags</span>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+    <% end %>
+    <%= active_link_to scorecards_path, wrap_tag: :li do %>
+      <span>Scorecards</span>
+    <% end %>
+    <%= active_link_to lists_path, wrap_tag: :li do %>
+      <span>Lists</span>
+    <% end %>
+    <% if can? :index, :activity %>
+      <%= active_link_to activities_path, wrap_tag: :li do %>
+        <span>Activity</span>
+      <% end %>
+    <% end %>
+    <% if can? :read, Announcement %>
+      <%= active_link_to announcements_path, wrap_tag: :li do %>
+        <span>M+MV</span>
+      <% end %>
+    <% end %>
+    <% if can? :index, Request %>
+      <%= active_link_to requests_path, wrap_tag: :li do %>
+        <span>Support</span>
+      <% end %>
+    <% end %>
+    <% if can? :index, Activity %>
+      <%= active_link_to activities_path, wrap_tag: :li do %>
+        <span>Activity</span>
+      <% end %>
+    <% end %>
+    <%= active_link_to users_path, wrap_tag: :li do %>
+      <span>Users</span>
+    <% end %>
+    <li class="<%= is_active_link?(packages_path, /^\/settings/) ? 'has_active_child' : '' %>">
+      <%= link_to packages_path,
+                  class: is_active_link?(packages_path, /^\/settings/) ? 'collapsed' : '',
+                  data: { toggle: 'collapse', target: '#setting' },
+                  html: { 'aria-expanded' => is_active_link?(packages_path, /^\/settings/) ? 'true' : 'false' } do %>
+        <span>Settings</span>
+      <% end %>
+      <div class="collapse <%= is_active_link?(packages_path, /^\/settings/) ? 'in' : '' %>" id="setting">
+        <ul class="nav nav-list">
+          <% if can? :manage, Package %>
+            <%= active_link_to packages_path, wrap_tag: :li do %>
+              <span>Packages</span>
+            <% end %>
+          <% else %>
+            <%= active_link_to packages_path, wrap_tag: :li do %>
+              <span>Package</span>
+            <% end %>
+          <% end %>
+          <% if can? :index, :diagnostic %>
+            <%= active_link_to diagnostic_path, wrap_tag: :li do %>
+              <span>Innovation Daignostic</span>
+            <% end %>
+          <% end %>
+          <% if can? :index, :brand_brief %>
+            <%= active_link_to brand_brief_index_path, wrap_tag: :li do %>
+              <span>Brand Brief</span>
+            <% end %>
+          <% end %>
+          <% if can? :read, PromoPage %>
+            <%= active_link_to promo_pages_path, wrap_tag: :li do %>
+              <span>Landing Pages</span>
+            <% end %>
+          <% end %>
+
+        </ul>
+      </div>
+    </li>
+    <li class="visible-xs visible-sm logout_link">
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <span>Log Out</span>
+      <% end %>
+    </li>
+  </ul>
+</nav>

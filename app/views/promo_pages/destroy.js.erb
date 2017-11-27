@@ -1,0 +1,5 @@
+<% if @promo_page.destroyed? %>
+  $("#promo_page_<%= @promo_page.id %>").remove();
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  $('.top_notification').showFlashMessage();
+<% end %>

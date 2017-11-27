@@ -1,0 +1,8 @@
+<h2 class="mobile_title visible-xs">All Startups</h2>
+<div class="boxer hovered styled_list">
+  <%= render 'startups/header' %>
+  <div id="startups-index">
+    <%= render partial: '/startups/startup', collection: @startups %>
+    <%= paginate @startups, remote: true %>
+  </div>
+</div>

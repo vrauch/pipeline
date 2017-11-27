@@ -1,0 +1,24 @@
+<div class="dashboard__pane--logos">
+  <%= link_to 'view all', startups_path(type: :founder), class: 'dashboard__pane--all' %>
+  <h4 class="dashboard__pane--title clearfix">
+    <span class="num"><%= @startups_founder.total_count %></span>
+    <% if current_user.evo_team? %>
+      <span>RECENTLY ADDED<br>FOUNDER SUBMISSIONS</span>
+    <% else %>
+      <span>FOUNDER SUBMITTED<br>LATEST STARTUPS</span>
+    <% end %>
+  </h4>
+  <div class="dashboard__logos clearfix">
+    <% @startups_founder.each do |startup| %>
+      <%=link_to startup.owner ? profile_startup_path(startup) : startups_path, class: startup.logo.present? ? '' : 'dashboard_logo_empty' do %>
+        <%= startup.logo.present? ? image_tag(startup.logo.thumb_small, width: 56) : startup.initial %>
+        <%= render 'startups/startup_info_tip', startup: startup %>
+      <% end %>
+    <% end %>
+    <% if @startups_founder.total_count > 4 %>
+      <%= link_to startups_path(type: :founder) do %>
+        <span>+ <%= @startups_founder.total_count - 4 %></span>
+      <% end %>
+    <% end %>
+  </div>
+</div>

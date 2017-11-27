@@ -1,0 +1,17 @@
+<% if @brand.brand_brief %>
+  <div class="head_content head_content_padd has_btn hidden-xs">
+    <h1 class="h1_title">Brand Brief</h1>
+    <div class="subtitle">The brand brief is used as a guide for Evol8tion curate relevant startups.</div>
+    <% if can? :modify, @brand.brand_brief %>
+      <%= link_to 'Update Brief', new_request_path(setting: "brand_brief"), remote: true, class:'btn btn_bordered_const md_size', data: { panel: 'modify_questions' } %>
+    <% end %>
+  </div>
+  <div id="brief-body">
+    <%= render 'brief_body' %>
+  </div>
+<% else %>
+  <div class="head_content hidden-xs">
+    <h1 class="h1_title">Brand brief</h1>
+    <div class="subtitle">Brief hasn't been passed yet</div>
+  </div>
+<% end %>

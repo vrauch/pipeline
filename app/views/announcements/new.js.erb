@@ -1,0 +1,24 @@
+$('#announcement-form').html("<%= j(render 'new') %>");
+$.controlMethods.showPanel("send_announcement");
+$("#receiver_ids").select2({
+  templateResult: formatImg
+});
+$('#announcement_content').froalaEditor({
+  heightMin: '200px',
+  toolbarButtons: ['bold', 'italic', 'underline', '|', 'insertImage', 'insertLink', '|', 'undo', 'redo', 'clearFormatting', 'html'],
+  imageUploadURL: '<%= announcements_upload_image_path %>',
+  imageUploadMethod: 'POST',
+  imageUploadParams: {
+    authenticity_token: '<%= form_authenticity_token %>',
+    return_to: window.location.href
+  }
+});
+$.mmvMethods.initEditor();
+
+function formatImg (state) {
+  if (!state.id) { return state.text; }
+  var $state = $(
+    '<span><img src="' + state.element.getAttribute('data-img-src') + '" class="multiple_item_img" /> ' + state.text + '</span>'
+  );
+  return $state; 
+};

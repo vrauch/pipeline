@@ -1,0 +1,20 @@
+$("#notification").html("<%= j(render('layouts/flash_message')) %>");
+$('.top_notification').showFlashMessage();
+<% if @search.errors.any? %>
+  <% if params[:session_search] %>
+    $("#query-name-from").html("<%= j(render 'search_name') %>");
+  <% else %>
+    form_container = $('#advanced_search_page').length ? $('.new-advanced-search') : $('#search-container');
+    form_container.html("<%= j(render 'form') %>");
+    $('.btn_save_query').click();
+    $.searchMethods.initCalendar();
+    $.searchMethods.initSelect();
+    $('.bot_control_btns').addClass('error_search_name');
+  <% end %>
+<% else %>
+   $('.btn_save_query_name').addClass('active');
+   $('.btn_save_query_name').parents('.hidden_form').delay(1500).fadeOut('fast');
+   setTimeout(function(){
+      window.location = "<%= saved_search_index_path %>"
+    }, 2000);
+<% end %>

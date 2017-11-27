@@ -1,0 +1,33 @@
+<div class="edit_question_block hidden">
+  <div class="grid_padding_sm form_container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <div class="fake_label">Edit Question</div>
+          <%= fq.text_field :body, class: 'form-control',
+            placeholder: 'Enter Question',
+            data: { default_val: fq.object.body, input_for: '.question-body' } %>
+        </div>
+      </div>
+    </div>
+    <div>
+      <ul class="inputs_list">
+        <%= fq.fields_for :variants do |fv| %>
+          <li>
+            <div class="points">
+              <%= t('points', count: fv.object.score) %>
+              <%= fv.hidden_field :score %>
+            </div>
+            <%= fv.text_field :title, class: 'form-control',
+              placeholder: 'Enter Answer',
+              data: { default_val: fv.object.title, input_for: ".variant#{fv.object.score}" } %>
+          </li>
+        <% end %>
+      </ul>
+      <div class="invers_btns">
+        <a href="#" class="btn btn_bordered_const md_size btn-cancel">Cancel</a>
+        <a href="#" data-panel="" class="btn btn_add btn-save">Save</a>
+      </div>
+    </div>
+  </div>
+</div>

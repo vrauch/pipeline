@@ -1,0 +1,25 @@
+<% if @scorecard.persisted? %>
+
+  <% if @scorecard.current_step == 'overview' %>
+    <%= link_to scorecard_path(@scorecard, save: true), method: :put, remote: true, class: 'btn btn_bar btn_bar_dark' do %>
+      Save <i class="icon icon_download visible-xs"></i>
+    <% end %>
+  <% else %>
+    <%= link_to scorecard_path(@scorecard), method: :put, remote: true, class: 'btn btn_bar btn_bar_dark' do %>
+      Save <i class="icon icon_download visible-xs"></i>
+    <% end %>
+  <% end %>
+
+<% else %>
+
+  <% if @scorecard.current_step == 'overview' %>
+    <%= link_to scorecards_path(save_draft: true), method: :post, remote: true, class: 'btn btn_bar btn_bar_dark' do %>
+      Save <i class="icon icon_download visible-xs"></i>
+    <% end %>
+  <% else %>
+    <%= link_to scorecards_path, method: :post, remote: true, class: 'btn btn_bar btn_bar_dark' do %>
+      Save <i class="icon icon_download visible-xs"></i>
+    <% end %>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,50 @@
+<li class="<%= 'list-item' unless list.favorite %>" id="<%= list.id %>" data-id="<%= list.id %>">
+  <%= link_to list_path(list), class:'card_item md_size list_card', id:"list_item_#{list.id}" do %>
+    <%= render 'blank_list' %>
+    <span class="card_middle_block">
+      <h3 class="card_title">
+        <%= list.name %>
+      </h3>
+      <span class="card_subtitle">
+        <%= "#{list.startups.count} #{"startup".pluralize(list.startups.count)} added" %>
+      </span>
+    </span>
+    <span class="card_bot_block">
+      <span class="user_details">
+        <span class="user_details_img favorite">
+          <% if list.favorite %>
+            <%= image_tag("star.svg", alt: 'Avatar') %>
+          <% else %>
+            <%= list.author.photo.thumb_medium.present? ? image_tag(list.author.photo.thumb_medium, width: 90, alt: 'Avatar') : list.author.initial %>
+          <% end %>
+
+        </span>
+        <span class="user_details_info">
+          <span><%= list.favorite ? "Your favorite startups" : "By #{list.author.full_name.split[0]} #{list.author.full_name.split[1]}" %></span>
+          <span><%= list.created_at.strftime("%d %B, %Y") %></span>
+        </span>
+      </span>
+        <% unless list.favorite %>
+          <span class="edit_card" data-path="<%= edit_list_path(list) %>"><i class="icon icon_edit"></i></span>
+        <% end %>
+    </span>
+  <% end %>
+  <div id="list_form_<%= list.id %>" class="add_card_block with_delete"></div>
+  <div class="card_alert">
+    <div class="card_alert_content">
+      <i class="icon icon_info"></i>
+      <div class="card_alert_title">
+        Are You Sure?
+      </div>
+      <div class="card_alert_text">
+        You will not be able to undo this action.
+      </div>
+    </div>
+    <div class="add_card_btns clearfix">
+      <button class="btn btn_default btn_gray btn_cancel_remove">CANCEL</button>
+      <%= link_to list_path(list), remote: true, method: :delete, class:'btn btn_default btn_red btn_show_mark btn_remove_card' do %>
+        <span>DELETE</span> <i class="icon icon_mark"></i>
+      <% end %>
+    </div>
+  </div>
+</li>

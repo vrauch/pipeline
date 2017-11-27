@@ -1,0 +1,25 @@
+<div class="sidebar_detail_head">
+  <%= link_to @startup.back_referer_path, class:'link_nav' do %>
+    <span class="hidden-xs">BACK</span><i class="icon icon_close visible-xs"></i>
+  <% end %>
+  <a href="javascript:;" class="sidebar_ava"><%= @startup.logo_url %></a>
+  <h2 class="sidebar_title"><%= @startup.title %></h2>
+  <div class="sidebar_subtitle hidden-xs">
+    <% if current_user.evo_team? %>
+      <%= @startup.member_since %>
+    <% else %>
+      <%= @startup.brand_member_since %>
+    <% end %>
+  </div>
+  <div>
+    <a href="#" class="btn btn_bordered_rounded visible-xs-inline-block hide_show_details">View Details</a>
+  </div>
+</div>
+<div class="sidebar_detail_body hidden_before">
+  <div class="inner">
+    <ul class="tool_bar clearfix hidden-xs">
+      <%= render current_user.evo_team? ? 'layouts/startup/evo_toolbar' : 'layouts/startup/brand_toolbar' %>
+    </ul>
+    <%= render 'layouts/startup/startup_information' %>
+  </div>
+</div>

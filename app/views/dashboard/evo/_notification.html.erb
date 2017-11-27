@@ -1,0 +1,13 @@
+<div class="col-sm-12">
+  <%= link_to my_tasks_activities_path, class:'dashboard__item' do %>
+    <span class="dashboard__item--img">
+      <%= image_tag notification.author.photo.thumb_small %>
+    </span>
+    <span class="dashboard__item--title">
+      <%= notification.suffix %><%= notification.note_text %>
+    </span>
+    <span class="dashboard__item--author">
+      By <%= notification.author_full_name %>
+    </span>
+  <% end %>
+</div>

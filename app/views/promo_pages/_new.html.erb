@@ -1,0 +1,40 @@
+<%= form_for @promo_page, html: { multipart: true, id: 'manage_promo_page', class: '' }, remote: true,
+             data: { refresh: @promo_page.persisted? ? refresh_promo_page_path(@promo_page) : refresh_promo_pages_path } do |f| %>
+  <% if @promo_page.current_step == PromoPage::STEPS.last %>
+    <%= render "#{@promo_page.current_step}_step", f: f %>
+  <% else %>
+    <ul class="step_name_list step_name_list_padd clearfix">
+      <li class="pull-left name_main_step"><%= @promo_page.persisted? ? 'UPDATE' : 'CREATE' %> LANDING PAGE</li>
+      <li <% if @promo_page.current_step == 'intro' %>class="active"<% end %>>INTRO</li>
+      <li <% if @promo_page.current_step == 'details' %>class="active"<% end %>>DETAILS</li>
+      <li <% if @promo_page.current_step == 'sign_up' %>class="active"<% end %>>SIGN UP</li>
+      <li <% if @promo_page.current_step == 'questions' %>class="active"<% end %>>QUESTIONS</li>
+    </ul>
+    <%= render "#{@promo_page.current_step}_step", f: f %>
+    <div class="bot_control_btns" style="<%= @promo_page.errors.any? && @promo_page.current_step == 'questions' ? 'display:none' : '' %>">
+      <div class="row">
+        <div class="col-xs-6 left text-right">
+          <% if @promo_page.first_step? %>
+            <a href="javascript:;" class="control_link dismiss_panels btn_loader">CANCEL
+              <%= render '/layouts/loader' %>
+            </a>
+          <% else %>
+            <%= f.button type: 'submit', name: 'back_button', class: 'control_link dismiss_one_panel btn_loader' do %>
+              <i class="icon icon_arrow_left"></i>
+              BACK
+              <%= render '/layouts/loader' %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col-xs-6 right text-left">
+          <%= f.button type: 'submit', class: 'control_link btn_loader',
+                       data: { panel: @promo_page.next_step } do %>
+            <%= @promo_page.last_step? ? 'PREVIEW' : 'NEXT' %>
+            <i class="icon icon_arrow_right"></i>
+            <%= render '/layouts/loader' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

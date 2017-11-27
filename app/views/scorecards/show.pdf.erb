@@ -1,0 +1,8 @@
+<%= content_for :custom_head do %>
+  <%= wicked_pdf_stylesheet_link_tag 'scorecards_pdf', media: 'all' %>
+  <%= wicked_pdf_javascript_include_tag 'graph.js' %>
+<% end %>
+
+<%= content_for :onload_func, "graph(#{@scorecard.product_total_score}, #{@scorecard.collaboration_total_score}, #{@scorecard.business_total_score});" %>
+
+<%= render 'scorecard', scorecard: @scorecard %>

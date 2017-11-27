@@ -1,0 +1,41 @@
+<h1 class="h1_title"><%= @note.form_title %></h1>
+<!--<div class="subtitle">To add a reminder assign your comment to a user</div>-->
+<div class="simple_form">
+  <%= form_for @note, url: @note, remote: true do |f| %>
+    <%= hidden_field_tag :type, params[:type] %>
+    <% if @note.new_record? %>
+      <%= hidden_field_tag :startup_id, @startup.id %>
+    <% end %>
+    <div class="form-group">
+      <%= f.text_area :note_text, class:'form-control', placeholder: "Type #{@note.placeholder} here...",
+                      style: "height: #{@note.height}" %>
+    </div>
+    <% if params[:type] == Note::TASK %>
+      <div class="control_note clearfix">
+        <%= render 'notes/assignee', f: f %>
+        <div class="datepicker_holder">
+          <%= f.text_field :due_date, class:'calendar', placeholder: 'Add Due Date' %>
+          <i class="icon icon_calendar"></i>
+        </div>
+      </div>
+    <% end %>
+    <% if @note.persisted? && can?(:destroy, @note) %>
+      <%= link_to 'Delete', delete_note_path(@note),
+                  class: 'btn btn_bordered_const btn_bordered_red btn_delete_brand md_size',
+                  remote: true %>
+    <% end %>
+    <div class="bot_control_btns">
+      <div class="row">
+        <div class="col-xs-6 left text-right">
+          <a href="#" class="control_link dismiss_one_panel">CANCEL</a>
+        </div>
+        <div class="col-xs-6 right text-left">
+          <%= f.button class:'control_link btn_loader' do %>
+            <%= @note.persisted? ? 'SAVE' : 'POST' %>
+            <%= render '/layouts/loader' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

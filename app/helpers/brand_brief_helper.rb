@@ -1,0 +1,2 @@
+module BrandBriefHelper
+end

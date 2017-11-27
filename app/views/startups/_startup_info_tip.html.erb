@@ -1,0 +1,11 @@
+<div class="info_tip">
+  <div class="info_tip_name"><%= startup.title %></div>
+  <div class="info_tip_site"><%= startup.website ? startup.website : 'none specified' %></div>
+  <div class="info_tip_date">
+    <% if defined?(pushed_time) %>
+      <%= startup.brand_startups.find_by(brand_id: current_user.brand.id).created_at.strftime("%B #{startup.brand_startups.find_by(brand_id: current_user.brand.id).created_at.day.ordinalize}, %Y %I:%M %p") %>
+    <% else %>
+      <%= startup.created_at.strftime("%B #{startup.created_at.day.ordinalize}, %Y %I:%M %p") %>
+    <% end %>
+  </div>
+</div>

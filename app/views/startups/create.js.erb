@@ -1,0 +1,23 @@
+el = $("#watchlist-form")
+<% if @startup.errors.any? %>
+  el.html("<%= j render 'new' %>")
+<% else %>
+  setTimeout(function(){
+    $('.btn_show_mark').addClass('active');
+  }, 400);
+
+  setTimeout(function(){
+    $.controlMethods.hidePanel("watchlist-form")
+    $('.btn_show_mark').removeClass('active');
+  }, 1300);
+
+  if ($("#startups-wrapper").find(".empty_block").length > 0) {
+    $("#startups-wrapper").html("<%= j(render 'present_startups') %>");
+  }
+  $("<%= j render 'startup', startup: @startup %>").prependTo("#startups-index");
+
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  $('.top_notification').showFlashMessage();
+<% end %>
+$("#startup_logo").previewImage(".startup-logo-preview");
+$.controlMethods.removePlaceholder();

@@ -1,0 +1,48 @@
+<div id="promo-pages-wrapper">
+  <% if @promo_pages.empty? %>
+    <%= render 'brands/empty_promo_page' %>
+  <% else %>
+    <%= render 'promo_pages' %>
+  <% end %>
+</div>
+<div class="slide-panel from-right" data-btn="intro">
+  <div class="slide-panel-container">
+    <div id="promo_page_intro" class="slide-panel-content slide-panel-content_pb">
+
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+</div> <!-- slide-panel -->
+
+<div class="slide-panel from-right" data-btn="details">
+  <div class="slide-panel-container">
+    <div id="promo_page_details" class="slide-panel-content slide-panel-content_pb">
+
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+</div> <!-- slide-panel -->
+
+<div class="slide-panel from-right" data-btn="sign_up">
+  <div class="slide-panel-container">
+    <div id="promo_page_sign_up" class="slide-panel-content slide-panel-content_pb">
+
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+</div> <!-- slide-panel -->
+
+<div class="slide-panel from-right" data-btn="questions">
+  <div class="slide-panel-container">
+    <div id="temporary-question-holder" class="hidden"></div>
+    <div id="temporary-answers-holder" class="hidden"></div>
+    <div id="promo_page_questions" class="slide-panel-content slide-panel-content_pb">
+
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+</div> <!-- slide-panel -->
+
+<div class="slide-panel from-right" data-btn="view_questions">
+  <div class="slide-panel-container">
+    <div id="view_questions" class="slide-panel-content slide-panel-content_pb">
+
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+</div> <!-- slide-panel -->

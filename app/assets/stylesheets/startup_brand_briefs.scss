@@ -1,0 +1,38 @@
+// Place all the styles related to the startup_brand_briefs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.brief_btn_step {
+  background-color: #25cc77;
+  border-radius: 5px !important;
+  min-width: 197px;
+  color: #fff;
+  font-family: "SFUIDisplayBold", sans-serif;
+  font-size: 16px !important;
+  line-height: 19px;
+  padding: 17px;
+}
+.btn.brief_btn_step:focus,
+.btn.brief_btn_step:hover {
+  color: #fff;  
+}
+.brief_btn_step:hover {
+  opacity: .8;
+}
+.brief_btn_step.btn_lg {
+  line-height: 18px;
+  padding: 20px 17px;
+  min-width: 257px;
+}
+
+@media (max-width: 991px) {
+    .has_side_btns .brief_btn_step.btn_lg {
+    min-width: 210px;
+  }
+} 
+
+@media screen and (max-width: 767px) {
+  .has_side_btns .brief_btn_step.btn_lg {
+    min-width: 180px;
+  }
+}

@@ -1,0 +1,14 @@
+<% flash.each do |message_type, message| %>
+  <div class="top_notification <%= message_type %>" style="z-index: 99999;">
+    <span class="notification_icon"><i class="icon icon_mark"></i></span>
+    <% if message.instance_of? Hash %>
+      <div class="top_notification_title"><%= message[:title].upcase %></div>
+      <div class="top_notification_text"><%= message[:text] %></div>
+    <% else %>
+      <div class="top_notification_title"><%= message %></div>
+      <div class="top_notification_text">&nbsp;</div>
+    <% end %>
+  </div>
+<% end %>
+
+

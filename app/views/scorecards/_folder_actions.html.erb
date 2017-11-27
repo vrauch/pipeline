@@ -1,0 +1,22 @@
+<div class="box links_box text-center hidden-xs">
+  <% if defined?(scorecard_template) && scorecard_template.scorecards.size > 0 ||
+        !defined?(scorecard_template) && @drafts.size > 0 %>
+    <div class="slide_icons xs_count">
+      <%= render 'pdf_sorting', scorecard_template: defined?(scorecard_template) ? scorecard_template : nil %>
+      <% if can?(:generate_xls, ScorecardTemplate) && defined?(scorecard_template) %>
+        <div>
+          <%= link_to scorecard_template_generate_xls_path(scorecard_template_id: scorecard_template.id),
+            class: 'download_link slide_link',
+            data: {
+              toggle: 'tooltip',
+              placement: 'bottom'
+            },
+            title: 'Download XLS' do %>
+            <i class="icon icon_xls"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <a href="#" class="dots_link"><i class="icon icon_dots"></i></a>
+  <% end %>
+</div>

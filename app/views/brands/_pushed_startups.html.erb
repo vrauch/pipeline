@@ -1,0 +1,22 @@
+<div class="head_content hidden-xs">
+  <h1 class="h1_title">Pushed Startups</h1>
+  <div class="subtitle">Here you can see all pushed startups</div>
+</div>
+<div class="tabs_holder">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="tabs_label_li">Show:</li>
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">STARTUPS <span><%= @startups.count %>/<%= @brand.package.number_startups %></span></a></li>
+    <!--<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">SCORECARDS <span>0/0</span></a></li>-->
+  </ul>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active in fade" id="home">
+      <ul class="card_list clearfix">
+        <% @startups.each do |startup| %>
+          <%= render 'startup', startup: startup %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

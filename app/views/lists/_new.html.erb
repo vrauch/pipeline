@@ -1,0 +1,20 @@
+<%= form_for @list, remote: true do |f| %>
+  <h3 class="card_title">
+    <%= f.object.persisted? ? 'Edit List' : 'Create New List' %>
+  </h3>
+  <div class="form-group">
+    <%= f.text_field :name, class: 'form-control',
+                      placeholder: 'Enter List Name',
+                        autofocus: true %>
+  </div>
+  <% if @list.persisted? %>
+    <a href="javascript:;" class="delete_card"><i class="icon icon_delete"></i>Delete List</a>
+  <% end %>
+  <div class="add_card_btns clearfix">
+    <button class="btn btn_default btn_gray btn_cancel_card" type="button">CANCEL</button>
+    <%= f.button class: 'btn btn_default btn_black btn_invite_card btn_loader' do %>
+      <%= f.object.persisted? ? "<span>SAVE</span>".html_safe : "<span>CREATE</span>".html_safe %><i class="icon icon_mark"></i>
+      <%= render '/layouts/loader' %>
+    <% end %>
+  </div>
+<% end %>

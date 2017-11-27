@@ -1,0 +1,9 @@
+<%= form_for @startup, html: { multipart: true, id: 'manage_startup' }, remote: true do |f| %>
+  <%= hidden_field_tag :full_profile, true %>
+  <%= render "startups/steps/#{@startup.current_step}", f: f %>
+<% end %>
+<% if @startup.persisted? %>
+  <%= form_for @startup.pdf_documents.build, url: startup_add_pdf_url(startup_id: @startup.id), remote: true, html: { class: 'hidden' } do |f| %>
+    <%= f.file_field :file %>
+  <% end %>
+<% end %>

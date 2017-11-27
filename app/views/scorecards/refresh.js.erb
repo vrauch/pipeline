@@ -1,0 +1,28 @@
+// DISABLE scrolling to top after refresh
+$('body').css('overflow', 'hidden');
+
+var scrollOffset = $('.slide-panel-container').scrollTop();
+$("#slidePanel").html('<%= j(render "step_#{@scorecard.current_step}") %>');
+// for cusom select
+$('.slide-panel-container').scrollTop(scrollOffset);
+$('.chosen-select').chosen({ 'disable_search': true });
+$("#scorecard_logo").imagePreview("#scorecard_logo_preview");
+$("#scorecard_product_image").imagePreview("#scorecard_product_image_preview");
+$("#scorecard_rs_product_image").imagePreview("#scorecard_rs_product_image_preview");
+
+<%= render 'new_on_startup_profile' %>
+
+$(".slide-panel .fixed_control_btns").each(function() {
+  var btnsWidth = $(this).parents('.slide-panel').find('.slide-panel-content').innerWidth();
+  $(this).css('width', btnsWidth);
+});
+
+$("#scorecard_logo_cache").val("<%= @scorecard.logo.cache_name %>");
+$("#scorecard_logo").val('');
+$("#scorecard_product_image_cache").val("<%= @scorecard.product_image.cache_name %>");
+$("#scorecard_product_image").val('');
+
+<%= render 'partials/disable_spinner' %>
+// $("#scorecard_logo").previewImage("#scorecard_logo_preview", true);
+// $("#scorecard_product_image").previewImage("#scorecard_product_image_preview");
+// $(".chosen-select").chosen({"disable_search": true});

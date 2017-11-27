@@ -1,0 +1,11 @@
+<div class="slide-panel_header">
+  <div class="slide-panel_header_bg" style="background-image: url(<%= @announcement.cover ? @announcement.cover.url : '' %>);"></div>
+  <a href="#" class="link_nav dismiss_panels"><i class="icon icon_close"></i></a>
+  <h2 class="slide-panel_title"><%= @announcement.title %></h2>
+  <div class="slide-panel_subtitle">
+    <span>sent:</span> <%= @announcement.created_at.strftime('%d/%m/%Y') %>
+  </div>
+</div>
+<div class="slide-panel_body">
+  <%= @announcement.content.html_safe %>
+</div>

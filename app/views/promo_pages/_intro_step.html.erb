@@ -1,0 +1,76 @@
+<h1 class="h1_title">Explain your mission</h1>
+<div class="subtitle">Create an external landing page to direct startups to.
+  Use the page to convey your mission, the types of startups that you are looking for,
+  and what you are looking to accomplish via startup collaboration.
+  You will be able to preview and edit all information before publishing
+</div>
+<%= f.hidden_field :current_step %>
+<div class="grid_padding_sm form_container">
+  <div class="row">
+    <div class="col-xs-12 block_for_upload">
+
+      <div class="default_upload_file_holder">
+        <div class="default_upload_file lg_size apsolute <%= f.object.cover_image? ? 'active' : '' %>">
+          <div class="inner cover-image-preview-image" style="<%= @promo_page.cover_image? ? "background-image: url(#{asset_path @promo_page.cover_image.thumb_large.url})" : ''%>">
+            <%= f.file_field :cover_image, class: 'upload_img cover-image-input' %>
+            <%= f.hidden_field :cover_image_cache %>
+          </div>
+          <div class="progress_holder" id="upload_step" style="display:none;">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                <span class="sr-only"></span>
+              </div>
+            </div>
+            <div class="progress_text">uploading</div>
+          </div>
+
+          <div class="progress_holder" id="upload_finish" style="display:none;">
+            <i class="icon icon_mark"></i>
+              <div class="progress_text"><span class="progress_text_done">done</span></div>
+          </div>
+          <div class="upload_text visible_before"><i class="icon icon_arrow_up_round"></i>
+            COVER IMAGE
+          </div>
+          <div class="upload_text visible_after"><i class="icon icon_arrow_up_round"></i>
+            CHANGE IMAGE
+          </div>
+        </div>
+        <div class="change_img_text" id="intro_image">
+          <span>Change image</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :name, class: 'form-control', autocomplete: :off, placeholder: 'Enter Header (for example: “Work with Evol8tion”)' %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :intro_message, class: 'form-control', placeholder: 'Enter Sub Header (for example: “We connect startups with brands”)' %>
+      </div>
+      <div class="form-group color_field has_help_text">
+        <%= f.text_field :brand_color, class: 'form-control picked_color', placeholder: 'Enter the hex code for your brand.' %>
+        <div class="element_change_color" style="<%= f.object.brand_color ? "background-color: #{f.object.brand_color}" : '' %>"></div>
+        <div class="right_help_text">This color is used for buttons and key elements</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row_mt_sm">
+    <div class="col-xs-12 form-group_mb">
+      <div class="form-group">
+        <label for="contact_person_name">
+          EXPLAIN WHY
+          <span>Describe why you are looking to work with startups.</span>
+        </label>
+        <%= f.text_field :inspirational_title, class: 'form-control', placeholder: 'Title' %>
+      </div>
+      <div class="form-group">
+        <%= f.text_area :description, class: 'form-control textarea_sm_size',
+                        autocomplete: :off, placeholder: 'Description' %>
+      </div>
+    </div>
+  </div>
+  <% if can? :unpublish, f.object %>
+    <%= link_to 'Unpublish', unpublish_promo_page_path(f.object), remote: true,
+                class: 'btn btn_bordered_const btn_bordered_red md_size btn_unpublish_padd' %>
+  <% end %>
+</div>

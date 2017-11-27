@@ -1,0 +1,27 @@
+<div class="tip_holder right">
+  <div class="tip_head">
+    SELECT LIST
+  </div>
+  <div class="tip_body custom_scroll">
+    <div class="tip_search">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <i class="icon icon_search"></i>
+        </span>
+        <%= form_for :list, url: search_lists_path, method: :get, remote: true do |f| %>
+          <%= hidden_field_tag :startup_id, @startup.id %>
+          <%= f.text_field :query, class: 'form-control simple_search', placeholder: 'Search for list' %>
+        <% end %>
+      </div>
+      <span class="clear_tip_search">X</span>
+    </div>
+    <%= render 'startups/add_to_list_search' %>
+  </div>
+  <div class="tip_group_btns clearfix">
+    <button class="btn btn_default btn_gray btn_tip_cancel" type="button">CANCEL</button>
+    <%= button_tag(class: 'btn btn_default btn_black btn_tip_add btn_loader') do %>
+      <span>ADD TO LIST</span> <i class="icon icon_mark"></i>
+      <%= render '/layouts/loader' %>
+    <% end %>
+  </div>
+</div>

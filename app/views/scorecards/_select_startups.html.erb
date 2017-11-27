@@ -1,0 +1,18 @@
+<div class="as_select<%= ' has_value' if f.object.startup_id %>">
+  <div class="as_select_value"><%= f.object.startup_id ? f.object.startup.title : 'Select startup' %></div>
+  <%= f.hidden_field :startup_id, class: 'as_select_form_value' %>
+  <div class="tip_body">
+    <div class="tip_search">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <i class="icon icon_search"></i>
+        </span>
+        <input type="text" class="form-control as_select_simple_search" data-search-url="<%= search_startups_scorecards_path %>" placeholder="Search for startup">
+      </div>
+      <span class="clear_tip_search">X</span>
+    </div>
+    <div id="startupsList" class="as_select_data">
+      <%= render 'select_items', resources: @startups %>
+    </div>
+  </div>
+</div>

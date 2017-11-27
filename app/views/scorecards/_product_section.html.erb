@@ -1,0 +1,11 @@
+<div class="preview_block preview_block_product">
+  <h3 class="bordered_title">PRODUCT</h3>
+  <div class="row">
+    <%= render 'scorecards/product_section_type', f: f,
+      section_type: @scorecard.scorecard_template.ls_product_section_type,
+      side: 'left' %>
+    <%= render 'scorecards/product_section_type', f: f,
+      section_type: @scorecard.scorecard_template.rs_product_section_type,
+      side: 'right' %>
+  </div>
+</div>

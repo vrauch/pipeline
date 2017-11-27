@@ -1,0 +1,11 @@
+Dear <%= @resource.full_name %>,
+<br><br>
+<div>Welcome to Pipeline!</div><br>
+
+<div>Thank you for registering your startup to join Pipeline! Please click the button below and complete your startup’s profile.</div><br>
+<div><strong><%= link_to 'Complete Your Profile', confirmation_url(@resource, confirmation_token: @token) %></strong></div><br>
+
+<div>Link not working? Copy and paste the URL below.</div>
+<div><%= confirmation_url(@resource, confirmation_token: @token) %></div>
+<br><br>
+Thank you

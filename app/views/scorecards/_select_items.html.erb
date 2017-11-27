@@ -1,0 +1,44 @@
+<% if resources.try(:any?) %>
+  <div class="tip_item_list clearfix">
+    <% resources.each do |resource| %>
+      <div class="btn tip_item" data-resource-id="<%= resource.id %>">
+        <span>
+          <span class="tip_item_img">
+            <% if resource.logo? %>
+              <%= image_tag resource.logo.thumb_small %>
+            <% else %>
+              <%= resource.try(:initial) %>
+            <% end %>
+          </span>
+          <span class="tip_item_text_holder">
+            <span class="tip_item_text">
+              <span class="tip_item_text_large"><%= resource.title %></span>
+            </span>
+          </span>
+        </span>
+      </div>
+
+      <!-- <div class="btn tip_item has_label">
+        <span>
+          <span class="tip_item_img"><img src="img/mask01.png" alt=""></span>
+          <span class="tip_item_text_holder">
+            <span class="tip_item_text">
+              <span class="tip_item_text_large">Nashville electric</span>
+            </span>
+          </span>
+          <span class="tip_label pink">REACHED LIMIT</span>
+        </span>
+      </div> -->
+    <% end %>
+  </div>
+<% else %>
+  <div class="empty_search">
+    <i class="icon icon_search"></i>
+    <div class="empty_search_title">
+      Nothing Found
+    </div>
+    <div class="empty_search_text">
+      Try other query. No results matched your search terms
+    </div>
+  </div>
+<% end %>

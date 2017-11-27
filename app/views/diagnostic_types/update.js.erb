@@ -1,0 +1,7 @@
+$("#flash-messages").html("<%= j(render 'shared/flash_messages') %>")
+<% if @result.errors.any? %>
+  $("#manage-result").html("<%= j(render 'edit') %>")
+<% else %>
+  $("#result-<%= @result.id %>").html("<%= j(render 'result', result: @result) %>")
+  $("#manage-result").empty()
+<% end %>

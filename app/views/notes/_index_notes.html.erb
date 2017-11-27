@@ -1,0 +1,13 @@
+<div class="head_content has_btn hidden-xs">
+  <h1 class="h1_title">Comments</h1>
+  <div class="subtitle">Leave comments about this startup for your team to read.</div>
+  <%= link_to '+ Add New Comment', new_note_path(startup_id: @startup.id, type: 'comment'), remote: true, class:'btn btn_add' %>
+</div>
+<%= link_to '+ Add Comments', new_note_path(startup_id: @startup.id, type: 'comment'),
+            class:'btn btn_open_panel btn_add btn_mobile visible-xs',
+            data: { panel: 'add_note' }, remote: true %>
+<div class="accordion_holder">
+  <div class="panel-group startup_notes_table" id="accordion" role="tablist" aria-multiselectable="true">
+    <%= render partial: 'notes/note', collection: @notes %>
+  </div>
+</div>

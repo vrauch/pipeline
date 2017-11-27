@@ -1,0 +1,46 @@
+<% if @promo_page.errors.any? %>
+  $("#promo_page_<%= @promo_page.current_step %>").html("<%= j(render 'new') %>");
+<% else %>
+  <% if @promo_page.new_record? %>
+    <% if params[:back_button] %>
+      $.controlMethods.hidePanel('<%= @promo_page.previous %>', true);
+    <% else %>
+      $.controlMethods.showPanel('<%= @promo_page.current_step %>');
+    <% end %>
+    window.setTimeout(function () {
+      $(".slide-panel-content[id!='promo_page_<%= @promo_page.current_step %>']").html("");
+    }, 500);
+    <% if @promo_page.last_step? %>
+      $(".promo_page_preview").show();
+    <% end %>
+    <% if remotipart_submitted? %>
+      $("#promo_page_<%= @promo_page.current_step %>").html("<%= j "#{render('new')}" %>");
+    <% else %>
+      $("#promo_page_<%= @promo_page.current_step %>").html("<%= j(render 'new') %>");
+    <% end %>
+    $(".add_question_button").on('cocoon:before-insert', function(e, insertedItem) {
+        var question_data_id;
+        question_data_id = insertedItem.find("input.add_guestion").attr("id");
+        insertedItem.find("input.question_data_id").val(question_data_id);
+        insertedItem.attr('question-data-id', question_data_id);
+    });
+  <% else %>
+    $(".promo_page_preview").hide();
+    $('.slide-panel').removeClass('is-visible');
+    if ($("#promo-pages-wrapper").find(".empty_block").length > 0) {
+      $("#promo-pages-wrapper").html("<%= j(render('promo_pages')) %>");
+    }
+    $('body').css('overflow-y', 'auto');
+    <% if remotipart_submitted? %>
+      $('<%= j("#{render('promo_page', promo_page: @promo_page)}") %>').prependTo("#promo-pages");
+    <% else %>
+      $("<%= j(render('promo_page', promo_page: @promo_page)) %>").prependTo("#promo-pages");
+    <% end %>
+    $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+    $('.top_notification').showFlashMessage();
+  <% end %>
+  $.controlMethods.removePlaceholder();
+<% end %>
+$('.cover-image-input').previewImage('.cover-image-preview-image');
+$('.form-image-input').previewImage('.form-image-preview-image');
+$.promoPageMethods.videoBlock();

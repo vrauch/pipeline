@@ -1,0 +1,5 @@
+el = $("#startup-<%= @startup.current_step %>-step");
+el.html("<%= j(render 'startups/new_full_profile') %>");
+$.controlMethods.showPanel("startup-<%= @startup.current_step %>-step");
+$(".chosen-select").chosen({ "disable_search": true });
+$("#startup_logo").previewImage(".startup-logo-preview-image");

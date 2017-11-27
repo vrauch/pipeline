@@ -1,0 +1,10 @@
+<div id="collapse<%= cabinet_question.id %>" class="panel-collapse <%= opened ? 'collapse in' : 'collapse' %>" role="tabpanel" aria-labelledby="heading<%= cabinet_question.id %>">
+  <div class="panel-body">
+    <div class="answer_block">
+      <div class="answer_title hidden-xs">ANSWER</div>
+      <div class="answer_text">
+        <%= auto_link(cabinet_question.answer.body, html: { target: '_blank', class: 'pink_link' }) %>
+      </div>
+    </div>
+  </div>
+</div>

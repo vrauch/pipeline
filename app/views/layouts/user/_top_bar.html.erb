@@ -1,0 +1,9 @@
+<%= active_link_to 'USER ACTIVITY',
+                   @brand ? activity_brand_user_path(@brand, @user) : activity_user_path(@user),
+                   wrap_tag: :li, active: :exact %>
+<% if can?(:diagnostic, @user) || can?(:diagnostic, :brand_users) %>
+<%= active_link_to 'INNOVATION DIAGNOSTIC',
+                   @brand ? diagnostic_brand_user_path(@brand, @user) : diagnostic_user_path(@user),
+                   wrap_tag: :li, active: :exact %>
+<% end %>
+

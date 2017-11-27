@@ -1,0 +1,17 @@
+<div class="top_bar visible-md visible-lg">
+  <div class="row">
+    <div class="col-xs-6 top_bar_control">
+      <ul class="control_list">
+        <li>
+          <%= link_to 'HOME', home_startup_path(@startup) %>
+        </li>
+        <li>
+          <%= link_to 'M+MV', 'javascript:;' %>
+        </li>
+        <li><%= link_to 'PROFILE', cabinet_startup_path(@startup) %></li>
+        <li><%= link_to 'CONTACT EVOLUTION', 'javascript:;' %></li>
+        <li><%= link_to 'LOG OUT', destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </div>
+  </div>
+</div>

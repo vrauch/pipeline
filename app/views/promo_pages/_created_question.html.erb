@@ -1,0 +1,23 @@
+<% if question.errors.empty? %>
+  <li data-question="<%= question.question_data_id %>"><%= question.question_text %>
+    <ol type="A" class="abc_list">
+      <% question.promo_page_question_answers.each do |answer| %>
+        <li><%= answer.answer_text %></li>
+      <% end %>
+    </ol>
+    <% if edit == true %>
+      <span class="question_control_btns">
+        <a href="#questions" class="question_edit question_item_btn">
+          <i class="icon icon_edit btn_open_panel edit-question" data-panel="edit_questions"
+             data-edit="<%= question.question_data_id.present? ? question.question_data_id : "promo_page_promo_page_questions_attributes_#{question.id}_question_text" %>"></i>
+        </a>
+        <%= link_to @promo_page.persisted? ? delete_question_promo_page_path(@promo_page) : 'javascript:;',
+                    class: 'question_remove question_item_btn remove-question',
+                    data: { remove: question.question_data_id.present? ? question.question_data_id : "promo_page_promo_page_questions_attributes_#{question.id}_question_text",
+                            persisted: @promo_page.persisted? ? true : false } do %>
+          <i class="icon icon_delete"></i>
+        <% end %>
+      </span>
+    <% end %>
+  </li>
+<% end %>

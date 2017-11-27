@@ -1,0 +1,14 @@
+<div class="sign_up_form">
+  <h2>Resend confirmation instructions</h2>
+  <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+    <div class="form_body form_body_padd">
+      <div class="form-group">
+        <%= f.email_field :email, class: 'form-control input_styled', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), placeholder: 'E-mail', autofocus: true %>
+      </div>
+    </div>
+    <%= f.submit 'RESEND CONFIRMATION INSTRUCTIONS', class: 'btn btn_default btn_black' %>
+  <% end %>
+  <div class="sign_up_bot_text marg_top_md">
+    <%= link_to 'Go Back', new_user_session_path, class: 'link_sm go_back_link' %>
+  </div>
+</div>

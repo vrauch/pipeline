@@ -1,0 +1,25 @@
+<div class="col-sm-6">
+  <div class="info_item">
+    <% if section_type.to_i == ps_type_number(:problem_startup_solves) %>
+      <div class="info_item_title">
+        PROBLEM STARTUP SOLVES
+      </div>
+      <p><%= @scorecard.problem_startup_solves_fv %></p>
+    <% elsif section_type.to_i == ps_type_number(:how_it_works) %>
+      <div class="info_item_title">
+        HOW IT WORKS
+      </div>
+      <p><%= @scorecard.how_it_works_fv %></p>
+    <% elsif section_type.to_i == ps_type_number(:product_image) && side == 'left' %>
+      <%= image_tag @scorecard.product_image if @scorecard.product_image? %>
+      <% if @scorecard.product_image_title %>
+        <div class="img_desk"><%= @scorecard.product_image_title %></div>
+      <% end %>
+    <% elsif section_type.to_i == ps_type_number(:product_image) && side == 'right' %>
+      <%= image_tag @scorecard.rs_product_image if @scorecard.rs_product_image? %>
+      <% if @scorecard.rs_product_image_title %>
+        <div class="img_desk"><%= @scorecard.rs_product_image_title %></div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

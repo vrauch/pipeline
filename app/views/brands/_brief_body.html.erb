@@ -1,0 +1,27 @@
+<div class="text_content changed_mob_ff">
+  <% if @brand.brand_brief.submitter %>
+    <div class="text_block text_block_padd">
+      <h3 class="h3_title">Submitted by</h3>
+      <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-7">
+          <div class="user_details">
+            <div class="user_details_img">
+              <%= @brand.brand_brief.submitter.photo.present? ? image_tag(@brand.brand_brief.submitter.photo.thumb_small, width: 43) : image_tag("layout/user_mask.png", alt: "") %>
+            </div>
+            <div class="user_details_info">
+              <div><%= @brand.brand_brief.submitter.full_name %></div>
+              <div><%= @brand.brand_brief.submitter.job_title %></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-5">
+          <div class="submitted_info">
+            <p><%= @brand.brand_brief.submitter.email %></p>
+            <p><%= @brand.brand_brief.created_at.strftime('%m/%d/%Y, %I:%M %p') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= render 'brands/brief_details' %>
+</div>

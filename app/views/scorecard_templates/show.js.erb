@@ -1,0 +1,7 @@
+<%= render 'partials/notification' %>
+
+$("#slidePanel").html('<%= j(render "scorecard_templates/show") %>');
+setTimeout(function(){
+  $("#slidePanel").addClass('is-visible');
+  return false;
+}, 10);

@@ -1,0 +1,42 @@
+<div id="note-<%= note.id %>" class="panel panel-default <%= note.task? %> <%= note.task_done %> note-<%= note.id %>">
+  <div role="button" class="slide_accordion collapsed" data-toggle="collapse"
+       data-parent="#accordion<%= note.id %>" href="#collapse<%= note.id %>"
+       aria-expanded="false" aria-controls="collapse<%= note.id %>">
+    <div class="panel-heading clearfix" role="tab" id="heading<%= note.id %>">
+      <%= render 'blank_list_item' %>
+      <span class="panel_img"><span class="panel_img_holder"><%= note.author_photo %></span></span>
+      <div class="panel_info<%= ' panel_has_edit' unless note.assignee.present? %>">
+        <div class="panel_info_title">
+          <%= note.suffix %>
+          <%= auto_link(note.note_text, html: { target: '_blank', class: 'pink_link' }) %>
+        </div>
+        <div class="panel_info_name_date clearfix">
+          <span class="panel_info_name"><%= note.assigned_for %> <%= note.task_author %></span>
+          <span class="panel_info_date"><%= note.assigned_at %></span>
+        </div>
+        <%= note.editable_or_done %>
+      </div>
+    </div>
+  </div>
+  <div id="collapse<%= note.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= note.id %>">
+    <div class="panel-body">
+      <div id="comments_<%= note.id %>">
+        <%= render partial: '/notes/comment', collection: note.comments %>
+      </div>
+      <div id="comment_form_<%= note.id %>">
+        <%= render '/note_comments/new', note: note %>
+      </div>
+    </div>
+  </div>
+  <div class="checkbox checkbox_in_panel <%= note.date_fail %>">
+    <div class="checkbox_item">
+      <% if note.assignee.present? && can?(:mark_task, note) %>
+        <%= link_to note.mark_unmark_url, class: 'check_activity mark_note', remote: true do %>
+          <label for="check_<%= note.id %>"><%= note.due_date_at %></label>
+        <% end %>
+        <span class="check_icon_holder"><i class="icon icon_mark"></i></span>
+      <% end %>
+    </div>
+  </div>
+  <a href="#" class="close_accordion_item"><i class="icon icon_arrow_up"></i></a>
+</div>

@@ -1,0 +1,35 @@
+<li>
+  <%= link_to activity_link(user), class: activity_class(user) do %>
+    <%= render 'blank_user' %>
+    <span class="card_ava_md card_ava">
+      <% if user.photo? %>
+        <%= image_tag(user.photo.thumb_medium, width: 90) %>
+      <% else %>
+        <%= image_tag('layout/user_mask.png', width: 50) %>
+      <% end %>
+    </span>
+    <span class="card_middle_block">
+      <span class="card_position">
+        <% if @brand %>
+          <% if can? :read, user.insight_summary_act %>
+            <%= user.summary_diagnostic_type ? user.summary_diagnostic_type.title.upcase : 'UNDEFINED' %>
+          <% end %>
+        <% else %>
+          <%= User::ROLES[user.role.to_sym] %>
+        <% end %>
+      </span>
+      <h3 class="card_title">
+        <%= user.full_name %>
+      </h3>
+      <span class="card_subtitle">
+        <%= user.email %>
+      </span>
+    </span>
+    <span class="card_bot_block">
+      <p>Created: <%= user.created_at.strftime('%d %B, %Y at %H:%M %P') %></p>
+      <% unless @brand %>
+        <p>Last Login: <%= user.last_sign_in_at.strftime('%d %B, %Y at %H:%M %P') %></p>
+      <% end %>
+    </span>
+  <% end %>
+</li>

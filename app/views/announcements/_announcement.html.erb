@@ -1,0 +1,50 @@
+<%= link_to announcement_path(announcement.id), remote: true, class: 'section_item btn_open_panel' do %>
+  <%= render 'blank_list_item', announcement: announcement %>
+  <% if announcement.cover? %>
+    <span class="section_img" style="background-image: url(<%= announcement.cover.url%>);">
+    </span>
+  <% end %>
+  <span class="section_content">
+    <h4 class="section_title">
+      <%= announcement.title %>
+    </h4>
+    <span class="section_date">
+      <span class="section_by visible-xs-inline-block">by <%= announcement.creator.full_name %> <span>|</span></span> <%= announcement.created_at.strftime('%b %-d, %Y') %>
+    </span>
+    <span class="section_text ellipsis_text">
+      <%= strip_tags(announcement.content) %>
+    </span>
+    <% if current_user.evo_team? %>
+      <span class="list_logo clearfix">
+        <% if announcement.selected_u? %>
+          <% counter = 0 %>
+          <% announcement.announcement_receivers.each_with_index do |receiver, i| %>
+            <span href="#" class="list_logo_item <%= i > 5 ? 'hidden' : ''%>">
+              <% if receiver.receiver_type %>
+                <% if receiver.brand.logo? %>
+                  <%= image_tag receiver.brand.logo.thumb_small, alt: '', title: receiver.brand.title %>
+                <% else %>
+                  <%= receiver.brand.initial %>
+                <% end %>
+              <% else %>
+                <% if receiver.startup.logo? %>
+                  <%= image_tag receiver.startup.logo.thumb_small, alt: '', title: receiver.startup.title %>
+                <% else %>
+                  <%= receiver.startup.initial %>
+                <% end %>
+              <% end %>
+            </span>
+            <% counter += 1 if i > 5 %>
+          <% end %>
+          <% if counter > 0 %>
+            <span href="#" class="list_logo_item">
+              <span>+ <%= counter %></span>
+            </span>
+          <% end %>
+        <% else %>
+          <%= announcement_users_text(announcement) %>
+        <% end %>
+      </span>
+    <% end %>
+  </span>
+<% end %>

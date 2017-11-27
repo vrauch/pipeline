@@ -1,0 +1,22 @@
+el = $('#watchlist-info');
+el.html("<%= j render 'watchlist_profile' %>");
+$("#gon").html("<%= j Gon::Base.render_data %>")
+
+$.controlMethods.showPanel("invers_panel");
+
+$.publicMethods.initTags();
+
+$('body').on('click', "#js__show__tags_<%= @startup.id %>", function() {
+  $(this).parent().parent().toggleClass('add__tag--opened');
+  return false;
+});
+$('body').on('keyup', '.tags__block--input, .tt-input', function() {
+  $(this).css('color', '#000');
+});
+$('body').on('click', '.tt-menu', function() {
+  $(".tags__block--input").val('');
+});
+$('body').on('blur', '.tt-input', function() {
+  $(this).typeahead('val', '');
+});
+$('[data-toggle=tooltip]').tooltip();

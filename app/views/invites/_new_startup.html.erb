@@ -1,0 +1,23 @@
+<div class="tip_holder tip_small">
+  <%= form_for(@invite, remote: true) do |f| %>
+    <div class="tip_body">    
+        <div class="tip_small_title">
+          Invite Startup
+        </div>            
+        <div class="form-group">
+          <%= f.text_field :email, class:'form-control', placeholder:'Enter Email' %>
+        </div>
+        <div class="tip_small_text">
+          Startup will receive an email with an instructions to create a profile in Pipeline.
+        </div>
+        <%= f.hidden_field :role, value: @invite.role %>
+        <%= f.hidden_field :resource_id, value: @invite.resource_id %>
+    </div>
+    <div class="tip_group_btns clearfix">
+      <%= f.button class:'btn btn_default btn_black btn_tip_add btn_loader' do %>
+        <span>INVITE</span> <i class="icon icon_mark"></i>
+        <%= render '/layouts/loader' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

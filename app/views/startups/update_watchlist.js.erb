@@ -1,0 +1,24 @@
+el = $("#watchlist-form");
+<% if @startup.errors.any? %>
+  el.html("<%= j render 'new' %>");
+<% else %>
+  $.controlMethods.hidePanel("watchlist-form");
+  $('#startup_<%= @startup.id %>').html("<%= j render partial: 'startups/startup', locals: { startup: @startup } %>");
+
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+
+  if ($("#profile-layout").length > 0) {
+    $('.top_notification').addClass('sm_size').showFlashMessage();
+  } else {
+    $('.top_notification').showFlashMessage();
+  }
+
+  $.publicMethods.initTags();
+
+  $('body').on('click', "#js__show__tags_<%= @startup.id %>", function() {
+    $(this).parent().parent().toggleClass('add__tag--opened');
+    return false;
+  });
+
+  $.controlMethods.removePlaceholder();
+<% end %>

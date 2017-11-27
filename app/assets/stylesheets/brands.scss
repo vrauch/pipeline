@@ -1,0 +1,19 @@
+// Place all the styles related to the dashboard::brands controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#image-preview {
+//  width: 200px;
+//  height: 200px;
+  background-position: center center;
+//  background-size: cover;
+//  -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+//  display: inline-block;
+}
+
+.del_question {
+  position: absolute;
+  right: -40px;
+  top: 13px;
+}

@@ -1,0 +1,8 @@
+$("#edit-profile").html("<%= j(render('users/edit')) %>");
+$(".chosen-select").chosen({ disable_search: true });
+$(".photo-image-input").previewImage(".photo-preview-image");
+
+setTimeout(function(){
+  $("#edit-profile").parents('.slide-panel').addClass('is-visible');
+  return false;
+}, 10);

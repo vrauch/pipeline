@@ -1,0 +1,44 @@
+<div class="show_tip">
+  <a href="#" class="download_link slide_link" data-toggle="tooltip" data-placement="bottom" title="Download PDF"><i class="icon icon_pdf"></i></a>
+  <div class="tip_holder center tip_sortable">
+    <%= form_tag generate_pdf_scorecards_path(formar: :pdf), method: :post, target: '_blank', class: 'add_form' do |f| %>
+      <div class="tip_head">
+        DOWNLOAD PDF OF ALL SCORECARDS
+      </div>
+      <div class="tip_body custom_scroll">
+        <div class="tip_help_text">Drag and drop to reorder</div>
+        <div class="sortable-scorecards tip_item_list clearfix">
+          <% (scorecard_template.try(:scorecards) || @drafts).each do |scorecard| %>
+            <% scorecard = scorecard.decorate %>
+            <div class="btn tip_item">
+              <span>
+                <span class="tip_item_img">
+                  <% if scorecard.logo? %>
+                    <%= image_tag scorecard.logo.thumb_medium %>
+                  <% else %>
+                    <%= scorecard.try(:initial) %>
+                  <% end %>
+                </span>
+                <span class="tip_item_text_holder">
+                  <span class="tip_item_text">
+                    <span class="tip_item_text_large"><%= scorecard.recommendation_title.downcase %></span><br>
+                    <span class="tip_item_text_small"><%= scorecard.title %></span>
+                  </span>
+                </span>
+                <%= hidden_field_tag 'scorecard_ids[]', scorecard.id %>
+              </span>
+            </div>
+          <% end %>
+
+        </div>
+
+      </div>
+      <div class="tip_group_btns clearfix">
+        <button class="btn btn_default btn_gray btn_tip_cancel">CANCEL</button>
+        <%= button_tag type: 'submit', class: 'btn btn_default btn_black btn_tip_add' do %>
+          <span>DOWNLOAD</span> <i class="icon icon_mark"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

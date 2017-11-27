@@ -1,0 +1,39 @@
+<% if @scorecard_templates.nil? || @scorecard_templates.empty? %>
+  <%= render 'partials/nothing_found' %>
+<% else %>
+  <div class="list_holder">
+    <div class="boxer boxer_cards">
+      <div class="box_row clearfix box_head hidden-xs">
+        <div class="box item_box">FOLDER</div>
+        <div class="box text-center hidden-xs">SCORECARDS</div>
+        <div class="box links_box text-center">ACTIONS</div>
+        <div class="box arrow_box"></div>
+      </div>
+
+      <% @scorecard_templates.each do |scorecard_template, scorecards| %>
+
+        <div class="box_row clearfix">
+					<div class="box item_box">
+						<span class="list_item_detail">
+							<span class="list_name centered">
+                <a href="#boxer_collapse<%= scorecard_template.id %>" data-toggle="collapse" aria-expanded="false" aria-controls="boxer_collapse1">
+                  <%= scorecard_template.title %>
+                </a>
+							</span>
+						</span>
+					</div>
+					<div class="box text-center hidden-xs"><%= scorecards.size %></div>
+          <div class="box links_box text-center hidden-xs">
+            <%= render 'pdf_sorting', scorecard_template: scorecard_template if scorecards.any? %>
+					</div>
+
+					<div class="box arrow_box"><a href="#boxer_collapse<%= scorecard_template.id %>" class="box_link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="boxer_collapse1"><i class="icon icon_arrow_down"></i></a></div>
+				</div>
+
+        <div class="collapse" id="boxer_collapse<%= scorecard_template.id %>">
+          <%= render 'scorecards/list', scorecards: scorecards %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

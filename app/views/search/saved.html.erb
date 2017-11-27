@@ -1,0 +1,12 @@
+<div id="saved_searches">
+  <% if @searches.empty? %>
+      <%= render 'empty_saved' %>
+  <% else %>
+    <div class="cards_holder clearfix">
+      <h2 class="mobile_title visible-xs">Saved Searches</h2>
+      <ul class="card_list clearfix">
+        <%= render partial: "search/search", collection: @searches %>
+      </ul>
+    </div>
+  <% end %>
+</div>

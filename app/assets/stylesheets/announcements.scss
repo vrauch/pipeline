@@ -1,0 +1,22 @@
+// Place all the styles related to the announcements controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.hidden_selected_users {
+  display: none;
+}
+/*.fr-box.fr-basic.fr-top .fr-wrapper,
+.fr-wrapper .fr-element.fr-view {
+  min-height: 220px;
+}*/
+.select2-container .select2-search input {
+  min-width: 400px;
+}
+#announcement-details p {
+  margin: 0;
+}
+
+.mmv_holder {
+  .head_content.head_content_padd {
+    padding-top: 25px;
+  }
+}

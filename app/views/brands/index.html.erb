@@ -1,0 +1,68 @@
+<div class="heading hidden-xs clearfix">
+  <div class="dropdown dropdown_text custom_dropdown with_round_triangle pull-left">
+    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Arrange by <i class="icon icon_arrow_down"></i></a>
+    <ul class="dropdown-menu" id="menu1">
+      <li class="sort-type"><%= sortable "title", "Brand Name: A - Z", "asc" %></li>
+      <li class="sort-type"><%= sortable "title", "Brand Name: Z - A", "desc" %></li>
+      <li class="sort-type"><%= sortable "location", "Location A-Z", "asc" %></li>
+      <li class="sort-type"><%= sortable "location", "Location Z-A", "desc" %></li>
+      <li class="active sort-type"><%= sortable "created_at", "Date Added: Newest to Oldest", "desc" %></li>
+      <li class="sort-type"><%= sortable "created_at", "Date Added: Oldest to Newest", "asc" %></li>
+    </ul>
+  </div>
+  <%= link_to '+ Add Brand', new_brand_path, remote: true, class: 'btn btn_add add_brand pull-right',
+              data: { panel: 'info' } %>
+</div>
+<div class="list_holder">
+  <h2 class="mobile_title visible-xs">Brands</h2>
+  <div class="boxer">
+    <div class="box_row clearfix box_head hidden-xs">
+      <div class="box item_box">BRAND</div>
+      <div class="box hidden_box">
+        <div class="hidden_box_left">LOCATION</div>
+        <div class="hidden_box_right">PACKAGE</div>
+      </div>
+      <div class="box text-center">STARTUPS</div>
+      <div class="box text-center">SCORECARDS</div>
+      <div class="box text-center">USERS</div>
+      <div class="box text-center">ACTIONS</div>
+    </div>
+    <div id="index-brands">
+      <%= render @brands %>
+    </div>
+  </div>
+</div>
+
+
+<div class="slide-panel from-right" data-btn="info">
+  <div class="slide-panel-container">
+    <div id="brand_info" class="slide-panel-content slide-panel-content_pb">
+
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+</div> <!-- slide-panel -->
+
+<div class="slide-panel from-right" data-btn="email">
+  <div class="slide-panel-container">
+    <div id="brand_email" class="slide-panel-content slide-panel-content_pb">
+
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+</div> <!-- slide-panel -->
+
+<div class="slide-panel from-right" data-btn="questions">
+  <div class="slide-panel-container">
+    <div id="temporary-question-holder" class="hidden"></div>
+    <div id="temporary-answers-holder" class="hidden"></div>
+    <div id="brand_questions" class="slide-panel-content slide-panel-content_pb">
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+</div> <!-- slide-panel -->
+
+<div class="slide-panel from-right" data-btn="users">
+  <div class="slide-panel-container">
+    <div id="brand_users" class="slide-panel-content slide-panel-content_pb">
+
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+</div> <!-- slide-panel -->

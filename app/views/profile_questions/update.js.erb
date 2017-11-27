@@ -1,0 +1,15 @@
+answer_form = $("#collapse<%= @profile_question.id %>")
+heading = $("#heading<%= @profile_question.id %>")
+
+<% if @profile_question.answer.present? && @profile_question.errors.empty? %>
+
+  answer_form.replaceWith("<%= j render '/profile_questions/answer', cabinet_question: @profile_question, opened: true %>");
+  heading.removeClass('pointed');
+
+  $('.new_questions_count').html("<%= j render 'startups/new_questions_count' %>");
+
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  $('.top_notification').showFlashMessage();
+<% else %>
+  answer_form.html("<%= j render 'answer_form', cabinet_question: @profile_question %>")
+<% end %>

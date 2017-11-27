@@ -1,0 +1,14 @@
+<div class="head_content head_content_padd has_dropdown hidden-xs">
+  <h1 class="h1_title">Scorecards</h1>
+  <div class="dropdown custom_dropdown with_round_triangle">
+    <a href="#" data-toggle="dropdown" class="btn btn_add dropdown-toggle">Generate Scorecard</a>
+    <ul class="dropdown-menu" id="menu1">
+      <li>
+        <%= link_to 'Use Existing Template', new_scorecard_path, remote: true %>
+      </li>
+      <li>
+        <%= link_to 'Create New Template', new_scorecard_template_path, remote: true %>
+      </li>
+    </ul>
+  </div>
+</div>

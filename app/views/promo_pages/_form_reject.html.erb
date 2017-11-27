@@ -1,0 +1,14 @@
+<div class="promo__bar--reject"  style="display: block;">
+  <div class="promo__bar--reject_head">
+    ENTER RECOMMENDATION
+  </div>
+  <%= form_for @promo_page, url: reject_promo_page_path(@promo_page), method: :post, remote: true do |f| %>
+    <%= f.text_area :reason, id: "reason", class: 'promo__bar--reject_text', autocomplete: :off, placeholder: "Enter rejection reason and recommendation how Brand can fix it" %>
+    <div class="clearfix">
+      <%= link_to 'CANCEL', 'javascript:;', id: "cancel-promo-page-reject", class: 'promo__bar--btn_disabled js__cancel__reject' %>
+      <%= f.button type: 'submit', id: 'promo-page-reject', class: 'promo__bar--btn_secondary btn_show_mark' do %>
+        <span>REJECT</span> <i class="icon icon_mark"></i>
+      <% end %>
+    </div>
+  <% end %>
+</div>

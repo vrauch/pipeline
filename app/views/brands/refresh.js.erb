@@ -1,0 +1,8 @@
+<% if @brand.current_step == Brand::STEPS.first %>
+  $("#brand_logo_cache").val("<%= @brand.logo.cache_name %>");
+<% elsif @brand.current_step == Brand::STEPS.second %>
+  $("#brand_email_template_attributes_email_logo_cache").val("<%= @brand.email_template.email_logo.cache_name %>");
+<% end %>
+$(".logo-image-input").previewImage(".logo-preview-image", true);
+$(".email-logo-image-input").previewImage(".email-logo-preview-image", true);
+$(".chosen-select").chosen({"disable_search": true});

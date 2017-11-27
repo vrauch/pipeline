@@ -1,0 +1,10 @@
+<div class="head_content hidden-xs">
+  <h1 class="h1_title">Questions</h1>
+  <div class="subtitle">Answers to additional questions answered by the startup</div>
+</div>
+<%= link_to 'Send Question', new_startup_profile_question_path(@startup), class:'btn btn_add btn_mobile visible-xs btn_open_panel', data: { panel: 'send_questions' }, remote: true %>
+<div class="accordion_holder">
+  <div class="panel-group startup_questions_table" id="accordion" role="tablist" aria-multiselectable="true">
+    <%= render partial: '/profile_questions/question', collection: @profile_questions %>
+  </div>
+</div>

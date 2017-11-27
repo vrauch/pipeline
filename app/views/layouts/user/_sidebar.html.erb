@@ -1,0 +1,63 @@
+<div class="inner_scroll">
+  <div class="sidebar_detail_head">
+    <%= link_to @brand ? brand_users_path(@brand) : users_path, class: 'link_nav' do %>
+      <span class="hidden-xs">BACK</span><i class="icon icon_close visible-xs"></i>
+    <% end %>
+    <a href="javascript:;" class="sidebar_ava">
+      <%= @user.photo.thumb_medium.present? ? image_tag(@user.photo.thumb_medium, width: 90) : image_tag("layout/user_mask.png", alt: "") %>
+    </a>
+    <% if @user.job_title.present? %>
+      <div class="user_position">
+        <%= @user.job_title.upcase %>
+      </div>
+    <% end %>
+    <h2 class="sidebar_title sidebar_title_md"><%= @user.full_name %></h2>
+    <div class="sidebar_subtitle hidden-xs">Profile Created on <%= @user.created_at.strftime('%d/%m/%Y') %></div>
+  </div>
+  <div class="sidebar_detail_body">
+    <div class="inner">
+      <% if can?(:update, @user) || can?(:reset_password, @user) || can?(:destroy, @user) %>
+        <ul class="tool_bar three_elements clearfix hidden-xs">
+          <% if can? :update, @user %>
+            <li class="tool_bar_li">
+              <%= link_to edit_user_path(@user), remote: true, class: 'edit_profile' do %>
+                <i class="icon icon_edit"></i><span>EDIT PROFILE</span></a>
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :reset_password, @user %>
+            <li class="tool_bar_li">
+              <%= link_to '#', data: { toggle: 'modal', target: '#reset_pass' } do %>
+                <i class="icon icon_lock_closed"></i><span>RESET PASSWORD</span></a>
+              <% end %>
+            </li>
+          <% end %>
+          <% if can? :destroy, @user %>
+            <li class="tool_bar_li">
+              <%= link_to '#', data: { toggle: 'modal', target: '#delete' } do %>
+                <i class="icon icon_trash"></i><span>DELETE PROFILE</span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="detail_item"></div>
+      <% end %>
+      <div class="detail_item">
+        <div class="detail_item_title">ABOUT</div>
+        <div class="detail_item_content">
+          <%= auto_link @user.about, html: { target: '_blank', class: 'sidebar_link' } %>
+        </div>
+      </div>
+      <div class="detail_item no_border">
+        <div class="detail_item_title">DETAILS</div>
+        <div class="detail_item_content">
+          <ul class="detail_list">
+            <li><span>Email:</span> <%= @user.email %></li>
+            <li><span>Permissions:</span> <%= User::ROLES[@user.role.to_sym] %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

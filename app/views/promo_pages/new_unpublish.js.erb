@@ -1,0 +1,4 @@
+$("body").append("<%= j render 'shared/alert', modal_id: "unpublish_landing_page#{@promo_page.id}", title: 'Are you sure?',
+                             text: 'This action can make uneditable changes.',
+                             link: { href: unpublish_promo_page_path(@promo_page), remote: true, button_text: 'Unpublish Landing Page', method: :patch } %>");
+$("#unpublish_landing_page<%= @promo_page.id %>").modal();

@@ -1,0 +1,7 @@
+<%= render 'preview' %>
+
+<script>
+  $(document).ready(function(){
+    graph(<%= @scorecard.product_total_score %>, <%= @scorecard.collaboration_total_score %>, <%= @scorecard.business_total_score %>);
+  });
+</script>

@@ -1,0 +1,23 @@
+<span class="section_item placeholder_styles">
+  <% if announcement.cover? %>
+    <span class="section_img"></span>
+  <% end %>
+  <span class="section_content">
+    <h4 class="section_title"></h4>
+    <span class="section_date">
+      <span class="section_by visible-xs-inline-block"></span>
+    </span>
+    <span class="section_text ellipsis_text">
+      <span class="placeholder_line_text" style="width: 95%"></span>
+    </span>
+    <% if current_user.evo_team? %>
+    <span class="list_logo clearfix">
+      <span class="list_logo_item"></span>
+      <span class="list_logo_item"></span>
+      <span class="list_logo_item"></span>
+      <span class="list_logo_item"></span>
+      <span class="list_logo_item"></span>
+    </span>
+    <% end %>
+  </span>
+</span>

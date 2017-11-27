@@ -1,0 +1,6 @@
+$('body').css('overflow', 'hidden');
+
+$("#scorecard_template_logo_cache").val("<%= @scorecard_template.logo.cache_name %>");
+$("#scorecard_template_logo").val('');
+$(".logo-image-input").previewImage(".logo-preview-image", true);
+$(".chosen-select").chosen({"disable_search": true});

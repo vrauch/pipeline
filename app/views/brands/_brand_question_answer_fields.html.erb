@@ -1,0 +1,6 @@
+<li class="nested-fields">
+  <%= f.text_field :answer_text, class: 'form-control add_answer', autocomplete: :off, placeholder: 'Enter Answer' %>
+  <%= link_to_remove_association  f, class: 'question_remove question_item_btn remove-question del_question' do %>
+    <i class="icon icon_delete"></i>
+  <% end %>
+</li>

@@ -1,0 +1,5 @@
+<% @tags.each do |tag| %>
+  <%= link_to tag.title, tag_path(tag, tags_search: @search, tags_page: params[:page]), class: "btn btn_bordered_const" %>
+<% end %>
+<br/>
+<%= paginate @tags %>

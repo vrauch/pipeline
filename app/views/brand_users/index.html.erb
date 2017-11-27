@@ -1,0 +1,15 @@
+<div class="head_content hidden-xs">
+  <h1 class="h1_title">Brand Team Users</h1>
+  <div class="subtitle">Manage and invite brand team users and super users.</div>
+</div>
+<div class="cards_holder">
+  <ul class="card_list clearfix">
+    <li>
+      <%= render 'invites/invite', user_group: :brand_team, resource_id: @brand.id %>
+      <div id="new-user-block"></div>
+    </li>
+    <% @users.each do |user| %>
+      <%= render 'users/user', user: user %>
+    <% end %>
+  </ul>
+</div>

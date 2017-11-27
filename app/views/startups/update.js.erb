@@ -1,0 +1,36 @@
+<% if @startup.errors.any? %>
+  <% if remotipart_submitted? %>
+    $('.setup-profile-form').html("<%= j "#{render('/startups/setup-profile/profile')}" %>");
+  <% else %>
+    $('.setup-profile-form').html("<%= j render('/startups/setup-profile/profile') %>");
+  <% end %>
+  $('.chosen-select').chosen({disable_search: true});
+  $('.remove_first').remove()
+  $("#startup_logo").previewImage(".startup-logo-preview");
+<% elsif !current_user.active? %>
+  $(".setup-profile-form").html("<%= j render '/startups/setup-profile/questions' %>")
+  $('.chosen-select').chosen({
+    disable_search: true
+  });
+  $('.btn_step').on('click', function() {
+    if ($(this).data("disabled") == 0) {
+      $.myMethods.file_init3.call(this);
+    }
+  });
+  $('body').on('click', '.hidden_item a[data-toggle="collapse"]', function(e) {
+    e.stopPropagation();
+  });
+  $(".bordered_menu").html("<%= j render partial: '/layouts/links_for_startup_edit' %>")
+  $('body').scrollTop(0);
+  $('#accordion').on('shown.bs.collapse', function() {
+    var destination;
+    destination = void 0;
+    destination = $('.collapse.in').offset().top - 100;
+    return $('html, body').animate({
+      scrollTop: destination
+    }, 500);
+  });
+<% else %>
+  window.location = "<%= cabinet_startup_path(@startup) %>"
+<% end %>
+$("#startup_logo").previewImage(".startup-logo-preview");

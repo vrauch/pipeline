@@ -1,0 +1,8 @@
+<%= form_for @search, url: @search.persisted? ? search_path(@search) : { action: 'create' }, remote: true do |f| %>
+  <%= hidden_field_tag 'session_search', true %>
+  <%= f.text_field :name, class: "form-control", placeholder: "Enter Query Name" %>
+  <div class="invers_btns">
+    <a href="#" data-panel="" class="btn btn_add btn_show_mark no_cancel_panel btn_save_query_name submit-save-query"><span>Save</span> <i class="icon icon_mark"></i></a>
+    <a href="#" class="btn btn_bordered_const md_size btn_cancel_query_name">Cancel</a>
+  </div>
+<% end %>

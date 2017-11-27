@@ -1,0 +1,20 @@
+<div class="form-group field_with_upload nested-fields">
+  <div class="field_pl">
+    <%= f.text_field :name, id:"founders", class:'form-control', placeholder:'Founder Name*' %>
+    <div class="default_upload_file_holder">
+      <div class="default_upload_file sm_size <%= f.object.avatar? ? 'active' : '' %>">
+        <div class="inner" style="<%= f.object.avatar? ? "background-image: url(#{asset_path f.object.avatar.thumb_small.url})" : '' %>">
+          <%= f.file_field :avatar, class: 'upload_img founder-avatar-input', accept: 'image/png,image/jpeg' %>
+          <%= f.hidden_field :avatar_cache, class: 'hidden-founder-avatar-cache' %>
+        </div>
+        <div class="upload_text visible_before"><i class="icon icon_arrow_up_path"></i></div>
+      </div>
+    </div>
+    <% if [0].exclude?(f.options[:child_index]) %>
+      <%= link_to_remove_association f, class: 'remove_link remove_first' do %>
+        <i class="icon icon_delete"></i>
+      <% end %>
+    <% end %>
+  </div>
+  <span class="field_help_text">Add Photo</span>
+</div>

@@ -1,0 +1,9 @@
+<%= render 'sidebar_details' %>
+<div class="content_sm content_pt">
+  <%= render 'top_menu' %>
+  <% if @requests.empty? %>
+    <%= render 'empty_requests' %>
+  <% else %>
+    <%= render 'present_requests' %>
+  <% end%>
+</div>

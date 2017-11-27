@@ -1,0 +1,53 @@
+<h1 class="h1_title">Explain the sign up process</h1>
+<div class="subtitle">Add details specific to your process or use the example text</div>
+<%= f.hidden_field :current_step %>
+<div class="grid_padding_sm form_container">
+  <div class="row">
+    <div class="col-xs-12 block_for_upload">
+      <div class="default_upload_file_holder">
+        <div class="default_upload_file lg_size apsolute <%= f.object.form_image? ? 'active' : '' %>">
+          <div class="inner form-image-preview-image" style="<%= @promo_page.form_image? ? "background-image: url(#{asset_path @promo_page.form_image.thumb_large.url})" : ''%>">
+            <%= f.file_field :form_image, class: 'upload_img form-image-input' %>
+            <%= f.hidden_field :form_image_cache %>
+          </div>
+          <div class="progress_holder" id="upload_step" style="display:none;">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                <span class="sr-only"></span>
+              </div>
+            </div>
+            <div class="progress_text">uploading</div>
+          </div>
+
+          <div class="progress_holder" id="upload_finish" style="display:none;">
+            <i class="icon icon_mark"></i>
+            <div class="progress_text"><span class="progress_text_done">done</span></div>
+          </div>
+          <div class="upload_text visible_before"><i class="icon icon_arrow_up_round"></i>
+            BACKGROUND IMAGE
+          </div>
+          <div class="upload_text visible_after"><i class="icon icon_arrow_up_round"></i>
+            CHANGE
+          </div>
+        </div>
+        <div class="change_img_text" id="sign_up_image">
+          <span>Change image</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group md_same_block_height">
+            <%= f.text_field :form_title, class: 'form-control', autocomplete: :off, placeholder: 'Sub- section header (for example: Submit a profile to our Pipeline)' %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <%= f.text_field :form_copy, class: 'form-control', placeholder: 'Description (for example: “We will reach out if there is a good fit”)' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

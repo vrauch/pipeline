@@ -1,0 +1,55 @@
+<div class="panel panel-default <%= 'hidden_item' unless index.zero? || current_user.active? %> <%= 'visited' if current_user.active? || !@answers[brief_question.alias].blank? %>" data-mandatory="<%= brief_question.mandatory? %>">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index %>" class="<%= 'collapsed' if current_user.active? %>">
+        <% unless current_user.active? %>
+          <i class="icon icon_circle"></i><i class="icon icon_circle_mark"></i>
+        <% end %>
+        <%= brief_question.alias.humanize.titleize %>
+        <i class="icon icon_arrow_right"></i></a>
+    </h4>
+  </div>
+  <div id="collapse<%= index %>" class="panel-collapse collapse <%= 'in' if index.zero? && !current_user.active? %>">
+    <div class="panel-body">
+      <div class="test_help_text">
+        <%= brief_question.content %>
+      </div>
+      <% if brief_question.alias == 'total_funding'%>
+        <div class="form-group amount_group">
+          <span class="amount_sign">$</span><%= text_field_tag "answers[#{brief_question.id}]", @answers[brief_question.alias], class: 'form-control', placeholder: 'Total Amount' %>
+        </div>
+      <% else %>
+        <%= text_area_tag "answers[#{brief_question.id}]", @answers[brief_question.alias], class: 'form-control', placeholder: 'Write your answer here', style: 'height: 91px;' %>
+        <%  if brief_question.alias == 'referral_information' && !@promo_questions %>
+          <%= fields_for @startup do |f| %>
+            <div class="checkbox checkbox_margin">
+              <div class="checkbox_item">
+                <%= f.check_box :share_info %>
+                <span class="check_icon_holder"><i class="icon icon_mark"></i></span>
+                <%= f.label :share_info do %>
+                  Evol8tion is always working hard to put startups like you in front of brands! By keeping this box checked, you are giving us permission to share the information in this profile directly with our brand clients and agree to our <a href="http://www.startupsforbrands.com/terms-of-use" target="_blank">terms and conditions</a>
+                <% end %>
+              </div>
+              <div class="checkbox_item">
+                <%= f.check_box :receive_emails %>
+                <span class="check_icon_holder"><i class="icon icon_mark"></i></span>
+                <%= f.label :receive_emails, 'I would like to receive emails about Evol8tion’s events, partnerships or news.' %>
+              </div>
+            </div> 
+          <% end %>
+        <% end %>
+      <% end %>
+      <% unless current_user.active? %>
+        <div class="btn_step_holder control_nav_btns">
+          <% unless index == @questions.count - 1 %>
+            <%= link_to 'SKIP', "javascript:;", class:'btn btn_step btn_back skip', data: { disabled: false } unless brief_question.mandatory? %>
+            <%= link_to 'NEXT', 'javascript:;', class: @answers[brief_question.alias].blank? ? "btn btn_step js_scroll disabled" : "btn btn_step js_scroll", 
+                                                data: { disabled: @answers[brief_question.alias].blank? ? true : false } %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+                      

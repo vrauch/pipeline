@@ -1,0 +1,40 @@
+<li class="tool_bar_li">
+  <%= link_to @startup.edit_path, remote: true do %>
+    <i class="icon icon_edit"></i><span>EDIT</span></a>
+  <% end %>
+</li>
+<!--<li class="tool_bar_li"><a href="#"><i class="icon icon_scorecard"></i><span>+ SCORECARD</span></a></li>-->
+
+<% if can? :questions, @startup %>
+  <li class="tool_bar_li">
+    <%= link_to new_startup_profile_question_path(@startup),
+                class: 'btn_open_panel',
+                data: { panel: 'send_questions' }, remote: true do  %>
+      <i class="icon icon_message"></i><span>+ QUESTIONS</span>
+    <% end %>
+  </li>
+<% end %>
+
+<% unless @startup.owner.present? %>
+  <li class="tool_bar_li white_arrow show_tip invite_startup">
+    <% unless @startup.owner.present? %>
+      <%= link_to @startup.invite.present? ? edit_invite_path(@startup.invite) : new_startup_invites_path(resource_id: @startup.id),
+                  remote: true do %>
+        <i class="icon <%= @startup.invite.present? ? 'icon_letter' : 'icon_email' %>"></i><span><%= @startup.invite.present? ? 'RESEND' : 'INVITE' %></span>
+      <% end %>
+    <% end %>
+  </li>
+<% end %>
+<% if can?(:create, Scorecard) %>
+  <li class="tool_bar_li">
+    <%= link_to new_scorecard_path(startup_id: @startup.id), class: "add_link", remote: true do %>
+      <i class="icon icon_scorecard"></i><span>SCORECARD</span>
+    <% end %>
+  </li>
+<% end %>
+<li class="tool_bar_li show_tip push_to_brand">
+  <%= link_to push_startup_path(@startup), remote: true do %>
+    <i class="icon icon_push"></i>
+    <span>PUSH</span>
+  <% end %>
+</li>

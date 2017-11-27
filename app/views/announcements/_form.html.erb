@@ -1,0 +1,74 @@
+<h1 class="h1_title">Create Post</h1>
+<div class="subtitle">You will be able to send the post to all users, specific users or a single user.</div>
+<%= form_for @announcement, remote: true, html: {} do |f| %>
+  <div class="grid_padding_sm form_container">
+    <%= hidden_field_tag 'type', 'create' %>
+    <div class="form-group">
+      <%= f.text_field :title, placeholder: 'Enter Title', class: 'form-control' %>
+    </div>
+
+    <div class="check_list check_list_changed">
+      <div class="check_list_name">SEND TO</div>
+      <div class="btn-group btn_check_group clearfix" data-toggle="buttons">
+        <!--<label class="btn btn_input_simple active">-->
+          <% f.radio_button :send_to, "all_u", checked: true, class: 'send-to', autocomplete: 'off' %><!--<span>All Users</span>-->
+        <!--</label>-->
+        <!--<label class="btn btn_input_simple">-->
+          <% f.radio_button :send_to, "startup_u", class: 'send-to', autocomplete: 'off' %><!--<span>Only Startups</span>-->
+        <!--</label>-->
+        <label class="btn btn_input_simple">
+          <%= f.radio_button :send_to, "brand_u", class: 'send-to', autocomplete: 'off' %> <span>All Brands</span>
+        </label>
+        <label class="btn btn_input_simple">
+          <%= f.radio_button :send_to, "selected_u", class: 'send-to', autocomplete: 'off' %> <span>Selected Brands</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="hidden_selected_users clearfix">
+      <div class="multiple_tag_select">
+        <div class="error_field">
+          <select name="announcement[receiver_ids][]" id="receiver_ids" multiple="multiple" class="js-example-basic-multiple" data-placeholder="Start typing brand name">
+            <% @choices.each_with_index do |collection, i| %>
+              <% collection.each do |receiver| %>
+                <%= content_tag(:option, receiver[:title], value: "#{i}=#{receiver[:id]}", 'data-img-src' => asset_path(receiver[:logo]), selected: (receiver[:selected] ? 'selected' : receiver[:selected])) %>
+              <% end %>
+            <% end %>
+          </select>
+          <% if @announcement.errors && @announcement.errors.messages[:receiver_ids] %>
+            <span class="error_text"><%= @announcement.errors.messages[:receiver_ids].first %></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="editor_holder">
+      <div class="form-group">
+        <label>ANNOUNCEMENT TEXT</label>
+        <%= f.text_area(:content, placeholder: 'Type something', class: 'announcemtn-text-edtior') %>
+      </div>
+    </div>
+
+    <div class="invers_btns left">
+      <a href="#" class="btn btn_add btn_file">Upload Cover
+        <%= f.file_field :cover, class: 'file_upload_cover' %>
+        <%= f.hidden_field :cover_cache %>
+      </a>
+      <a href="#" class="btn btn_bordered_const md_size btn_remove_file_name">Cancel</a>
+      <div class="selected_file_name"><%= @announcement.cover %></div>
+    </div>
+  </div>
+
+  <div class="bot_control_btns">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <a href="#" class="control_link dismiss_one_panel">CANCEL</a>
+        <a href="#" class="control_link btn_open_panel" id='show-preview'>PREVIEW</a>
+        <a id="send-announcement" href="#" class="control_link dismiss_panels btn_call_notification btn_show_mark btn_loader">
+          <span>SEND</span><i class="icon icon_mark"></i>
+          <%= render '/layouts/loader' %>
+        </a>
+      </div>
+    </div>
+  </div>
+<% end %>

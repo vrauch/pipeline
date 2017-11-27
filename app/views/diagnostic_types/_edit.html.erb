@@ -1,0 +1,14 @@
+Edit Result
+<%= form_for(@result, remote: true) do |f| %>
+  <%= f.text_field :title %>
+  <br/>
+  <%= f.text_field :description %>
+  <br/>
+  <%= f.text_field :points_from %>
+  <br/>
+  <%= f.text_field :points_to %>
+
+  <br/>
+  <%= link_to 'Cancel', 'javascript:;', id: 'manage-result-close' %>
+  <%= f.submit 'Update Result' %>
+<% end %>

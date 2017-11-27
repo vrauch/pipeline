@@ -1,0 +1,96 @@
+<h1 class="h1_title"><%= @package.persisted? ? 'Edit' : 'Add' %> Package</h1>
+<div class="subtitle"><%= @package.persisted? ? 'Modify package settings' : 'Create a new package' %></div>
+<div class="add_form">
+  <%= form_for @package, remote: true, html: {} do |f| %> 
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <%= f.text_field :name, class:'form-control', placeholder: 'Package name' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row_mt_sm">
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="form-group"> 
+          <label for="details">DETAILS</label>
+          <div class="input_holder">
+            <%= f.number_field :number_brand_briefs, id:'details', class:'form-control', placeholder:'0' %> 
+            <span class="sublabel">Brand Briefs</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="form-group no_label_mt"> 
+          <div class="input_holder">
+            <%= f.number_field :number_external_pages, class:'form-control', placeholder:'0' %>
+            <span class="sublabel">Landing Pages</span>
+          </div> 
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="form-group no_label_mt"> 
+          <div class="input_holder">
+            <%= f.number_field :number_questions, class:'form-control', style: "padding-right:165px;", placeholder:'0' %>
+            <span class="sublabel">Custom Questions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row_mt_sm">
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="form-group"> 
+          <label for="brand_team_users">BRAND TEAM USERS</label>
+          <div class="input_holder">
+            <%= f.number_field :number_users, id:'brand_team_users', class:'form-control', placeholder:'0' %>
+            <span class="sublabel">Users</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-8">
+        <div class="checkbox_round">
+          <div class="checkbox_item checkbox_item_padd">
+            <%= f.check_box :unlimited_users %>
+            <%= f.label :unlimited_users, 'Unlimeted Brand Team Users' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row_mt_sm">
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="form-group"> 
+          <label for="startups_scorecards">STARTUPS AND SCORECARDS</label>
+          <div class="input_holder">
+            <%= f.number_field :number_startups, id:'startups_scorecards', class:'form-control', placeholder: '0' %>
+            <span class="sublabel">Pushed Startups</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="form-group no_label_mt"> 
+          <div class="input_holder">
+            <%= f.number_field :number_scorecards, class:'form-control', placeholder:'0' %>
+            <span class="sublabel">Scorecards</span>
+          </div> 
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="form-group no_label_mt"> 
+          <div class="input_holder">
+            <%= f.number_field :number_scorecard_requests, class:'form-control', placeholder:'0' %>
+            <span class="sublabel">Requests</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="invers_btns invers_btns_padd">
+      <a href="#" class="btn btn_bordered_const md_size dismiss_panels">Cancel</a>
+      <%= f.button class:'btn btn_add btn_show_mark' do %>
+        <span><%= @package.persisted? ? 'Save Package' : 'Add Package' %></span> <i class="icon icon_mark"></i>
+      <% end %>
+    </div>
+  <% end %>
+</div>

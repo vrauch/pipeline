@@ -1,0 +1,7 @@
+// $("#startups-index").empty();
+// $(".heading").remove();
+// $("#top_bar_tag").remove();
+// $(".box_row").empty();
+// $("<%# j( render 'tags', tag: @tags ) %>").prependTo("#startups-index");
+
+$('.tags_holder').html("<%= j render('tags') %>");

@@ -1,0 +1,167 @@
+<div class="panel_control">
+  <!-- <a href="#"><i class="icon icon_edit"></i></a> -->
+  <% if @scorecard_template.can_edit? %>
+    <%= link_to edit_scorecard_template_path(@scorecard_template), remote: true do %>
+      <i class="icon icon_edit"></i>
+    <% end %>
+  <% end %>
+  <% if defined?(back_url) && back_url %>
+    <%= link_to back_url, class: 'dismiss_one_panel' do %>
+      <i class="icon icon_close"></i>
+    <% end %>
+  <% else %>
+    <a href="#" class="dismiss_one_panel"><i class="icon icon_close"></i></a>
+  <% end %>
+</div>
+
+<h1 class="h1_title"><%= @scorecard_template.title %></h1>
+<div class="subtitle">Template Preview</div>
+
+<div class="grid_padding_sm form_container">
+
+  <div class="template_preview">
+    <h2 class="h2_title title_img">
+      STARTUP SCORECARD
+      <%= image_tag @scorecard_template.get_logo %>
+    </h2>
+    <div class="template_preview_inner">
+
+      <div class="preview_block">
+        <div class="row">
+          <div class="col-sm-3 preview_block_left">
+            <div class="img_holder_outher img_holder_sm">
+              <div class="img_holder_inner">
+                <i class="icon icon_picture"></i>
+                <div>Startup Logo</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-9 preview_block_right">
+            <h2>Startup Name</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            </p>
+            <p class="site_text">www.startupwebsite.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview_block preview_block_vitals">
+        <h3 class="bordered_title">VITALS</h3>
+        <div class="row">
+          <div class="col-sm-3 preview_block_left">
+            <div class="info_item">
+              <div class="info_item_title">
+                LOCATION
+              </div>
+              <p>Lorem ipsum dolor </p>
+            </div>
+          </div>
+          <div class="col-sm-9 preview_block_right">
+            <div class="info_item">
+              <div class="info_item_title">
+                FUNDING STAGE
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3 preview_block_left">
+            <div class="info_item">
+              <div class="info_item_title">
+                DATE FOUNDED
+              </div>
+              <p>mm yyyy</p>
+            </div>
+          </div>
+          <div class="col-sm-9 preview_block_right">
+            <div class="info_item">
+              <div class="info_item_title">
+                BRAND EXPERIENCE
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3 preview_block_left">
+            <div class="info_item">
+              <div class="info_item_title">
+                DEVELOPMENT STAGE
+              </div>
+              <p>Lorem ipsum dolor consectetur</p>
+            </div>
+          </div>
+          <div class="col-sm-3 preview_block_right">
+            <div class="info_item">
+              <div class="info_item_title">
+                <%= @scorecard_template.macro_categories_title.try(:upcase) %>
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="info_item">
+              <div class="info_item_title">
+                <%= @scorecard_template.micro_categories_title.try(:upcase) %>
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview_block preview_block_product">
+        <h3 class="bordered_title">PRODUCT</h3>
+        <div class="row">
+          <%= render 'scorecard_templates/product_section',
+                     section_type: @scorecard_template.ls_product_section_type %>
+          <%= render 'scorecard_templates/product_section',
+                      section_type: @scorecard_template.rs_product_section_type %>
+        </div>
+      </div>
+
+      <div class="preview_block">
+        <h3 class="bordered_title">SCORING</h3>
+        <div class="row">
+          <div class="col-lg-6">
+            <%= render 'partials/custom_graph' %>
+          </div>
+          <div class="col-lg-6 graph_desc">
+            <div class="custom_graph_values_list clearfix">
+              <div class="custom_graph_value_item">
+                <div class="custom_graph_value"><span>X</span>/10</div>
+                product<br> quality
+              </div>
+              <div class="custom_graph_value_item">
+                <div class="custom_graph_value"><span>X</span>/10</div>
+                CORPORATE<br> COLLABORATION
+              </div>
+              <div class="custom_graph_value_item">
+                <div class="custom_graph_value"><span>X</span>/10</div>
+                BUSINESS<br> ALIGNMENT
+              </div>
+            </div>
+            <div class="info_item">
+              <div class="info_item_title graph_title">
+                RECOMMENDATION:
+                <div>LOREM IPSUM DOLOR SIT AMET</div>
+              </div>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaec
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="powered_by">
+      <span>POWERED BY</span> <%= image_tag 'layout/logo03.png', alt: 'Evol8tion' %>
+    </div>
+  </div>

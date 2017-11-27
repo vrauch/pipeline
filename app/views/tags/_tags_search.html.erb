@@ -1,0 +1,12 @@
+<%= form_for tags_url, method: :get do |f| %>
+  <div class="inner_search_wrap">
+    <div class="inner_search<%= ' active_search' if @search %>">
+      <div class="field_search_holder">
+        <%= text_field_tag :search, @search, class:'form-control inner_field_search', placeholder: 'Search for a keyword' %>
+        <%= link_to 'X', tags_url, class: 'clear_field' if @search %>
+      </div>
+      <i class="icon icon_search"></i>
+      <input type="submit" class='btn btn_add' value="Search">
+    </div>
+  </div>
+<% end %>

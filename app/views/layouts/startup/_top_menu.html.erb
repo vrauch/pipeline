@@ -1,0 +1,22 @@
+<div class="top_menu sm_size fixed_menu with_icon">
+  <ul class="top_menu_list clearfix">
+    <% if can? :profile, Startup %>
+      <%= active_link_to 'PROFILE', profile_startup_path(@startup), wrap_tag: :li, active: :exact %>
+    <% end %>
+    <% if can? :questions, @startup %>
+      <%= active_link_to 'QUESTIONS', questions_startup_path(@startup), wrap_tag: :li, active: :exact %>
+    <% end %>
+    <% if can? :activity, Startup %>
+      <%= active_link_to 'ACTIVITY', activity_startup_path(@startup), wrap_tag: :li, active: :exact %>
+    <% end %>
+    <% if can? :notes, Startup %>
+      <%= active_link_to 'COMMENTS', notes_startup_path(@startup), wrap_tag: :li, active: :exact %>
+    <% end %>
+    <% if can? :tasks, Startup %>
+      <%= active_link_to 'TASKS', tasks_startup_path(@startup), wrap_tag: :li, active: :exact %>
+    <% end %>
+  </ul>
+  <div class="top_menu_link hidden-xs">
+    <%= render 'layouts/startup/top_actions' %>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<% if section_type == ps_type_number(:problem_startup_solves) || section_type == ps_type_number(:how_it_works) %>
+  <div class="col-sm-6">
+    <div class="info_item">
+      <div class="info_item_title">
+        <%= ps_type(section_type).to_s.humanize.upcase %>
+      </div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>
+    </div>
+  </div>
+<% elsif section_type == ps_type_number(:product_image) %>
+  <div class="col-sm-6">
+    <div class="img_holder_outher img_holder_md">
+      <div class="img_holder_inner">
+        <i class="icon icon_picture"></i>
+        <div>PRODUCT IMAGE</div>
+      </div>
+    </div>
+  </div>
+<% end %>

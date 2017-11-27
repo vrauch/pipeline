@@ -1,0 +1,7 @@
+<div class="dashboard__pane--chart <%= @startups_all_count == 0 ? 'empty_chart_block' : '' %>">
+  <h4 class="dashboard__pane--title clearfix"><span class="num"><%= @startups_all_count %></span><span>TOTAL STARTUPS</span></h4>
+  <ul class="dashboard__pane--labels">
+    <%= render "dashboard/#{current_user.evo_team? ? 'evo' : 'brand'}/startups_statistic" %>
+  </ul>
+  <%= render 'total_startups_graph' %>
+</div>

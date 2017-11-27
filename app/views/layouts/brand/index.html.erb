@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <%= csrf_meta_tags %>
+    <%= Gon::Base.render_data %>
+  </head>
+  <body>
+  <div id='gon'></div>
+    <div class="page_container">
+      <%= render 'layouts/brand/sidebar' %>
+      <div class="content_sm content_pt <%= 'content_white' if current_page?(brief_brand_path(@brand.id)) && @brand.brand_brief.present? %>">
+        <div id="notification">
+          <%= render 'layouts/flash_message' %>
+        </div>
+        <div class="top_menu md_size fixed_menu">
+          <ul class="top_menu_list clearfix">
+            <%= render 'layouts/brand/top_bar' %>
+          </ul>
+        </div>
+        <%= yield %>
+        <div class="slide-panel from-right" data-btn="info">
+          <div class="slide-panel-container <%= 'width_sm' if @brand.persisted? %>">
+            <div id="brand_info" class="slide-panel-content slide-panel-content_pb">
+
+            </div> <!-- slide-panel-content -->
+          </div> <!-- slide-panel-container -->
+        </div> <!-- slide-panel -->
+
+        <div class="slide-panel from-right" data-btn="email">
+          <div class="slide-panel-container <%= 'width_sm' if @brand.persisted? %>">
+            <div id="brand_email" class="slide-panel-content slide-panel-content_pb">
+
+            </div> <!-- slide-panel-content -->
+          </div> <!-- slide-panel-container -->
+        </div> <!-- slide-panel -->
+
+        <div class="slide-panel from-right" data-btn="questions">
+          <div class="slide-panel-container <%= 'width_sm' if @brand.persisted? %>">
+            <div id="temporary-question-holder" class="hidden"></div>
+            <div id="temporary-answers-holder" class="hidden"></div>
+            <div id="brand_questions" class="slide-panel-content slide-panel-content_pb">
+            </div> <!-- slide-panel-content -->
+          </div> <!-- slide-panel-container -->
+        </div> <!-- slide-panel -->
+
+        <div class="slide-panel from-right" data-btn="users">
+          <div class="slide-panel-container">
+            <div id="brand_users" class="slide-panel-content slide-panel-content_pb">
+
+            </div> <!-- slide-panel-content -->
+          </div> <!-- slide-panel-container -->
+        </div> <!-- slide-panel -->
+      </div>
+    </div>
+    <div id="modify-form" class="slide-panel from-right" data-btn="modify_questions"></div>
+
+    <div class="slide-panel promo_page_preview" data-btn="preview">
+      <div class="slide-panel-container" style="width:100%;">
+        <div id="promo_page_preview" class="slide-panel-content slide-panel-content_pb" style="padding:0px;">
+
+        </div> <!-- slide-panel-content -->
+      </div> <!-- slide-panel-container -->
+    </div> <!-- slide-panel -->
+
+    <div class="slide-panel from-right" data-btn="view_questions">
+      <div class="slide-panel-container width_sm">
+        <div id="view_questions" class="slide-panel-content slide-panel-content_pb">
+
+        </div> <!-- slide-panel-content -->
+      </div> <!-- slide-panel-container -->
+    </div> <!-- slide-panel -->
+
+    <div class="slide-panel from-right invers_sidebar" data-btn="invers_panel">
+      <div class="slide-panel-container sidebar_width">
+        <div id="watchlist-info" class="sidebar_details">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

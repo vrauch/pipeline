@@ -1,0 +1,26 @@
+<div class="panel panel-default <%= current_user.brand_team? && request.answer.present? && request.answer.new? ? 'set-as-seen' : '' %>" data-path="<%= seen_request_path(request) %>">
+  <div role="button" class="slide_accordion collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= request.id %>" aria-expanded="false" aria-controls="collapse<%= request.id %>">
+    <div class="panel-heading clearfix" role="tab" id="heading<%= request.id %>">
+      <%= render 'activities/blank_list_item' %>
+      <span class="panel_img <%= pointed_image(request) %>">
+        <span class="panel_img_holder"><%= request_image(request) %></span>
+      </span>
+
+      <div class="panel_info">
+        <div class="panel_info_title">
+          <%= auto_link(request.body, html: { target: '_blank', class: 'pink_link' }) %>
+        </div>
+        <div class="panel_info_name_date clearfix">
+          <span class="panel_info_name">By <%= request.author_full_name %></span>
+          <span class="panel_info_date"><%= request.created_at.strftime("%B #{request.created_at.day.ordinalize}") %><span class="hidden-xs"><%= request.created_at.strftime(", %Y %I:%M %p") %></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if request.answer.present? %>
+    <%= render partial: 'requests/answer', locals: { request: request, opened: false } %>
+  <% else %>
+    <%= render partial: 'requests/answer_form', locals: { request: request, activity: defined?(accordion_id) ? true : false } %>
+  <% end %>
+  <a href="#" class="close_accordion_item"><i class="icon icon_arrow_up"></i></a>
+</div>

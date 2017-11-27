@@ -1,0 +1,13 @@
+var container = $(".add_to_list.visible");
+if (container.find(".tip_holder").length == 0) {
+  container.append("<%= j render 'add_to_list' %>");
+}
+
+$('.custom_scroll').mCustomScrollbar({
+  scrollButtons: {
+    enable: false,
+    advanced: {
+      updateOnContentResize: true
+    }
+  }
+});

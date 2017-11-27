@@ -1,0 +1,9 @@
+<h2>Hi!</h2>
+<%= image_tag @announcement.cover, widht: '600px' %>
+<small>
+  by <%= @announcement.creator.first_name %> <%= @announcement.creator.first_name%>
+  | <%= @announcement.created_at.strftime('%b %-d, %Y') %>
+</small>
+<p>
+  <%= @announcement.content %>
+</p>

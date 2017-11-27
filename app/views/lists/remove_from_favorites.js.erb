@@ -1,0 +1,18 @@
+$("#notification").html("<%= j(render('layouts/flash_message')) %>");
+$('.top_notification').showFlashMessage();
+
+list_table = $("#startups_table");
+startup = $("#startup_<%= @startup.id %>")
+top_menu = $(".top_menu_link")
+
+if (list_table.length) {
+  el.html("<%= j render partial: '/startups/startup', collection: @favorite_list.startups %>");
+}
+else if (startup.length) {
+  startup.find('.slide_icons').html("<%= j render '/startups/actions', startup: @startup %>");
+}
+else if (top_menu.length) {
+  top_menu.html("<%= j render '/startups/top_actions' %>");
+}
+
+$('[data-toggle=tooltip]').tooltip();

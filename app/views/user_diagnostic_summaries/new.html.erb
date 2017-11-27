@@ -1,0 +1,14 @@
+<div id="user-diagnostic-summary" class="page_container slider_container">
+  <div class="slide_counter">
+    <span>Question</span>
+    <span id="slide_counter"></span>
+  </div>
+  <%= form_for(@user_diagnostic_summary, remote: true, html: { style: 'height:100%;' }) do |f| %>
+    <%= hidden_field_tag :invite_token, @invite.token %>
+    <div class="questions_slider">
+      <% @diagnostic_questions.each_with_index do |question, index| %>
+        <%= render 'test', question: question, last_index: index == @diagnostic_questions.count - 1 %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

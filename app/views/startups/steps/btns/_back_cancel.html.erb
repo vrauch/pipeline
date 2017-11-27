@@ -1,0 +1,8 @@
+<% if @startup.first_step? %>
+  <!-- <a href="javascript:;" class="control_link dismiss_panels">CANCEL</a> -->
+  <%= link_to 'CANCEL', cancel_startups_path(startup_id: @startup.id), method: :put, remote: true, class: 'control_link' %>
+<% else %>
+  <%= f.button type: 'submit', name: 'back_button', class: 'control_link dismiss_one_panel' do %>
+    <i class="icon icon_arrow_left"></i> BACK
+  <% end %>
+<% end %>

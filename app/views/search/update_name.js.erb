@@ -1,0 +1,15 @@
+form = $('#edit-search-name-<%= @search.id %>');
+item = $("#search-block-<%= @search.id %>");
+
+<% if @search.errors.any? %>
+  form.html("<%= j(render partial: 'edit_name') %>")
+<% else %>
+  window.setTimeout(function(){
+    $("#search-<%= @search.id %>").replaceWith("<%= j render partial: 'search', locals: { search: @search } %>");
+    $.controlMethods.removePlaceholder();
+  }, 100);
+  item.siblings('.add_card_block').find('.btn_invite_card').addClass('active');
+  item.siblings('.add_card_block').fadeOut(400);
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  $('.top_notification').showFlashMessage();
+<% end %>

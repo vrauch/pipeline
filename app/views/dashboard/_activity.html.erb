@@ -1,0 +1,23 @@
+<div class="col-sm-12">
+  <%= link_to activities_path, class:'dashboard__item' do %>
+      <% if activity.startup? && activity.startup.owner.present? && activity.startup_logo.blank? %>
+        <span class="dashboard__item--img __empty">
+          <%= activity.startup.initial.upcase %>
+        </span>
+      <% elsif activity.startup? && activity.startup.owner.blank? %>
+        <span class="dashboard__item--img" style="border: 1px solid #eee;">
+          <%= image_tag activity.user.photo.thumb_medium, width: 34 %>
+        </span>
+      <% else %>
+        <span class="dashboard__item--img" style="border: 1px solid #eee;">
+          <%= image_tag(dashboard_activity_image(activity), width: 34) %>
+        </span>
+      <% end %>
+    <span class="dashboard__item--title">
+      <%= truncate(current_user.evo_team? ? activity.evo_text.html_safe : activity.brand_text.html_safe, length: 52) %>
+    </span>
+    <span class="dashboard__item--author">
+      By <%= activity_author(activity) %>
+    </span>
+  <% end %>
+</div>

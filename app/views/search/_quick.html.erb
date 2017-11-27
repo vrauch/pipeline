@@ -1,0 +1,17 @@
+<% if @startups.count > 0 %>
+  <div class="count_found text-uppercase"><%= pluralize(@startups.count, 'startup') %> FOUND</div>
+  <div class="list_holder">
+    <h2 class="mobile_title visible-xs">All Startups</h2>
+    <div class="boxer hovered styled_list">
+      <%= render 'startups/header' %>
+      <div id="startups-index">
+        <%= render partial: '/startups/startup', collection: @startups %>
+        <% if @startups.any? %>
+          <%= paginate @startups, remote: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render 'search/nothing_found' %>
+<% end %>

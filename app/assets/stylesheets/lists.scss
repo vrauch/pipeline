@@ -1,0 +1,76 @@
+.sortable-placeholder {
+  background-color: rgba(21, 21, 21, 0.05);
+  margin-bottom: 30px;
+  min-height: 420px;
+  @media (max-width: 1600px) {
+    min-height: 360px;
+  }
+  @media (max-width: 1199px) {
+    min-height: 420px;
+  }
+  @media screen and (max-width: 880px) {
+    min-height: 360px;
+  }
+}
+
+.sortable {
+  display: list-item;
+}
+
+.spinner {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.35s linear;
+  position: fixed;
+  z-index: 999999;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(#000, 0.5);
+  i {
+    font-size: 50pt;
+    color: #fff;
+    width: 50pt;
+    height: 50pt;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.card_list.sortable-list li {
+  margin: 0 15px 30px ;
+  .card_item {
+    margin: 0;
+  }
+  .add_card_btns {
+    bottom: -30px;
+    left: -15px;
+    right: -15px;
+  }
+  .btn_remove_card {
+    transition: all 0.3s;
+  }
+  .btn_remove_card:hover {
+    opacity: 1;
+    background-color: #EB5C6E;
+  }
+  width: calc(25% - 31px);
+  @media (max-width: 1600px) {
+    width: calc(100% / 3 - 31px);
+  }
+  @media (max-width: 1199px) {
+    width: calc(50% - 31px);
+  }
+  @media screen and (max-width: 767px) {
+    width: calc(100% - 30px);
+  }
+}

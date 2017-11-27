@@ -1,0 +1,13 @@
+<div class="control_nav_btns has_side_btns">
+  <%= link_to 'CANCEL', cabinet_startup_path(@startup), class:'btn btn_step btn_lg btn_back' %>
+  <%= f.hidden_field "progress_step", value: @questions.first.progress_step if @questions.present? %>
+  <%= f.submit 'SAVE', class:'btn btn_step btn_lg btn_next' %>
+  <div class="nav_links_holder absolute clearfix">
+    <% if @questions.present? %>
+      <%= link_to "&lt;BACK".html_safe, to_step_startup_brief_index_path(@startup, progress_step: @questions.first.progress_step, back: true), 
+                                        remote: true, class: 'nav_link pull-left' %>
+    <% end %>
+    <%= link_to "NEXT&gt;".html_safe, to_step_startup_brief_index_path(@startup, progress_step: @questions.present? ? (@questions.first.progress_step + 1) : 1), 
+                                      remote: true, class: 'nav_link pull-right' unless @questions.present? && @questions.first.progress_step == 4 %>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="score_list">
+  <% questions.each_with_index do |question, i| %>
+    <div class="score_item">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="score_title">
+            <span class="score_number"><%= i + 1 %>.</span>
+            <% if question.title && question.title != '' %>
+              <strong>
+                <%= question.title %>:
+              </strong>
+            <% end %>
+            <%= question.body %>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="radio radio_list">
+            <% question.variants.each do |variant| %>
+              <div class="radio_item">
+                <%= radio_button_tag "scorecard_answers[#{question.id}]", variant.id,
+                    session[:scorecard_answers]
+                    .values.map(&:to_i).include?(variant.id),
+                    data: { score: variant.score } %>
+                <%= label_tag "scorecard_answers_#{question.id}_#{variant.id}", variant.title %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

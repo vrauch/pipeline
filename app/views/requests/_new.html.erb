@@ -1,0 +1,33 @@
+<%= form_for @request, remote: true do |f| %>
+  <div class="simple_form">
+    <div class="form-group">
+      <div class="custom_select">
+        <% if @startup.present? %>
+          <% if params[:startup_scorecard] %>
+            <%= f.select :request_type, { "Startup scorecard" => :startup_scorecard }, { selected: "startup_scorecard" }, class: 'chosen-select' %>
+          <% else %>
+            <%= f.select :request_type, { "Startup Inquiry" => :startup }, { selected: "startup" }, class: 'chosen-select' %>
+          <% end %>
+        <% else %>
+          <%= f.select :request_type, params[:setting] ? { "Package Upgrade" => :profile_update } : current_user.brand_super? ? Request::SUPER_BRAND_REQUESTS : Request::BRAND_REQUESTS, { }, class: 'chosen-select' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.text_area :body, class:'form-control', placeholder:'Ask question here', style: 'height: 255px;' %>
+      <%= f.hidden_field :startup_id, value: @startup.id if @startup.present? %>
+    </div>
+  </div>
+  <div class="bot_control_btns">
+    <div class="row">
+      <div class="col-xs-6 left text-right">
+        <a href="#" class="control_link dismiss_one_panel">CANCEL</a>
+      </div>
+      <div class="col-xs-6 right text-left">
+        <%= f.button class:'control_link' do %>
+          SEND <span class="hidden-xs">QUESTION</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

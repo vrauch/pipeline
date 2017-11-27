@@ -1,0 +1,4 @@
+$("body").append("<%= j render 'shared/alert', modal_id: "package#{@package.id}", title: 'Are you sure?',
+                             text: 'This action can make uneditable changes.',
+                             link: { href: @package, remote: true, button_text: 'Delete Package', method: :delete } %>");
+$("#package<%= @package.id %>").modal();

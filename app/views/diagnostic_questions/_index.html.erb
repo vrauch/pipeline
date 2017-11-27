@@ -1,0 +1,4 @@
+<% @questions.each_with_index do |question, index| %>
+  <span><%= index + 1 %></span>
+  <%= render 'question', question: question  %>
+<% end %>

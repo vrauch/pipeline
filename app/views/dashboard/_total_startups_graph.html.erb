@@ -1,0 +1,16 @@
+<div class="dashboard__donut--wrapper">
+  <% if @startups_all_count == 0 %>
+    <div class="dashboard__donut">
+      <div class="no_dashboard__donut">
+        <span>
+          <%= image_tag 'empty_chart.png', alt: 'Chart' %>
+        </span>
+      </div>
+    </div>
+  <% else %>
+    <div class="dashboard__donut" id="dashboard__donut" data-highcharts-chart="0">
+      <div class="highcharts-container" id="highcharts-0" style="position: relative; overflow: hidden; width: 210px; height: 293px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: 'Open Sans';">
+      </div>
+    </div>
+  <% end %>
+</div>

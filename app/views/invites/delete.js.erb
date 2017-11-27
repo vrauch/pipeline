@@ -1,0 +1,4 @@
+$("body").append("<%= j render 'shared/alert', modal_id: "invite#{@invite.id}", title: 'Are you sure?',
+                             text: 'This action can make uneditable changes.',
+                             link: { href: @invite, remote: true, button_text: 'Delete User Invite', method: :delete } %>");
+$("#invite<%= @invite.id %>").modal();

@@ -1,0 +1,30 @@
+<div class="panel panel-default <%= 'hidden_item' unless index.zero? %>">
+ <div class="panel-heading">
+   <h4 class="panel-title">
+       <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index %>">
+         <i class="icon icon_circle"></i><i class="icon icon_circle_mark"></i>
+       <%= brief_question.question_text %>
+       <i class="icon icon_arrow_right"></i></a>
+   </h4>
+ </div>
+ <div id="collapse<%= index %>" class="panel-collapse collapse <%= 'in' if index.zero? %>">
+   <div class="panel-body">
+     <div class="test_help_text">
+       Please select one
+     </div>
+     <ol type="A" class="abc_list check_abc_list radio">
+       <% brief_question.brand_question_answers.each do |answer| %>
+       <li>
+         <%= radio_button_tag "answers[#{brief_question.id}]", answer.id, false, autocomplete: 'off'  %>
+         <label for="answers_<%= brief_question.id %>_<%= answer.id %>"><%= answer.answer_text %></label>
+       </li>
+       <% end %>
+     </ol>
+       <div class="btn_step_holder control_nav_btns">
+         <% unless index == @brand_questions.count - 1 %>
+           <%= link_to 'DONE', 'javascript:;', class: 'btn brief_btn_step btn_lg js_scroll' %>
+         <% end %>
+       </div>
+   </div>
+ </div>
+</div>

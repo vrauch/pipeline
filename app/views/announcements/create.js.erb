@@ -1,0 +1,49 @@
+$("#notification").html("<%= j(render('layouts/flash_message')) %>");
+$('.top_notification').showFlashMessage();
+<% if @announcement.errors.any? %>
+  <% if remotipart_submitted? %>
+    $("#announcement-form").html("<%= j "#{render('new')}" %>");
+  <% else %>
+    $("#announcement-form").html("<%= j(render 'new') %>");
+  <% end %>
+  $(".js-example-basic-multiple").select2({
+    templateResult: formatImg
+  });
+  $('.send-to').each(function() {
+    if ($(this).is(':checked')) {
+      $(this).parents('label').addClass('active');
+      if ($(this).val() == 'selected_u') {
+        $('.hidden_selected_users').show();
+      }
+    } else {
+      $(this).parents('label').removeClass('active');
+    }
+  });
+  $('#announcement_content').froalaEditor({
+    heightMin: '200px',
+    toolbarButtons: ['bold', 'italic', 'underline', '|', 'insertImage', 'insertLink', '|', 'undo', 'redo', 'clearFormatting', 'html'],
+    imageUploadURL: '<%= announcements_upload_image_path %>',
+    imageUploadMethod: 'POST',
+    imageUploadParams: {
+      authenticity_token: '<%= form_authenticity_token %>',
+      return_to: window.location.href
+    }
+  });
+  $.mmvMethods.initEditor();
+<% else %>
+  $.controlMethods.hidePanel("send_announcement");
+  if (!$("#announcement-list").length) {
+    <% if remotipart_submitted? %>
+      $("#empty-announcement").replaceWith("<%= j "#{render('index')}" %>");
+    <% else %>
+      $('#empty-announcement').replaceWith("<%= j(render 'index') %>");
+    <% end %>
+  }
+  <% if remotipart_submitted? %>
+    $("#announcement-list").prepend("<%= j "#{render('announcement', announcement: @announcement)}" %>");
+  <% else %>
+    $("#announcement-list").prepend("<%= j (render 'announcement', announcement: @announcement) %>");
+  <% end %>
+  $('.ellipsis_text').dotdotdot();
+  $.controlMethods.removePlaceholder();
+<% end %>

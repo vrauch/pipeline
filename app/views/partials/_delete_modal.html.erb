@@ -1,0 +1,20 @@
+<div class="modal fade modal_small" tabindex="-1" role="dialog" id="<%= modal_id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="alert_content">
+        <i class="icon icon_info"></i>
+        <div class="card_alert_title">
+          Are You Sure?
+        </div>
+        <div class="card_alert_text">
+          <!-- This action can make uneditable changes. For each action will be created relevant text and button names -->
+          <%= modal_text %>
+        </div>
+        <div class="modal_btns">
+          <a href="#" class="btn btn_bordered_const md_size" data-dismiss="modal">Cancel</a>
+          <%= link_to confirm_btn || 'Delete', confirm_link || '', method: :delete, class: 'btn btn_default_round btn_red confirm_link' %>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

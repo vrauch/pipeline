@@ -1,0 +1,64 @@
+<div id="promo_page_<%= promo_page.id %>" class="promo_item">
+  <%= render '/promo_pages/blank_promo_page' %>
+  <div class="promo_img" style="background-image: url(<%= promo_page.cover_image %>);"></div>
+  <div class="promo_content">
+    <h2 class="promo_title"><%= promo_page.name %></h2>
+    <div class="promo_subtitle"><%= promo_url(alias: promo_page.alias) %></div>
+
+    <span class="styled_label <%= promo_page.promo_page_status %>">
+      <% if promo_page.published? %>
+        <i class="icon icon_mark_bold"></i>
+      <% end %>
+      <%= PromoPage::STATUSES[promo_page.promo_page_status.to_sym].upcase.html_safe %>
+    </span>
+    <div class="promo_links hidden-xs">
+      <% if can? :approve, promo_page %>
+        <%= link_to approve_promo_page_path(promo_page),
+                    class: 'promo_link_item approve',
+                    remote: true, method: :patch,
+                    data: { panel: 'intro', toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Approve' } do %>
+          <i class="icon icon_approve"></i>
+        <% end %>
+      <% end %>
+      <% if can? :reject, promo_page %>
+        <%= content_tag :span,
+                        class: 'promo_link_item reject',
+                        data: { panel: 'intro', toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Reject' } do %>
+          <i class="icon icon_reject"></i>
+          <%= render 'promo_pages/reject_block', promo_page: promo_page, preview: false %>
+        <% end %>
+      <% end %>
+      <% if can? :update, promo_page %>
+        <%= link_to edit_promo_page_path(promo_page),
+                    class: 'promo_link_item edit btn_open_panel edit_promo_page', remote: true,
+                    data: { panel: 'intro', toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Edit' } do %>
+          <i class="icon icon_edit_round"></i>
+        <% end %>
+      <% end %>
+      <% if can? :destroy, promo_page %>
+        <%= link_to '#',
+                    class: 'promo_link_item delete',
+                    data: { panel: 'intro', toggle: 'tooltip',
+                            placement: 'bottom', 'original-title' => 'Delete' } do %>
+          <i class="icon icon_reject" data-toggle="modal" data-target="<%= "#promo_page#{promo_page.id}" %>"></i>
+        <% end %>
+      <% end %>
+      <%= link_to preview_promo_page_path(promo_page),
+                  class: 'promo_link_item edit btn_open_panel preview', remote: true,
+                  data: { panel: 'preview', toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Preview' } do %>
+        <i class="icon icon_preview"></i>
+      <% end %>
+      <%= link_to view_questions_promo_page_path(promo_page),
+                  class: 'promo_link_item edit btn_open_panel view_question', remote: true,
+                  data: { panel: 'view_questions', toggle: 'tooltip', placement: 'bottom', 'original-title' => 'View Questions' } do %>
+        <i class="icon icon_questions"></i>
+      <% end %>
+    </div>
+  </div>
+  <% if promo_page.rejected? %>
+    <div class="promo_text hidden-xs">
+      <span class="promo_text_title">Rejection<br>Reason:</span>
+      <p><%= promo_page.reason ? promo_page.reason : '&nbsp;'.html_safe %></p>
+    </div>
+  <% end %>
+</div>

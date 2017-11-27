@@ -1,0 +1,63 @@
+<div class="sign_up_form">
+  <%= form_for(@user, url: users_path, html: { multipart: true }, remote: true) do |f| %>
+    <% if @invite %>
+      <%= hidden_field_tag :invite_token, @invite.token %>
+    <% end %>
+    <% if @promo_page %>
+      <%= hidden_field_tag :promo_token, @promo_page.token %>
+    <% end %>
+    <div class="sign_up_form_title">SUBMIT THE FORM TO CONTINUE</div>
+    <div class="form_body form_body_padd_sm">
+      <% unless @user.instance_of?(UserStartup) %>
+        <div class="default_upload_file_holder relative">
+          <div class="default_upload_file md_size <%= @user.photo? ? 'active' : '' %>">
+            <div class="inner photo-preview-image" style="<%= @user.photo? ? "background-image: url(#{asset_path @user.photo.thumb_large.url})" : ''%>">
+              <%= f.file_field :photo, class: 'upload_photo_img', accept: 'image/png,image/jpeg' %>
+              <%= f.hidden_field :photo_cache %>
+            </div>
+            <div class="upload_text visible_before"><i class="icon icon_arrow_up_round"></i>
+              ADD PHOTO
+            </div>
+            <div class="upload_text visible_after"><i class="icon icon_arrow_up_round"></i>
+              CHANGE PHOTO
+            </div>
+          </div>
+          <div class="help_text">Upload your profile picture.</div>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :full_name, class: 'form-control input_styled',
+                           placeholder: 'Your Full Name' %>
+        </div>
+      <% end %>
+      <% if !@user.instance_of?(UserStartup) %>
+        <div class="form-group">
+          <%= f.text_field :job_title, class: 'form-control input_styled',
+                           placeholder: 'Job title' %>
+        </div>
+      <% elsif @user.instance_of?(UserStartup) %>
+        <%= render 'startup', f: f %>
+      <% end %>
+      <% if @user.instance_of?(UserBrand) %>
+        <div class="form-group">
+          <%= f.text_field :about, class: 'form-control input_styled',
+                           placeholder: 'Describe yourself briefly' %>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.password_field :password, class: 'form-control input_styled',
+                             autocomplete: 'off', placeholder: 'Password' %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password_confirmation, class: 'form-control input_styled',
+                             autocomplete: 'off', placeholder: 'Confirm Password' %>
+      </div>
+    </div>
+    <%= f.button  class:'btn btn_default btn_black btn_loader', type: 'submit' do %>
+      CONTINUE
+      <%= render '/layouts/loader' %>
+    <% end %>
+  <% end %>
+  <div class="sign_up_bot_text marg_top_md">
+    <%= render 'devise/shared/login' %>
+  </div>
+</div>

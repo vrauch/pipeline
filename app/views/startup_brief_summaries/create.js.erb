@@ -1,0 +1,64 @@
+<% if @questions.present? %>
+  $(".setup-profile-form").html("<%= j render '/startups/setup-profile/questions' %>")
+
+  $('.chosen-select').chosen({
+    disable_search: true
+  });
+
+  $(".bordered_menu").html("<%= j render partial: '/layouts/links_for_startup_edit' %>")
+
+  $('.btn_step').on('click', function() {
+    if ($(this).data("disabled") == 0) {
+      $.myMethods.file_init3.call(this);
+    }
+  });
+
+  $('body').on('click', '.hidden_item a[data-toggle="collapse"]', function(e) {
+    e.stopPropagation();
+  });
+
+  $('body').scrollTop(0);
+
+  $('#accordion').on('shown.bs.collapse', function() {
+    var destination;
+    destination = void 0;
+    destination = $('.collapse.in').offset().top - 100;
+    return $('html, body').animate({
+      scrollTop: destination
+    }, 500);
+  });
+
+  $('#accordion2').on('shown.bs.collapse', function() {
+    var destination;
+    destination = void 0;
+    destination = $('.collapse.in').offset().top - 200;
+    return $('html, body').animate({
+      scrollTop: destination
+    }, 500);
+  });
+
+  $('body').on('change', '#startup_share_info', function() {
+    if ($('#startup_share_info').is(':checked')) {
+      $('input[type="submit"]').removeAttr('disabled');
+    } else {
+      $('input[type="submit"]').attr('disabled','disabled');
+    }
+  });
+
+  $("#startup_notification").html("<%= j(render('layouts/startup_flashes')) %>");
+  $('.top_notification').addClass('full_width').showFlashMessage();
+
+<% elsif @step == 0 %>
+  $(".setup-profile-form").html("<%= j render '/startups/setup-profile/profile' %>")
+
+  $('.chosen-select').chosen({
+    disable_search: true
+  });
+
+  $('.remove_first').remove()
+
+  $(".bordered_menu").html("<%= j render partial: '/layouts/links_for_startup_edit' %>");
+  $('.startup-logo-input').previewImage('.inner.startup-logo-preview');
+<% else %>
+  window.location.href = "<%= cabinet_startup_path(@startup) %>"
+<% end %>

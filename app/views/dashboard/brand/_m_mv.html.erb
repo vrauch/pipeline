@@ -1,0 +1,19 @@
+<div class="dashboard__pane--aside dashboard__pane--news clearfix">
+  <%= link_to 'view all', announcements_path, class: 'dashboard__pane--all' %>
+  <h4 class="dashboard__pane--title with-subtitle  clearfix">M+MV</h4>
+  <h5 class="dashboard__pane--subtitle">Content curated by Evol8tion team.</h5>
+  <% @m_mv.each do |announcement| %>
+    <div class="col-sm-12">
+      <%= link_to announcement_path(announcement.id), remote: true, class: 'dashboard__item' + (announcement.cover? ? '' : ' no_img') do %>
+        <% if announcement.cover? %>
+          <span class="dashboard__item--img">
+            <%= image_tag announcement.cover.thumb_small.url%>
+          </span>
+        <% end %>
+        <span class="dashboard__item--title">
+          <%= truncate(announcement.title, length: 49) %>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

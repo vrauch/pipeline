@@ -1,0 +1,27 @@
+$("#notification").html("<%= j(render('layouts/flash_message')) %>");
+holder = $('.push_startup_to_brand.visible')
+<% if @brand_startup %>
+  setTimeout(function(){
+    holder.find('.btn_tip_add').addClass('active');
+  }, 200);
+
+  setTimeout(function(){
+    holder.removeClass('visible');
+    holder.find('.tip_group_btns').fadeOut(400);
+    holder.find('.tip_holder').remove();
+    $("#brand-<%= @brand.id %>").replaceWith("<%= j(render('brands/brand', brand: @brand)) %>");
+
+    if ($("#index-brands").length) {
+      $('.top_notification').showFlashMessage();
+    } else {
+      $("#pushed_startups").prepend("<%= j(render 'startup', startup: @brand_startup.startup ) %>");
+      $("#brand_startup_count").html("<%= @brand.pushed_startups.count %>");
+      $('.top_notification').addClass('sm_size').showFlashMessage();
+    }
+    $.controlMethods.removePlaceholder();
+  }, 1500);
+<% else %>
+  $("#brand-<%= @brand.id %>").replaceWith("<%= j(render('brands/brand', brand: @brand)) %>");
+  $('.btn_loader').removeClass('btn_load');
+<% end %>
+$.controlMethods.removePlaceholder();

@@ -1,0 +1,58 @@
+<% if @scorecard.any_scores? || @scorecard.current_step == 'recommendation' %>
+  <div class="preview_block">
+    <h3 class="bordered_title">SCORING</h3>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= render 'scorecards/graph' %>
+      </div>
+      <div class="col-lg-6 graph_desc graph_desc_active">
+        <div class="custom_graph_values_list clearfix">
+          <div class="custom_graph_value_item">
+            <div class="custom_graph_value"><span><%= product_total_score %></span>/10</div>
+            product<br> quality
+          </div>
+          <div class="custom_graph_value_item">
+            <div class="custom_graph_value"><span><%= collaboration_total_score %></span>/10</div>
+            CORPORATE<br> COLLABORATION
+          </div>
+          <div class="custom_graph_value_item">
+            <div class="custom_graph_value"><span><%= business_total_score %></span>/10</div>
+            BUSINESS<br> ALIGNMENT
+          </div>
+        </div>
+
+        <div class="info_item editable">
+          <div class="info_item_title graph_title">
+            RECOMMENDATION:
+            <div><%= sc_recommendation_title %></div>
+          </div>
+          <p class="editable_text">
+            <span class="hidden_input_value">
+              <%= @scorecard.recommendation_fv %>
+            </span>
+            <span class="hidden_input_block">
+              <span class="limit_text"><%= sc_limit_text(:recommendation, @scorecard.recommendation) %></span>
+              <%= f.text_area :recommendation, class: 'hidden_input',
+                    rows: 12,
+                    placeholder: 'Type recommendation here',
+                    data: {
+                      default_val: f.object.recommendation,
+                      max_length: Scorecard.max_length_of(:recommendation)
+                    } %>
+            </span>
+          </p>
+          <a href="#" class="edit_link"><i class="icon icon_edit"></i> Edit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+  <%= render 'scorecards/no_scoring' %>
+<% end %>
+
+<script>
+  $(document).ready(function(){
+    graph(<%= product_total_score %>, <%= collaboration_total_score %>, <%= business_total_score %>);
+  });
+</script>

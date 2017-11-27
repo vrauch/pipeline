@@ -1,0 +1,39 @@
+<div class="panel-group accordion_default" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading_p_<%= promo_page_id %>">
+      <h4 class="panel-title">
+        <a role="button" class='collapsed' data-toggle="collapse" data-parent="#accordion" href="#collapse_p_<%= promo_page_id %>" aria-expanded="true" aria-controls="collapse_p_<%= promo_page_id %>">
+          <span class="accordion_default_item_img">
+            <%= image_tag questions.first.promo_page.cover_image? ? questions.first.promo_page.cover_image.thumb_small : '' %>
+          </span>
+          <%= questions.first.promo_page_name.upcase %> QUESTIONS
+          <span class="accordion_default_item_date"><%= @startup.promo_briefs.find_by(promo_page_id: promo_page_id).created_at.strftime('%b %-d, %Y') %></span>
+          <i class="icon icon_arrow_right"></i>
+          
+        </a>
+      </h4>
+    </div>
+    <div id="collapse_p_<%= promo_page_id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_p_<%= promo_page_id %>">
+      <div class="panel-body">
+        <% questions.each do |question| %>
+            <div class="text_block">
+              <h3 class="h3_title"><%= question.question_text %></h3>
+              <% if summary[question.id].present? %>
+                <% if question.text? %>
+                  <%= auto_link(summary[question.id], html: { target: '_blank', class: 'pink_link' }) %>
+                <% else %>
+                  <ul>
+                    <% summary[question.id].each do |answer| %>
+                      <li><%= answer %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+              <% else %>
+                <div class="light_text">none specified</div>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div id="result-<%= result.id %>">
+  <p><%= result.title %></p>
+  <p><%= result.description %></p>
+  <p><%= result.points_from %>-<%= result.points_to %></p>
+  <span>
+    <%= link_to 'edit', edit_diagnostic_type_path(result),
+                remote: true %>
+  </span>
+</div>

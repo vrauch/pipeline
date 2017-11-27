@@ -1,0 +1,4 @@
+<%= label_tag "answers[#{brief_question.id}]", class: @answers[brief_question.alias].present? && @answers[brief_question.alias].include?(answer.id) ? "btn btn_input_simple active" : "btn btn_input_simple" do %>
+  <%= radio_button_tag "answers[#{brief_question.id}]", answer.id, @answers[brief_question.alias].present? && @answers[brief_question.alias].include?(answer.id), autocomplete: 'off'  %>
+  <span><%= answer.category_value.content %></span>
+<% end %>

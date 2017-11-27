@@ -1,0 +1,15 @@
+<div>
+  <div id="manage-question"></div>
+  <%= link_to diagnostic_questions_path, remote: true do %>
+    <span>Questions</span>
+  <% end %>
+  <%= link_to '+Add Question', new_diagnostic_question_path, remote: true %>
+  <div id="questions"></div>
+</div>
+<div>
+  <div id="manage-result"></div>
+  <%= link_to diagnostic_types_path, remote: true do %>
+    <span>Results</span>
+  <% end %>
+  <div id="results"></div>
+</div>

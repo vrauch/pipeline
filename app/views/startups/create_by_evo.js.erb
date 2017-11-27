@@ -1,0 +1,26 @@
+el = $("#startup-<%= @startup.current_step %>-step");
+<% if @startup.errors.any? %>
+  <% if remotipart_submitted? %>
+    el.html("<%= j "#{render('new_full_profile')}" %>");
+  <% else %>
+    el.html("<%= j render('new_full_profile') %>");
+  <% end %>
+<% else %>
+  <% if @startup.persisted? %>
+    if ($("#startups-wrapper").find(".empty_block").length > 0) {
+      $("#startups-wrapper").html("<%= j(render 'present_startups') %>");
+    }
+    $("<%= j render 'startup', startup: @startup %>").prependTo("#startups-index");
+    $.controlMethods.hideAllPanels();
+    $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+    $('.top_notification').showFlashMessage();
+  <% else %>
+    el.html("<%= j(render 'new_full_profile') %>");
+    $.controlMethods.showPanel("startup-<%= @startup.current_step %>-step");
+  <% end %>
+<% end %>
+$(".chosen-select").chosen({ "disable_search": true });
+if ( $(".cover-image-input").parent().is( ".error_field" ) ) {
+  $(".cover-image-input").unwrap();
+}
+$.controlMethods.removePlaceholder();

@@ -1,0 +1,73 @@
+<%= render 'scorecards/top_actions' %>
+
+<div class="tabs_holder scorecards_tabs_holder">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="tabs_label_li">Show:</li>
+    <li role="presentation">
+      <!-- <a href="#scorecards" aria-controls="scorecards" role="tab" data-toggle="tab">SCORECARDS</a> -->
+      <%= link_to 'SCORECARDS', scorecards_path %>
+    </li>
+    <li role="presentation" class="active">
+      <!-- <a href="#templates" aria-controls="templates" role="tab" data-toggle="tab">TEMPLATES</a> -->
+      <%= link_to 'TEMPLATES', scorecard_templates_path %>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <div role="tabpanel" class="tab-pane fade active in" id="templates">
+      <div class="list_holder">
+
+        <% if @scorecard_templates && @scorecard_templates.any? %>
+          <ul class="card_list clearfix">
+            <% @scorecard_templates.each do |template| %>
+              <li>
+                <!-- <a href="#" class="card_item md_size template_card"> -->
+                <%= link_to template, remote: true, class: 'card_item md_size template_card' do %>
+                  <span class="card_ava_md card_ava">
+                    <%= template.get_logo.present? ? image_tag(template.get_logo.thumb_medium, size: 150) : template.initial %>
+                  </span>
+                  <span class="card_middle_block">
+                    <h3 class="card_title">
+                      <%= template.title %>
+                    </h3>
+                  </span>
+                  <span class="card_bot_block">
+                    <span class="user_details">
+                      <span class="user_details_img">
+                        <%= template.user.try(:logo).present? ? image_tag(template.user.logo.thumb_small, size: 50) : template.user.try(:initial) %>
+                      </span>
+                      <span class="user_details_info">
+                        <span>By <%= template.user.try(:full_name) %></span>
+                        <span>
+                          <%= template.created_at.strftime('%d %B, %Y at %l:%M %P') %>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                <% end %>
+                <!-- </a> -->
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <%= render 'scorecard_templates/empty_state' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="slidePanel" class="slide-panel from-right template_panel">
+</div> <!-- slide-panel -->
+
+<% content_for :modals do %>
+  <%= render 'partials/delete_modal',
+        modal_id: 'deleteScorecardTemplateModal',
+        modal_text: 'Your template will not be saved.',
+        confirm_btn: 'Delete Template',
+        confirm_link: '' %>
+<% end %>

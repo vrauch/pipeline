@@ -1,0 +1,18 @@
+<div id="question-<%= question.id %>">
+  <%= question.question_text %>
+  <span>
+    <%= link_to 'edit', edit_diagnostic_question_path(question),
+                remote: true %>
+  </span>
+  <span><%= link_to 'delete', question, method: :delete, remote: true,
+                    data: { confirm: 'Are you sure?' } %>
+  </span>
+  <div>
+    <% question.answers.each do |answer| %>
+      <p>
+        <%= answer.answer_text %>
+        <span><%= pluralize(answer.number_points, 'point') %></span>
+      </p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,244 @@
+<div id="full_width_notification"></div>
+<div class="scorecard_page page_container">
+  <div class="scorecard_page_bg" style="background-image: url('<%= image_url('layout/inner_page_bg2.png') %>');"></div>
+  <div class="scorecard_bar clearfix">
+    <div class="pull-left">
+      <% unless action_name == 'show_by_token' %>
+        <% if @is_preview %>
+          <a class="promo__bar--back hide-fw-slide-panel" href="#">
+            <i class="icon icon_arrow_left"></i>
+            Back
+          </a>
+        <% else %>
+          <%= link_to params[:back_url] || scorecard_back_link, class: 'promo__bar--back' do %>
+            <i class="icon icon_arrow_left"></i>
+            Back
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="pull-right bar_btns">
+      <% if @is_preview %>
+        <%= render 'preview_save_button' %>
+
+      <% else %>
+        <%= link_to (action_name == 'show_by_token') ? show_by_token_scorecards_url(token: @scorecard.try(:token), format: :pdf) :  scorecard_path(@scorecard, format: :pdf),
+                    target: '_blank', class: 'btn btn_bar btn_bar_dark' do %>
+          Download <i class="icon icon_download visible-xs"></i>
+        <% end %>
+
+        <span class="show_tip">
+          <button class="btn btn_bar btn_bar_light">Copy Link <i class="icon icon_link visible-xs"></i></button>
+          <div class="tip_holder tip_copy sc_link_tip">
+            <div class="tip_head">
+              USE THIS LINK TO SHARE A SCORECARD
+            </div>
+            <div class="tip_body">
+              <div class="tip_copy_content">
+                <div class="form-group">
+                  <input id="shareLink<%= @scorecard.id %>"  type="text" class="form-control" value="<%= show_by_token_scorecards_url(token: @scorecard.token) %>">
+                </div>
+                to view a scorecard following this link no password required
+              </div>
+            </div>
+            <div class="tip_group_btns clearfix">
+              <%= link_to 'OPEN IN NEW TAB', show_by_token_scorecards_url(token: @scorecard.token), target: '_blank', class: 'btn btn_default btn_gray inner-link' %>
+              <button class="btn btn_default btn_black" data-copy-input="#shareLink<%= @scorecard.id %>"
+                data-msg-title="DONE"
+                data-msg-text="Link copied to clipboard">
+                COPY TO CLIPBOARD
+              </button>
+            </div>
+
+          </div>
+        </span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="scorecard_content">
+    <div class="container">
+      <div class="grid_padding_sm">
+
+        <div class="template_preview">
+          <h2 class="h2_title title_img">
+            STARTUP SCORECARD
+            <%= image_tag @scorecard.scorecard_template.try(:get_logo) %>
+          </h2>
+          <div class="template_preview_inner">
+
+            <div class="preview_block">
+              <div class="row">
+                <div class="col-sm-3 preview_block_left">
+                  <div class="centered_img">
+                    <%= image_tag @scorecard.logo if @scorecard.logo? %>
+                  </div>
+                </div>
+                <div class="col-sm-9 preview_block_right">
+                  <h2><%= @scorecard.title_fv %></h2>
+                  <p class="desc_text">
+                    <%= @scorecard.description_fv %>
+                  </p>
+                  <p class="site_text">
+                    <%= link_to(@scorecard.website ? "//#{@scorecard.website}" : '#',
+                          target: '_blank') do %>
+                      <%= @scorecard.website_fv %>
+                    <% end %>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="preview_block preview_block_vitals">
+              <h3 class="bordered_title">VITALS</h3>
+              <div class="row">
+                <div class="col-sm-3 preview_block_left">
+                  <div class="info_item">
+                    <div class="info_item_title">
+                      LOCATION
+                    </div>
+                    <p><%= @scorecard.location_fv %></p>
+                  </div>
+                </div>
+                <div class="col-sm-9 preview_block_right">
+
+                  <div class="info_item">
+                    <div class="info_item_title">
+                      FUNDING STAGE
+                    </div>
+                    <p><%= @scorecard.fun_stage_fv %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 preview_block_left">
+                  <div class="info_item">
+                    <div class="info_item_title">
+                      DATE FOUNDED
+                    </div>
+                    <p><%= @scorecard.date_founded_fv %></p>
+                  </div>
+                </div>
+                <div class="col-sm-9 preview_block_right">
+                  <div class="info_item">
+                    <div class="info_item_title">
+                      BRAND EXPERIENCE
+                    </div>
+                    <p><%= @scorecard.brand_experience_fv %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 preview_block_left">
+                  <div class="info_item">
+                    <div class="info_item_title">
+                      DEVELOPMENT STAGE
+                    </div>
+                    <p><%= @scorecard.dev_stage_fv %></p>
+                  </div>
+                </div>
+                <div class="col-sm-9 preview_block_right">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="info_item">
+                        <div class="info_item_title">
+                          <%= @scorecard.scorecard_template.macro_categories_title.try(:upcase) %>
+                        </div>
+                        <p><%= @scorecard.macro_trends_fv %></p>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="info_item">
+                        <div class="info_item_title">
+                          <%= @scorecard.scorecard_template.micro_categories_title.try(:upcase) %>
+                        </div>
+                        <p><%= @scorecard.micro_trends_fv %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="preview_block preview_block_product">
+              <h3 class="bordered_title">PRODUCT</h3>
+              <div class="row">
+
+                <%= render 'scorecards/product_section_type_show',
+                  section_type: @scorecard.scorecard_template.ls_product_section_type,
+                  side: 'left' %>
+                <%= render 'scorecards/product_section_type_show',
+                  section_type: @scorecard.scorecard_template.rs_product_section_type,
+                  side: 'right' %>
+              </div>
+            </div>
+
+            <% if @scorecard.any_scores? || @scorecard.current_step == 'recommendation' %>
+              <div class="preview_block graph_active">
+                <h3 class="bordered_title">SCORING</h3>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="custom_graph_values_list clearfix">
+                      <% if @scorecard.persisted? && @scorecard.current_step == 'overview' || !@is_preview %>
+                        <div class="custom_graph_value_item">
+                          <div class="custom_graph_value"><span><%= @scorecard.product_total_score %></span>/10</div>
+                          product<br> quality
+                        </div>
+                        <div class="custom_graph_value_item">
+                          <div class="custom_graph_value"><span><%= @scorecard.collaboration_total_score %></span>/10</div>
+                          CORPORATE<br> COLLABORATION
+                        </div>
+                        <div class="custom_graph_value_item">
+                          <div class="custom_graph_value"><span><%= @scorecard.business_total_score %></span>/10</div>
+                          BUSINESS<br> ALIGNMENT
+                        </div>
+                      <% else %>
+                        <div class="custom_graph_value_item">
+                          <div class="custom_graph_value"><span><%= product_total_score %></span>/10</div>
+                          product<br> quality
+                        </div>
+                        <div class="custom_graph_value_item">
+                          <div class="custom_graph_value"><span><%= collaboration_total_score %></span>/10</div>
+                          CORPORATE<br> COLLABORATION
+                        </div>
+                        <div class="custom_graph_value_item">
+                          <div class="custom_graph_value"><span><%= business_total_score %></span>/10</div>
+                          BUSINESS<br> ALIGNMENT
+                        </div>
+                      <% end %>
+                    </div>
+                    <%= render 'scorecards/graph' %>
+                  </div>
+                  <div class="col-lg-6 graph_desc graph_desc_active">
+                    <div class="info_item">
+                      <div class="info_item_title graph_title">
+                        RECOMMENDATION:
+                        <% if @scorecard.persisted? && @scorecard.current_step == 'overview' || !@is_preview %>
+                          <div><%= @scorecard.recommendation_title %></div>
+                        <% else %>
+                          <div><%= sc_recommendation_title %></div>
+                        <% end %>
+                      </div>
+                      <p>
+                        <%= @scorecard.recommendation_fv %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <% else %>
+              <%= render 'no_scoring' %>
+            <% end %>
+          </div>
+          <div class="powered_by">
+            <span>POWERED BY</span> <%= image_tag 'layout/logo03.png', alt: 'Evol8tion' %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="colored_footer"></div>
+
+</div>

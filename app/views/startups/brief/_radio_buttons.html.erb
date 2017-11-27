@@ -1,0 +1,7 @@
+<% if brief_question.detail? %>
+  <%= radio_button("brief_answers[#{brief_question.id}]", :answer, answer.id,
+                   checked: brief_question.checked?(answer) ) %>
+<% else %>
+  <%= radio_button(:brief_answers, brief_question.id, answer.id,
+                   checked: brief_question.checked?(answer) ) %>
+<% end %>

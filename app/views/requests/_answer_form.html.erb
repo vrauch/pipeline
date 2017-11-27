@@ -1,0 +1,14 @@
+<div id="collapse<%= request.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= request.id %>">
+  <%= form_for request, remote: true do |f| %>
+    <%= f.fields_for :answer, request.build_answer do |answer_fields| %>
+      <div class="panel-body">
+        <% if can?(:answer, request) %>
+          <%= answer_fields.text_area :body, class:"form-control request_field", placeholder: "Type answer here" %>
+          <%= answer_fields.hidden_field :author_id, value: current_user.id %>
+          <%= hidden_field_tag :activity, activity %>
+          <%= answer_fields.submit "Send", class:'btn btn_add disabled', disabled: true %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

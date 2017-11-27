@@ -1,0 +1,15 @@
+form = $("#list_form_<%= @list.id %>");
+item = $("#list_item_<%= @list.id %>");
+
+<% if @list.errors.any? %>
+  form.html("<%= j(render partial: 'new') %>")
+<% else %>
+  window.setTimeout(function(){
+    $("#<%= @list.id%>").replaceWith("<%= j render partial: 'list', locals: { list: @list } %>");
+    $.controlMethods.removePlaceholder();
+  }, 70);
+  item.siblings('.add_card_block').find('.btn_invite_card').addClass('active');
+  item.siblings('.add_card_block').fadeOut(400);
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  $('.top_notification').showFlashMessage();
+<% end %>

@@ -1,0 +1,10 @@
+$("#fwSlidePanel").html('<%= j(render "scorecards/preview") %>');
+setTimeout(function(){
+  $("#fwSlidePanel").parents('.slide-panel').addClass('is-visible');
+  <% if @scorecard.persisted? && @scorecard.current_step == 'overview' %>
+    graph(<%= @scorecard.product_total_score %>, <%= @scorecard.collaboration_total_score %>, <%= @scorecard.business_total_score %>);
+  <% else %>
+    graph(<%= product_total_score %>, <%= collaboration_total_score %>, <%= business_total_score %>);
+  <% end %>
+  return false;
+}, 10);

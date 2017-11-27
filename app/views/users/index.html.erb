@@ -1,0 +1,18 @@
+<div class="cards_holder users2 clearfix">
+  <h2 class="mobile_title visible-xs">Users</h2>
+  <ul class="card_list clearfix">
+    <li>
+      <% if current_user.evo_team? %>
+        <%= render 'invites/invite', user_group: :evo_team,
+                                     resource_id: nil %>
+      <% else %>
+        <%= render 'invites/invite', user_group: :brand_team,
+                                     resource_id: current_user.brand.id %>
+      <% end %>
+      <div id="new-user-block"></div>
+    </li>
+    <% @users.each do |user| %>
+      <%= render 'user', user: user %>
+    <% end %>
+  </ul>
+</div>

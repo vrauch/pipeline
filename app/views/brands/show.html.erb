@@ -1,0 +1,13 @@
+<% if @requests.empty? %>
+  <%= render 'empty_requests' %>
+<% else %>
+  <div class="head_content hidden-xs">
+    <h1 class="h1_title">Brand Requests</h1>
+    <div class="subtitle">Questions and requests from the brand team.</div>
+  </div>
+  <div class="accordion_holder">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <%= render partial: '/requests/request', collection: @requests %>
+    </div>
+  </div>
+<% end %>

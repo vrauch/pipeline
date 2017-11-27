@@ -1,0 +1,12 @@
+<%= render '/startups/filter_startups' %>
+<div class="list_holder">
+  <h2 class="mobile_title visible-xs">All Startups</h2>
+  <div class="boxer hovered styled_list">
+    <div class="box_row clearfix box_head hidden-xs">
+      <%= render 'startups/header' %>
+    </div>
+    <div id="startups-index">
+      <%= render partial: '/startups/startup', collection: @startups %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<% if current_user.favorite_list.startups.include?(@startup)%>
+    <%= link_to remove_from_favorites_lists_path(startup_id: @startup.id),
+                class: 'favorites_link slide_link top_menu_link_item',
+                data: { toggle: 'tooltip', placement: 'bottom',  'original-title' => 'Remove from favorites'},
+                remote: true do %>
+      <i class="icon icon_star_fill"></i>
+    <% end %>
+<% else %>
+  <%= link_to add_to_favorites_lists_path(startup_id: @startup.id),
+              class: 'favorites_link slide_link top_menu_link_item',
+              data: { toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Add to Favorites'},
+              remote: true do %>
+    <i class="icon icon_star"></i>
+  <% end %>
+<% end %>
+<span class="show_tip add_to_list">
+  <%= link_to add_to_list_startup_path(@startup),
+              class: 'list_link slide_link top_menu_link_item',
+              data: { toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Add to list' },
+              remote: true do %>
+    <i class="icon icon_bookmark"></i>
+  <% end %>
+</span>

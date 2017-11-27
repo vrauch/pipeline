@@ -1,0 +1,43 @@
+<%= render 'scorecards/top_actions' %>
+
+<div class="tabs_holder scorecards_tabs_holder">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="tabs_label_li">Show:</li>
+    <li role="presentation" class="active">
+      <!-- <a href="#scorecards" aria-controls="scorecards" role="tab" data-toggle="tab">SCORECARDS</a> -->
+      <%= link_to 'SCORECARDS', scorecards_path %>
+    </li>
+    <li role="presentation">
+      <!-- <a href="#templates" aria-controls="templates" role="tab" data-toggle="tab">TEMPLATES</a> -->
+      <%= link_to 'TEMPLATES', scorecard_templates_path %>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <div role="tabpanel" class="tab-pane tab-pane_scorecards fade active in" id="scorecards">
+      <%= render 'scorecards/search' %>
+
+      <% if @search %>
+        <%= render 'scorecards/search_template' %>
+      <% else %>
+        <%= render 'scorecards/index_template' %>
+      <% end %>
+
+    </div>
+  </div>
+
+</div>
+
+<div id="slidePanel" class="slide-panel from-right template_panel">
+</div> <!-- slide-panel -->
+
+<% content_for :modals do %>
+  <%= render 'partials/delete_modal',
+        modal_id: 'deleteScorecardModal',
+        modal_text: 'This scorecard will be removed from a brand’s Pipeline!',
+        confirm_btn: 'Delete Scorecard',
+        confirm_link: '' %>
+<% end %>

@@ -1,0 +1,37 @@
+<div class="top_panel clearfix advanced-search-results">
+  <div class="top_panel_text_holder pull-left">
+    <div class="top_panel_text">
+      <%= link_to advanced_search_index_path(search: params[:search], back_to_form: true), class: 'top_panel_link' do %>
+        <span class="top_panel_action">ADVANCED SEARCH <i class="icon icon_arrow_down"></i></span>
+      <% end %>
+      <!-- <a id="close-advance-result" href="#" class="top_panel_link<%# ' not-advanced' unless params[:is_advanced_page].present? || params[:back_result].present? %>">
+        <span class="top_panel_action">ADVANCED SEARCH <i class="icon icon_arrow_down"></i></span>
+      </a> -->
+    </div>
+  </div>
+  <a class="btn btn_bordered_const pull-right save-advanced-query" href="#">Save Query</a>
+  <div class="hidden_form">
+    <div class="row">
+      <div id="query-name-from" class="hidden_form_content col-lg-12">
+        <%= render partial: 'search_name' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @startups.count > 0 %>
+  <%= render '/startups/filter_startups' %>
+
+  <div class="list_holder">
+    <h2 class="mobile_title visible-xs">All Startups</h2>
+    <div class="boxer hovered styled_list">
+      <%= render 'startups/header' %>
+      <div id="startups-index">
+        <%= render partial: '/startups/startup', collection: @startups %>
+        <%= paginate @startups, remote: true %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render 'search/nothing_found' %>
+<% end %>

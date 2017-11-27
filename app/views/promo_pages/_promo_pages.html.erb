@@ -1,0 +1,18 @@
+<div id="index-promo-pages" class="head_content head_content_padd has_btn hidden-xs">
+  <h1 class="h1_title">Landing Pages</h1>
+  <div class="subtitle">Create an external landing page to encourage startups to submit a profile to your Pipeline.</div>
+  <% if can? :create, PromoPage %>
+    <%= link_to 'Create Landing Page', new_promo_page_path, remote: true,
+                class: 'btn btn_add btn_open_pane add_promo_page pull-right',
+                data: { panel: 'intro' } %>
+  <% else %>
+    <div class="btn_with_tip_holder show_tip">
+      <a href="javascript:;" class="btn btn_add reached_limit">Create Landing Page</a>
+      <%= render 'reached_limit' %>
+    </div>
+  <% end %>
+</div>
+
+<div id="promo-pages" class="promo_holder">
+  <%= render @promo_pages if @promo_pages %>
+</div>

@@ -1,0 +1,44 @@
+// Place all the styles related to the search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.back-search-loader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #ddd;
+  z-index: 99;
+  .loader {
+    position: fixed;
+    top: 45%;
+    left: calc((100% + 264px) / 2);
+    z-index: 100;
+    width: 55px;
+    height: 16px;
+    display: block;
+    .circle {
+      background: #000;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .back-search-loader {
+    .loader {
+      left: calc((100% + 55px) / 2);
+    }
+  }
+}
+
+.clear_search_holder {
+  &.active {
+    display: block;
+  }
+}
+
+.search_btns {
+  &.active {
+    transform: none;
+  }
+}

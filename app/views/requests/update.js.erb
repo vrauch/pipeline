@@ -1,0 +1,16 @@
+answer_form = $("#collapse<%= @request.id %>")
+
+<% if @request.answer.present? && @request.errors.empty? %>
+
+  answer_form.replaceWith("<%= j render partial: '/requests/answer', locals: { request: @request, opened: true, index: nil } %>");
+  $("#heading<%= @request.id %>").find(".panel_img").removeClass('pointed')
+
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  <% if @activity %>
+    $('.top_notification').showFlashMessage()
+  <% else %>
+    $('.top_notification').addClass('sm_size').showFlashMessage()
+  <% end %>
+<% else %>
+  answer_form.html("<%= j render 'answer_form', request: @request, index: nil %>")
+<% end %>

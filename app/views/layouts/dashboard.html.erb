@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <%= favicon_link_tag '/favicon.ico' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <%= csrf_meta_tags %>
+  <%= Gon::Base.render_data %>
+</head>
+<body>
+<div id="gon"></div>
+
+<div class="page_container">
+  <div class="sidebar">
+    <%= render 'layouts/sidebar' %>
+  </div>
+  <div class="content <%= current_class %>">
+    <% if params['back_search'] %>
+      <div class="back-search-loader"><%= render 'layouts/loader' %></div>
+    <% end %>
+    <div id="notification">
+      <%= render 'layouts/flash_message' %>
+    </div>
+    <%= render 'layouts/top_bar' %>
+    <%= yield %>
+  </div>
+
+</div>
+<div class="slide-panel from-right" data-btn="watchlist-form">
+  <div class="slide-panel-container">
+    <div id="watchlist-form" class="slide-panel-content slide-panel-content_pb">
+    </div>
+  </div>
+</div>
+
+<div id="modify-form" class="slide-panel from-right" data-btn="modify_questions"></div>
+
+<div class="slide-panel from-right visible_panel" data-btn="send_request">
+  <div class="slide-panel-container width_xs">
+    <div class="slide-panel-content slide-panel-content_pb">
+      <h1 class="h1_title">Ask Evol8tion</h1>
+      <div id="request-form" class="subtitle">Ask Evol8tion team about startups, tech assistance and else</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide-panel from-right visible_panel invers_sidebar" data-btn="invers_panel">
+  <div class="slide-panel-container sidebar_width">
+    <div id="watchlist-info" class="sidebar_details">
+    </div>
+  </div>
+</div>
+
+<div class="slide-panel promo_page_preview" data-btn="preview">
+  <div class="slide-panel-container" style="width:100%;">
+    <div id="promo_page_preview" class="slide-panel-content slide-panel-content_pb" style="padding:0px;">
+
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+</div> <!-- slide-panel -->
+
+<%= render 'announcements/slide_panels' %>
+
+<%= render 'startups/full_profile_panels', width: '' %>
+
+<div class="slide-panel from-right visible_panel" data-btn="add_note">
+  <div class="slide-panel-container width_xs">
+    <div id="note_form" class="slide-panel-content slide-panel-content_pb">
+    </div>
+  </div>
+</div>
+
+<div class="slide-panel from-right">
+  <div class="slide-panel-container full_width">
+    <div id="fwSlidePanel" class="slide-panel-content slide-panel-content_no_padd"></div>
+  </div>
+</div>
+
+<%= render 'search/advanced_form' %>
+
+<% if params[:controller] == 'promo_pages' %>
+  <% @promo_pages.each do |promo| %>
+    <%= render 'shared/alert', modal_id: "promo_page#{promo.id}", title: 'Are you sure?',
+               text: 'This action can make uneditable changes.',
+               link: { href: promo_page_path(promo), remote: true, button_text: 'Delete Lending Page', method: :delete } %>
+  <% end %>
+<% end %>
+
+<%= yield :modals if content_for?(:modals) %>
+
+<%= render 'partials/spinner' %>
+
+</body>
+</html>

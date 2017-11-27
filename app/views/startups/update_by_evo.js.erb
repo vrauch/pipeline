@@ -1,0 +1,21 @@
+el = $("#startup-<%= @startup.current_step %>-step");
+<% if @startup.errors.any? %>
+  <% if remotipart_submitted? %>
+    el.html("<%= j "#{render('startups/new_full_profile')}" %>");
+  <% else %>
+    el.html("<%= j render('startups/new_full_profile') %>");
+  <% end %>
+<% else %>
+  <% if params[:save_button] %>
+    $("#elevator_pitch").html("<%= j render 'startups/elevator_pitch' %>");
+    $("#startup_sidebar").html("<%= j render 'layouts/startup/sidebar' %>");
+    $.publicMethods.initTags();
+    $.controlMethods.hideAllPanels();
+    $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+    $('.top_notification').addClass('sm_size').showFlashMessage();
+  <% else %>
+    el.html("<%= j(render 'startups/new_full_profile') %>");
+    $.controlMethods.showPanel("startup-<%= @startup.current_step %>-step");
+  <% end %>
+<% end %>
+$(".chosen-select").chosen({ "disable_search": true });

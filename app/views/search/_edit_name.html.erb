@@ -1,0 +1,15 @@
+<% if can? :update_name, @search %>
+  <%= form_for @search, url: { action: 'update_name' }, remote: true, html: {} do |f| %>
+    <h3 class="card_title">
+      Edit Search
+    </h3>
+    <div class="form-group"> 
+      <%= f.text_field :name, class: 'form-control', placeholder: 'Edit Search Name' %>
+    </div>
+    <a href="javascript:;" class="delete_card"><i class="icon icon_delete"></i>Delete Query</a>
+    <div class="add_card_btns clearfix">
+      <a href="#" class="btn btn_default btn_gray btn_cancel_card">CANCEL</a>
+      <button class="btn btn_default btn_black btn_invite_card"><span>SAVE</span> <i class="icon icon_mark"></i></button>
+    </div>
+  <% end %>
+<% end %>

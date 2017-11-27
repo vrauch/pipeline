@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="20px" height="14.666px" viewBox="0 0 20 14.666" enable-background="new 0 0 20 14.666" xml:space="preserve">
+<title>health</title>
+<desc>Created with Sketch.</desc>
+<g id="Icons">
+	<g id="Artboard-1" transform="translate(-728.000000, -258.000000)">
+		<g id="health" transform="translate(728.000000, 258.000000)">
+			<rect id="Rectangle-98" y="6" width="2.667" height="2.666"/>
+			<rect id="Rectangle-98_1_" x="17.334" y="6" width="2.666" height="2.666"/>
+			<rect id="Rectangle-97" x="6" y="6" width="8" height="2.666"/>
+			<path id="Rectangle-75" d="M5.333,0L5.333,0C6.07,0,6.667,0.597,6.667,1.333v12c0,0.736-0.597,1.332-1.333,1.332l0,0
+				C4.597,14.666,4,14.07,4,13.334v-12C4,0.597,4.597,0,5.333,0z"/>
+			<path id="Rectangle-75_1_" d="M3.333,2.667L3.333,2.667C4.07,2.667,4.667,3.264,4.667,4v6.666C4.667,11.403,4.07,12,3.333,12l0,0
+				C2.597,12,2,11.403,2,10.666V4C2,3.264,2.597,2.667,3.333,2.667z"/>
+			<path id="Rectangle-75_2_" d="M14.666,0L14.666,0C15.402,0,16,0.597,16,1.333v12c0,0.736-0.598,1.332-1.334,1.332l0,0
+				c-0.736,0-1.332-0.596-1.332-1.332v-12C13.334,0.597,13.93,0,14.666,0z"/>
+			<path id="Rectangle-75_3_" d="M16.666,2.667L16.666,2.667C17.402,2.667,18,3.264,18,4v6.666C18,11.403,17.402,12,16.666,12l0,0
+				c-0.736,0-1.332-0.597-1.332-1.334V4C15.334,3.264,15.93,2.667,16.666,2.667z"/>
+		</g>
+	</g>
+</g>
+</svg>

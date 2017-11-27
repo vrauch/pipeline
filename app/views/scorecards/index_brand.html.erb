@@ -1,0 +1,22 @@
+<% if @scorecard_templates.try(:any?) || @search %>
+  <div class="head_content head_content_padd hidden-xs">
+  <h1 class="h1_title">Scorecards</h1>
+  <div class="subtitle">Startup scorecards organized by brief</div>
+  </div>
+
+  <div class="tabs_holder scorecards_tabs_holder brand_scorecards">
+    <div class="tab-pane_scorecards">
+
+      <%= render 'scorecards/search' %>
+
+      <% if @search %>
+      <%= render 'scorecards/search_template' %>
+      <% else %>
+      <%= render 'scorecards/index_brand_template' %>
+      <% end %>
+    </div>
+
+  </div>
+<% else %>
+  <%= render 'empty_state_brand' %>
+<% end %>

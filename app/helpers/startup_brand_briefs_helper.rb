@@ -1,0 +1,2 @@
+module StartupBrandBriefsHelper
+end

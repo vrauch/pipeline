@@ -1,0 +1,25 @@
+<li>
+  <%= link_to startup.owner.present? || startup.prefilled_brief? ? profile_startup_path(startup) : startup_path(startup),
+              class: 'card_item sm_size brand_startup', remote: !(startup.owner.present? || startup.prefilled_brief?)  do %>
+    <%= render 'blank_startup' %>
+    <span class="card_ava_md card_ava">
+      <%= startup.logo.thumb_medium.present? ? image_tag(startup.logo.thumb_medium, width: 90) : startup.initial %>
+    </span>
+    <span class="card_middle_block">
+      <h3 class="card_title">
+        <%= startup.title %>
+      </h3>
+      <span class="card_site">
+        <%= startup.website %>
+      </span>
+      <span class="card_location">
+        <i class="icon icon_pin"></i><%= startup.location %>
+      </span>
+    </span>
+    <span class="card_bot_block">
+      <p>
+        <%= startup.created_at.strftime('%d %B, %Y at %H:%M %P') %>
+      </p>
+    </span>
+  <% end %>
+</li>

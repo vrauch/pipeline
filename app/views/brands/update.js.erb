@@ -1,0 +1,40 @@
+<% if @brand.errors.any? %>
+  <% if remotipart_submitted? %>
+    $("#brand_<%= @brand.current_step %>").html("<%= j("#{render 'new'}") %>");
+  <% else %>
+    $("#brand_<%= @brand.current_step %>").html("<%= j(render 'new') %>");
+  <% end %>
+
+<% else %>
+  <% if @brand.current_step == 'users' %>
+    $('.slide-panel').removeClass('is-visible');
+    $('body').css('overflow-y', 'auto');
+    $('.sidebar_details').html("<%= j(render('layouts/brand/sidebar')) %>");
+    $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+    $('.top_notification').addClass('sm_size').showFlashMessage();
+  <% else %>
+    <% if params[:back_button] %>
+      $.controlMethods.hidePanel('<%= @brand.previous %>');
+    <% else %>
+      $.controlMethods.showPanel('<%= @brand.current_step %>');
+    <% end %>
+    window.setTimeout(function () {
+      $(".slide-panel-content[id!='brand_<%= @brand.current_step %>']").html("");
+    }, 500);
+    <% if remotipart_submitted? %>
+      $("#brand_<%= @brand.current_step %>").html("<%= j("#{render 'new'}") %>");
+    <% else %>
+      $("#brand_<%= @brand.current_step %>").html("<%= j(render 'new') %>");
+    <% end %>
+
+    $(".add_question_button").on('cocoon:before-insert', function(e, insertedItem) {
+      var question_data_id;
+      question_data_id = insertedItem.find("input.add_guestion").attr("id");
+      insertedItem.find("input.question_data_id").val(question_data_id);
+      insertedItem.attr('question-data-id', question_data_id);
+    });
+  <% end %>
+<% end %>
+$(".chosen-select").chosen({"disable_search": true});
+$(".logo-image-input").previewImage(".logo-preview-image", true);
+$(".email-logo-image-input").previewImage(".email-logo-preview-image", true);

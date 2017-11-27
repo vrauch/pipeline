@@ -1,0 +1,47 @@
+<div class="text_block text_block_padd">
+  <div class="row">
+    <div class="col-sm-6">
+      <h3 class="h3_title">Verticals</h3>
+      <ul class="icon_list sm_size clearfix">
+        <% if @summary['verticals'].present? %>
+          <% @summary['verticals'].each do |vertical| %>
+            <li>
+              <%= content_tag(:i, '', class: "icon icon__#{vertical[:icon_name]}") %>
+              <%= vertical[:content] %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-sm-6">
+      <h3 class="h3_title">Categories</h3>
+      <ul class="icon_list clearfix">
+        <% if @summary['technologies'].present? %>
+          <% @summary['technologies'].each do |category| %>
+            <li>
+              <%= content_tag(:i, '', class: "icon icon__#{category[:icon_name]}") %>
+              <%= category[:content] %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="text_block text_block_padd one_title">
+  <h3 class="h3_title">Audience</h3>
+  <div class="row">
+    <div class="col-sm-6">
+      <ul class="icon_list clearfix">
+        <% if @summary['audience'].present? %>
+          <% @summary['audience'].each do |audience| %>
+            <li>
+              <%= content_tag(:i, '', class: "icon icon__#{audience[:icon_name]}") %>
+              <%= audience[:content] %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

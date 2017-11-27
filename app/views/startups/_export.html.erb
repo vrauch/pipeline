@@ -1,0 +1,16 @@
+<div class="dropdown dropdown_btn custom_dropdown with_round_triangle pull-right">
+  <a href="#" data-toggle="dropdown" class="btn dropdown-toggle btn_add">Export Startups <i class="icon icon_arrow_down"></i></a>
+  <ul class="dropdown-menu" id="menu3">
+    <li class="active export-type"><%= download "All Startups", "all" %></li>
+    <% if current_user.evo_team? %>
+      <li class="export-type"><%= download "Founder Evol8tion", "founder_evolution" %></li>
+      <li class="export-type"><%= download "Founder - Brand", "founder_brand" %></li>
+      <li class="export-type"><%= download "Evol8tion Generated", "evo_generated" %></li>
+    <% else %>
+      <li class="export-type"><%= download "Founder Submitted", "submission" %></li>
+      <li class="export-type"><%= download "Evol8tion Curated", "manual" %></li>
+    <% end %>
+    <li class="export-type"><%= download "Startup Watchlist", "watchlist" %></li>
+    <li class="export-type"><%= download "Current Query Results Only", "query" %></li>
+  </ul>
+</div>

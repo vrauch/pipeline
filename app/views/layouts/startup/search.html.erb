@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <%= csrf_meta_tags %>
+  <%= Gon::Base.render_data %>
+</head>
+<body>
+
+<div class="page_container">
+  <div class="sidebar">
+    <%= render 'layouts/sidebar' %>
+  </div>
+  <div class="content">
+    <div id="notification">
+      <%= render 'layouts/flash_message' %>
+    </div>
+    <div class="top_panel clearfix">
+      <div class="top_panel_text_holder pull-left">
+        <div class="top_panel_text">
+          <%= link_to edit_search_path(@search.id), { remote: true, class: 'top_panel_link' } do %>
+            <span class="top_panel_user_img">
+              <%= image_tag @search.user.photo.thumb_small %>
+            </span>
+            <span class="top_panel_user_details">
+              <span class="top_panel_action text-uppercase"><%= @search.name %> <i class="icon icon_arrow_down"></i></span> <br>
+              <span class="top_panel_user_name">By <%= @search.user.full_name %></span>
+            </span>
+          <% end %>
+        </div>
+      </div>
+      <a href="<%= saved_search_index_path %>" class="close_panel">
+        <i class="icon icon_close"></i>
+      </a>
+    </div>
+    <%= render '/startups/filter_startups' if @startups.any? %>
+    <%= yield %>
+  </div>
+</div>
+<%= render 'search/advanced_form' %>
+</body>
+</html>

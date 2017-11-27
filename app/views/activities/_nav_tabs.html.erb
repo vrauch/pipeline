@@ -1,0 +1,28 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li class="tabs_label_li">Show:</li>
+  <% if can? :index, Activity %>
+    <%= active_link_to activities_path, wrap_tag: :li, active: [['activities'], ['index']] do %>
+      ALL ACTIVITY
+    <% end %>
+  <% end %>
+  <% if can? :my_tasks, Activity %>
+    <%= active_link_to my_tasks_activities_path, wrap_tag: :li, active: [['activities'], ['my_tasks']] do %>
+      MY TASKS
+    <% end %>
+  <% end %>
+  <% if can? :assigned_tasks, Activity %>
+    <%= active_link_to assigned_tasks_activities_path, wrap_tag: :li, active: [['activities'], ['assigned_tasks']] do %>
+      ASSIGNED TASKS
+    <% end %>
+  <% end %>
+  <% if can? :requests, Activity %>
+    <%= active_link_to requests_activities_path, wrap_tag: :li, active: [['activities'], ['requests']] do %>
+      <span class="visible-lg-inline">BRAND</span> REQUESTS
+    <% end %>
+  <% end %>
+  <% if can? :updates, Activity %>
+    <%= active_link_to updates_activities_path, wrap_tag: :li, active: [['activities'], ['updates']] do %>
+      <span class="visible-lg-inline">PROFILE</span> UPDATES
+    <% end %>
+  <% end %>
+</ul>

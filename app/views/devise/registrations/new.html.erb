@@ -1,0 +1,11 @@
+<div id="new-user-wrapper" class="right_block_content half_block_content">
+  <% if @user.new_record? %>
+    <%= render 'form' %>
+  <% else %>
+    <% if @user.brand_team? %>
+      <%= render 'brief' %>
+    <% else %>
+      <%= render 'thanks' %>
+    <% end %>
+  <% end %>
+</div>

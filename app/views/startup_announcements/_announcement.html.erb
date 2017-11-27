@@ -1,0 +1,18 @@
+<%= link_to startup_announcement_path(@startup, announcement.id), remote: true, class: 'section_item' do %>
+  <%= render '/announcements/blank_list_item', announcement: announcement %>
+  <% if announcement.cover? %>  
+    <div class="section_img" style="background-image: url(<%= announcement.cover ? announcement.cover.url : '' %>);">
+    </div>
+  <% end %>
+  <div class="section_content">
+    <h4 class="section_title">
+      <%= announcement.title %>
+    </h4>
+    <div class="section_date">
+      <%= announcement.created_at.strftime('%b %-d, %Y') %>
+    </div>
+    <span class="section_text ellipsis_text">
+      <%= strip_tags(announcement.content) %>
+    </span>
+  </div>
+<% end %>

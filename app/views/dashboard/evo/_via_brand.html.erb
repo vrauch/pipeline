@@ -1,0 +1,17 @@
+<div class="dashboard__pane--logos">
+  <%= link_to 'view all', startups_path(type: :founder_brand), class: 'dashboard__pane--all' %>
+  <h4 class="dashboard__pane--title clearfix"><span class="num"><%= @startups_founder_brand.total_count %></span><span>RECENTLY ADDED<br>VIA BRAND</span></h4>
+  <div class="dashboard__logos clearfix">
+    <% @startups_founder_brand.each do |startup| %>
+      <%= link_to startup.owner ? profile_startup_path(startup) : startups_path, class: startup.logo.present? ? '' : 'dashboard_logo_empty' do %>
+        <%= startup.logo.present? ? image_tag(startup.logo.thumb_small, width: 56) : startup.initial %>
+        <%= render 'startups/startup_info_tip', startup: startup %>
+      <% end %>
+    <% end %>
+    <% if @startups_founder_brand.total_count > 4%>
+      <%= link_to startups_path(type: :founder_brand) do %>
+        <span>+ <%= @startups_founder_brand.total_count - 4 %></span>
+      <% end %>
+    <% end %>
+  </div>
+</div>

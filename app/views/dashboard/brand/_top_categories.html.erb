@@ -1,0 +1,21 @@
+<div class="dashboard__pane--tech">
+  <h4 class="dashboard__pane--title clearfix">TECH SECTORS</h4>
+  <div class="clearfix">
+    <% @top_categories.each do |category| %>
+      <%= link_to by_categories_search_index_path(
+            search: { category_value_ids: [category.id],
+                      startup_type: :all_startups }),
+            class: 'tech-sector-link' do %>
+        <div class="col-sm-4 dashboard__tech">
+          <div class="dashboard__tech--title">
+            <i class="icon icon__<%= category.icon_name %>"></i>
+            <%= category.content %>
+          </div>
+          <div class="dashboard__tech--text">
+            <%= category.count %><small>startups</small>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<li>
+  <%= link_to diagnostic_brand_user_path(@brand, user), class: 'card_item xs_size brand_users' do %>
+    <%= render 'blank_user' %>
+    <span class="card_ava_lg card_ava">
+      <%= user.photo.thumb_medium.present? ? image_tag(user.photo.thumb_medium, width: 90) : user.initial %>
+    </span>
+    <span class="card_middle_block">
+      <span class="card_position">
+        <%= user.job_title %>
+      </span>
+      <h3 class="card_title">
+        <%= user.full_name %>
+      </h3>
+      <span class="card_subtitle">
+        <%= user.email %>
+      </span>
+    </span>
+    <span class="card_bot_block">
+      <p>Submited <%= user.created_at.strftime('%d %B, %Y at %H:%M %P') %></p>
+    </span>
+  <% end %>
+</li>

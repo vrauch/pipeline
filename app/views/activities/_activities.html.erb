@@ -1,0 +1,36 @@
+<div class="head_content head_content_padd has_btn hidden-xs">
+  <h1 class="h1_title">Users Activity</h1>
+  <div class="subtitle">All requests, updates, and actions taking place within your Pipeline.</div>
+</div>
+<div class="activity_holder">
+  <h2 class="mobile_title visible-xs">Activity</h2>
+  <div class="tabs_holder md_size">
+    <% if current_user.evo_team? %>
+      <!-- Nav tabs -->
+      <%= render 'nav_tabs' %>
+    <% end %>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+      <div class="tab-pane visible_mobile fade active in">
+        <div class="accordion_holder">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <% objects.each do |activity| %>
+              <% if activity.kind_of? Note %>
+                <%= render partial: 'notes/note',  locals: { note: activity.decorate } %>
+              <% elsif activity.kind_of? Request %>
+                <%= render partial: 'requests/request', locals: { request: activity, accordion_id: 0 } %>
+              <% else %>
+                <%= render partial: 'activity', locals: { activity: activity } %>
+              <% end %>
+            <% end %>
+          </div>
+          <div id="activity-paginator">
+            <%= paginate objects %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

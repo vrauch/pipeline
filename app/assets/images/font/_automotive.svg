@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="18px" height="16px" viewBox="0 0 18 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>Automotive</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-1" transform="translate(-331.000000, -161.000000)" fill="#000000">
+            <path d="M346.9,162 C346.7,161.4 346.1,161 345.5,161 L334.5,161 C333.8,161 333.3,161.4 333.1,162 L331,168 L331,176 C331,176.6 331.4,177 332,177 L333,177 C333.6,177 334,176.6 334,176 L334,175 L346,175 L346,176 C346,176.6 346.4,177 347,177 L348,177 C348.6,177 349,176.6 349,176 L349,168 L346.9,162 L346.9,162 Z M334.5,172 C333.7,172 333,171.3 333,170.5 C333,169.7 333.7,169 334.5,169 C335.3,169 336,169.7 336,170.5 C336,171.3 335.3,172 334.5,172 L334.5,172 Z M345.5,172 C344.7,172 344,171.3 344,170.5 C344,169.7 344.7,169 345.5,169 C346.3,169 347,169.7 347,170.5 C347,171.3 346.3,172 345.5,172 L345.5,172 Z M333,167 L334.5,162.5 L345.5,162.5 L347,167 L333,167 L333,167 Z" id="Automotive"></path>
+        </g>
+    </g>
+</svg>

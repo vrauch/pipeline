@@ -1,0 +1,152 @@
+<% action = @search.persisted? ? "update" : "create" %>
+<%= form_for @search, url: { action: action }, remote: true, html: { id: 'form-search' } do |f| %>
+  <% if @search.persisted? %>
+    <%= f.hidden_field :id %>
+  <% end %>
+  <div class="top_bar advanced-search">
+    <div class="row">
+      <div class="col-xs-6 col-sm-5 col-md-5 col-lg-5 search_b">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <i class="icon icon_search"></i>
+          </span>
+          <%= f.text_field :search, class: "form-control field_search", placeholder: "Search for startups" %>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-7 col-md-7 col-lg-7">
+        <div class="advanced_search_btns">
+          <a href="#" class="control_link dismiss_one_panel close_advance_search">ADVANCED <i class="icon icon_arrow_up"></i></a>
+          <% if can? action.to_sym, @search %>
+            <a id="save-query-btn" class="btn btn_default btn_large btn_dark_gray" href="#save-query-link">Save Query</a>
+            <%= link_to adv_search_index_path, class: 'btn btn_default btn_large btn_black advanced-search btn_loader' do %>
+              Search
+              <%= render '/layouts/loader' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="collapse_block">
+    <div class="collapse_item">
+      <a href="#startup_info" class="collapse_link" data-toggle="collapse" aria-expanded="true" aria-controls="startup_info">STARTUP INFORMATION</a>
+      <div id="startup_info" class="collapse in">
+        <div class="collapsed_content">
+          <div class="grid_padding_sm">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <div class="custom_select">
+                    <%= f.select :startup_type, @submissions, {}, { class: 'chosen-select' } %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <%= f.text_field :location, class: 'form-control', placeholder: 'Location' %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row row_mt_sm">
+              <div class="col-sm-6">
+                <div class="choose_date clearfix">
+                  <span class="choose_date_text">DATE <br>FOUNDED</span>
+                  <div class="choose_date_item pull-left">
+                    <%= f.text_field :added_from, class: 'form-control calendar', placeholder: 'From' %>
+                  </div>
+                  <div class="choose_date_item pull-right">
+                    <%= f.text_field :added_to, class: 'form-control calendar', placeholder: 'To' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <% @categories.each do |category| %>
+              <% if %w(lifestage funding).include?(category.alias) %>
+                <div class="row row_mt_sm">
+                  <div class="col-xs-12 check_list check_list_padd">
+                    <div class="check_list_name text-uppercase"><%= category.name %></div>
+                    <div class="btn-group btn_check_group clearfix" data-toggle="buttons">
+                      <%= collection_check_boxes('search', :category_value_ids, category.category_values, :id, :content) do |v| %>
+                        <%= v.label(class: 'btn btn_input_simple' + (@search.search_categories.collect(&:category_value_id).include?(v.object.id) ? ' active' : '')) { v.check_box(autocomplete: 'off', class: 'category-value') + "<span>#{v.text}</span>".html_safe } %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% @categories.each do |category| %>
+      <% unless %w(lifestage funding).include?(category.alias) %>
+        <div class="collapse_item">
+          <a href="#<%= category.alias %>" class="collapse_link collapsed text-uppercase" data-toggle="collapse" aria-expanded="false" aria-controls="<%= category.alias %>">
+            <%= category.name %> <span class="number-selected-category"></span>
+          </a>
+          <div id="<%= category.alias %>" class="collapse">
+            <div class="collapsed_content">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="checkbox checkbox_list">
+                    <%= collection_check_boxes('search', :category_value_ids, category.category_values, :id, :content) do |v| %>
+                      <div class="checkbox_item dark">
+                        <%= v.check_box(autocomplete: 'off', class: 'category-value' + (v.object.is_other ? ' other-checkbox' : '') ) + "<span class='check_icon_holder'><i class='icon icon_mark_bold'></i></span><label for='search_category_value_ids_#{v.value}'>#{v.text}</label>".html_safe %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <% if %w(accelerators target_audience roadmap).include?(category.alias) %>
+                    <div class="slide_div">
+                      <div class="form-group">
+                        <%= text_field_tag :other, '', class: "form-control" %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+  <div class="bot_control_btns">
+    <% if can? action.to_sym, @search %>
+      <div class="hidden_form">
+        <div class="row">
+          <div class="col-sm-5">
+            <%= f.text_field :name, class: "form-control", placeholder: "Enter Query Name" %>
+          </div>
+          <div class="col-sm-7">
+            <div class="invers_btns">
+              <a id="save-query-link" href="#" data-panel="" class="btn btn_add btn_show_mark no_cancel_panel btn_save_query_name btn_loader">
+                <span>Save</span> <i class="icon icon_mark"></i>
+                <%= render '/layouts/loader' %>
+              </a>
+              <a href="#" class="btn btn_bordered_const md_size btn_cancel_query_name">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="row">
+      <% if can? action.to_sym, @search %>
+        <div class="col-xs-6 left text-right">
+          <a href="#" class="control_link btn_save_query"> SAVE QUERY</a>
+        </div>
+        <div class="col-xs-6 right text-left">
+          <%= link_to adv_search_index_path, class: 'control_link advanced-search btn_loader' do %>
+            SEARCH
+            <%= render '/layouts/loader' %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+<div class="tip_holder tip_small tip_limit">
+  <i class="icon icon_speedo"></i>
+  <div class="tip_limit_title">
+    It's time to upgrade
+  </div>
+  <div class="card_alert_text">
+    This request takes over your brand (<%= current_user.brand.package.number_external_pages %>) landing pages limit
+  </div>
+  <% if can? :create, Request %>
+    <%= link_to 'Request Upgrade', new_request_path(setting: 'profile_update'), remote: true,
+                class: 'btn btn_default_round btn_pink btn_request_upgrade' %>
+  <% end %>
+</div>

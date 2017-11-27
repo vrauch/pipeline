@@ -1,0 +1,33 @@
+<div id="note-<%= activity.id %>" class="panel panel-default panel_default_close panel_task">
+  <div role="button" class="slide_accordion collapsed" data-toggle="collapse" data-parent="#accordion"
+       href="#collapse<%= activity.id %>_" aria-expanded="false"
+       aria-controls="collapse<%= activity.id %>_">
+    <div class="panel-heading clearfix" role="tab" id="heading<%= activity.id %>">
+      <%= render 'activities/blank_list_item' %>
+      <span class="panel_img">
+        <span class="panel_img_holder">
+          <% if activity.startup? && activity.startup.owner.present? && activity.startup_logo.blank? %>
+            <%= activity.startup.initial.upcase %>
+          <% elsif activity.startup? && activity.startup.owner.blank? %>
+              <%= image_tag activity.user.photo.thumb_medium, width: 82 %>
+          <% else %>
+            <%= activity_image(activity) %>
+          <% end %>
+        </span>
+      </span>
+      <div class="panel_info">
+        <div class="panel_info_title">
+          <%= current_user.evo_team? ? activity.evo_text.html_safe : activity.brand_text.html_safe %>
+        </div>
+        <div class="panel_info_name_date clearfix">
+          <span class="panel_info_name">By <%= activity_author(activity) %></span>
+          <span class="panel_info_date"><%= activity.created_at.strftime("%B #{activity.created_at.day.ordinalize}") %><span class="hidden-xs"><%= activity.created_at.strftime(", %Y %I:%M %p") %></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="collapse<%= activity.id %>_" class="panel-collapse collapse"
+        role="tabpanel" aria-labelledby="heading<%= activity.id %>">
+    <div class="panel-body" style="padding: 0;"></div>
+  </div>
+</div>

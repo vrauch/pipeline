@@ -1,0 +1,10 @@
+<% if @user.errors.any? %>
+  $("#edit-profile").html("<%= j(render('users/edit')) %>");
+  $(".chosen-select").chosen({ disable_search: true });
+  $(".photo-image-input").previewImage(".photo-preview-image");
+<% else %>
+  $('.sidebar_details').html("<%= j(render('layouts/user/sidebar')) %>");
+  $.controlMethods.hidePanel('edit_profile');
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  $('.top_notification').addClass('sm_size').showFlashMessage();
+<% end %>

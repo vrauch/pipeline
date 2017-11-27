@@ -1,0 +1,23 @@
+<div class="dashboard__pane--recent">
+  <h4 class="dashboard__pane--title clearfix">RECENT SAVED SEARCHES</h4>
+  <div class="clearfix">
+    <% @saved_searches.each do |item| %>
+      <div class="col-sm-6">
+        <%= link_to search_path(item.id), { class: 'dashboard__item', id: "search-block-#{item.id}" } do %>
+          <span class="image-border dashboard__item--img">
+            <%= image_tag item.user.photo? ? item.user.photo.thumb_small : 'user_mask.png', width: 56 %>
+          </span>
+          <span class="dashboard__item--title">
+            <%= item.name %>
+          </span>
+          <span class="dashboard__item--desc">
+            <%= item.number_startups %>
+          </span>
+          <span class="dashboard__item--date">
+            <%= item.created_at.strftime("%d %B, %Y at %H:%M %P") %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

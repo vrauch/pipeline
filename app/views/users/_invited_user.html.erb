@@ -1,0 +1,38 @@
+<li id="invite-<%= invite.id %>">
+  <div class="card_item <%= invite.evo_team? ? 'md_size user_card' : 'xs_size brand_users' %> invited_user">
+    <%= render 'users/blank_user' %>
+    <span class="card_ava_md card_ava">
+      <%= image_tag('user_mask2.png') %>
+    </span>
+    <span class="card_middle_block">
+      <% if invite.evo_team? %>
+        <span class="card_position">
+          <%= User::ROLES[invite.role.to_sym] %>
+        </span>
+        <h3 class="card_title">User was invited</h3>
+        <span class="card_subtitle">
+          <%= invite.email %>
+        </span>
+      <% else %>
+        <span class="card_position">NOT SUBMITTED YET</span>
+        <h3 class="card_title">User was invited</h3>
+      <% end %>
+    </span>
+    <span class="card_middle_btns clearfix">
+      <span class="card_middle_btn_holder">
+        <%= link_to delete_invite_path(invite), class: 'card_middle_btn_item', remote: true do %>
+          <i class="icon icon_delete"></i> <br> DELETE PROFILE
+        <% end %>
+      </span>
+      <span class="card_middle_btn_holder">
+        <%= link_to edit_invite_path(invite), class: 'card_middle_btn_item resend_invite', remote: true do %>
+          <i class="icon icon_letter"></i> <br> RESEND INVITE
+        <% end %>
+      </span>
+    </span>
+    <span class="card_bot_block">
+      <p>Created: <%= invite.created_at.strftime('%d %B, %Y at %H:%M %P') %></p>
+    </span>
+  </div>
+  <div class="add_card_block <%= invite.brand_team? ? 'small' : '' %> resend_invite_wrap"></div>
+</li>

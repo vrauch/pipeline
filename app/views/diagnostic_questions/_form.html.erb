@@ -1,0 +1,17 @@
+<%= form_for(@question, remote: true) do |f| %>
+  <%= f.text_field :question_text %>
+  <br />
+  <%= f.select :insight_group_id, InsightGroup.all.map { |group| [group.title, group.id] } %>
+  <br/>
+  Add answers
+  <br/>
+  <%= f.fields_for :answers do |answer_builder| %>
+    <% %>
+    <%= answer_builder.text_field :answer_text %>
+    <%= answer_builder.text_field :number_points %>
+    <br />
+  <% end %>
+  <br/>
+  <%= link_to 'Cancel', 'javascript:;', id: 'manage-question-close' %>
+  <%= f.submit @question.new_record? ? 'Add Question' : 'Update Question' %>
+<% end %>

@@ -1,0 +1,38 @@
+<div class="card_item md_size scorecard_card">
+  <%= link_to scorecard do %>
+    <span class="card_ava_md card_ava">
+      <% if scorecard.logo? %>
+        <%= image_tag scorecard.logo.thumb_medium %>
+      <% else %>
+        <%= scorecard.try(:initial) %>
+      <% end %>
+    </span>
+    <span class="card_middle_block">
+      <span class="card_position<%= " #{scorecard.state.to_s.downcase}_card" unless scorecard.complete? %>">
+        <%= scorecard.state.to_s.upcase if current_user.evo_team? %>
+      </span>
+      <h3 class="card_title">
+        <%= scorecard.title %>
+      </h3>
+      <span class="card_subtitle">
+        <%= scorecard.recommendation_title.capitalize if scorecard.any_scores? %>
+      </span>
+    </span>
+  <% end %>
+  <span class="card_middle_btns clearfix">
+    <span class="card_middle_btns_inner">
+      <%= render 'scorecards/actions', scorecard: scorecard %>
+    </span>
+  </span>
+  <span class="card_bot_block">
+    <span class="user_details">
+      <span class="user_details_img">
+        <%= scorecard.user.photo.present? ? image_tag(scorecard.user.photo.thumb_small, size: 50) : scorecard.user.try(:initial) %>
+      </span>
+      <span class="user_details_info">
+        <span>By <%= scorecard.user.try(:full_name) %></span>
+        <span><%= scorecard.created_at.try(:strftime, '%d %B, %Y at %l:%M %P') %></span>
+      </span>
+    </span>
+  </span>
+</div>

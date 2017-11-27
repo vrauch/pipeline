@@ -1,0 +1,5 @@
+<% if @user_activities.any? %>
+  <%= render 'activity' %>
+<% else %>
+  <%= render 'empty_activity' %>
+<% end %>

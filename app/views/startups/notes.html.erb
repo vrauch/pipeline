@@ -1,0 +1,11 @@
+<%= render 'layouts/startup/sidebar_details' %>
+<div class="content_sm content_pt">
+  <%= render 'layouts/startup/top_menu' %>
+  <div id="startup_notes">
+    <% if @notes.any? %>
+      <%= render 'notes/index_notes' %>
+    <% else %>
+      <%= render 'notes/empty_notes' %>
+    <% end %>
+  </div>
+</div>

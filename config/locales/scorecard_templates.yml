@@ -1,0 +1,4 @@
+en:
+  points:
+    one: '%{count} point'
+    other: '%{count} points'

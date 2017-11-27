@@ -1,0 +1,6 @@
+<% if @announcements.empty? %>
+  <%= render 'empty_announcement' %>
+<% else %>
+  <%= render 'index' %>
+  <%= paginate @announcements %>
+<% end %>

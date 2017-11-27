@@ -1,0 +1,5 @@
+form = $('#edit-search-name-<%= @search.id %>');
+item = $("#search-block-<%= @search.id %>");
+form.html("<%= j(render 'edit_name') %>");
+item.siblings('.add_card_block').find('.btn_invite_card').removeClass('active');
+item.siblings('.add_card_block').fadeIn(400);

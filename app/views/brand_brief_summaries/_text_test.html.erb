@@ -1,0 +1,12 @@
+<div class="panel-body" data-progress-step="<%= brief_question.progress_step %>">
+  <%= text_area_tag "brand_brief_summary[#{brief_question.id}][answer_text]", @answers[brief_question.alias], class: 'form-control', placeholder: 'User answer text here'  %>
+  <% if defined? f %>
+    <div class="btn_step_holder">
+      <% if index == @brief_questions.count - 1 %>
+        <%= f.submit 'SUBMIT BRIEF', class: 'btn btn_step' %>
+      <% else %>
+        <%= link_to 'DONE', 'javascript:;', class: 'btn btn_step btn_done' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

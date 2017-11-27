@@ -1,0 +1,46 @@
+<li id="search-<%= search.id %>">
+  <%= link_to search_path(search.id), { class: 'card_item md_size searched_card', id: "search-block-#{search.id}" } do %>
+    <%= render 'blank_search' %>
+    <span class="card_middle_block">
+      <h3 class="card_title">
+        <%= search.name %>
+      </h3>
+      <span class="card_subtitle">
+        <%= pluralize(search.number_startups, 'startup') %> found
+      </span>
+    </span>
+    <span class="card_bot_block">
+      <span class="user_details">
+        <span class="image-border user_details_img">
+          <%= image_tag(search.user.photo? ? search.user.photo.thumb_small : 'user_mask.png', width: 40 ) %>
+        </span>
+        <span class="user_details_info">
+          <span>By <%= search.user.full_name %></span>
+          <span><%= search.updated_at.strftime("%d %B, %Y at %H:%M %P") %></span>
+        </span>
+      </span>
+      <% if can? :edit_name, search %>
+        <span class="edit_card" data-path="<%= edit_name_search_path(search) %>"><i class="icon icon_edit"></i></span>
+      <% end %>
+    </span>
+  <% end %>
+  <div id="edit-search-name-<%= search.id %>" class="add_card_block with_delete">
+  </div>
+  <div class="card_alert">
+    <div class="card_alert_content">
+      <i class="icon icon_info"></i>
+      <div class="card_alert_title">
+        Are You Sure?
+      </div>
+      <div class="card_alert_text">
+        You will not be able to undo this action.
+      </div>
+    </div>
+    <div class="add_card_btns clearfix">
+      <button class="btn btn_default btn_gray btn_cancel_remove">CANCEL</button>
+      <%= link_to search_path(search), remote: true, method: :delete, class:'btn btn_default btn_red btn_show_mark btn_remove_card' do %>
+        <span>DELETE</span> <i class="icon icon_mark"></i>
+      <% end %>
+    </div>
+  </div>
+</li>

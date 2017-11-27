@@ -1,0 +1,80 @@
+<% if params[:action] == 'preview' || params[:action] == 'show'%>
+  <% unless params[:action] == 'show' %>
+    <% if params[:action] == 'preview' && current_user.evo_team? %>
+      <div class="promo__bar hidden-sm hidden-xs">
+        <div class="pull-left">
+          <%= link_to 'javascript:;', class: 'promo__bar--back back-from-preview' do %>
+            <i class="icon icon_arrow_left"></i>
+            Back
+          <% end %>
+        </div>
+        <div class="pull-right">
+          <% if can? :reject, @promo_page %>
+            <a href="javascript:;" class="promo__bar--btn_secondary js__reject__promo">
+              Reject
+            </a>
+          <% end %>
+          <% if can? :approve, @promo_page %>
+            <%= link_to approve_promo_page_path(@promo_page, preview: 1),
+                        class: 'promo__bar--btn_primary btn_show_mark approve',
+                        remote: true, method: :patch do %>
+              <i class="icon icon_mark"></i>
+              <span>Approve</span>
+            <% end %>
+          <% end %>
+          <% if can? :reject, @promo_page %>
+            <%= render 'promo_pages/reject_block', promo_page: @promo_page, preview: true %>
+          <% end %>
+        </div>
+        <div class="promo__bar--title">
+          <%= @promo_page.brand.title.capitalize %> promo page
+        </div>
+      </div>
+    <% else %>
+      <div class="promo__bar">
+        <div class="pull-left">
+         <%= link_to 'javascript:;', class: 'promo__bar--back back-from-preview' do %>
+           <i class="icon icon_arrow_left"></i>
+           Back
+         <% end %>
+        </div>
+        <% if @promo_page.published? %>
+          <div class="pull-right">
+           <div class="promo__bar--btn_primary">
+             <i class="icon icon_mark"></i>
+             Published
+           </div>
+          </div>
+        <% end %>
+        <div class="promo__bar--title">
+          Here is your landing page
+        </div>
+      </div>
+
+    <% end %>
+  <% end %>
+<% else %>
+  <%= f.hidden_field :current_step %>
+
+  <div class="promo__bar">
+    <div class="pull-left">
+      <%= f.button name: 'back_button', type: :submit, class: 'promo__bar--back dismiss_one_panel btn_loader' do %>
+        <i class="icon icon_arrow_left"></i>
+        <%= render '/layouts/loader' %>
+      <% end %>
+    </div>
+    <div class="pull-right">
+      <%= f.button type: 'submit', name: 'save_as_draft', class: 'promo__bar--btn_disabled btn_show_mark btn_loader' do %>
+        <span>Save as draft</span>
+        <%= render '/layouts/loader' %>
+      <% end %>
+      <%= f.button type: 'submit', name: 'submit', class: 'promo__bar--btn_primary btn_show_mark btn_loader' do %>
+        <span>Submit</span>
+        <%= render '/layouts/loader' %>
+      <% end %>
+    </div>
+    <div class="promo__bar--title">
+      Here is your landing page
+    </div>
+  </div>
+<% end %>

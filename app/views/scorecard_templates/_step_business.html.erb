@@ -1,0 +1,127 @@
+<%= form_for @scorecard_template, remote: true, html: { id: 'scorecardTemplateQuestionsForm' } do |f| %>
+  <div class="slide-panel-container">
+    <div class="slide-panel-content slide-panel-content_pb">
+      <ul class="step_name_list step_name_list_padd clearfix">
+        <li class="pull-left name_main_step">TEMPLATE GENERATOR</li>
+        <li>TEMPLATE</li>
+        <li class="active">Business Alignment</li>
+        <li>PREVIEW</li>
+      </ul>
+
+      <h1 class="h1_title">Business Alignment Evaluation Questions</h1>
+      <div class="subtitle">Select 5 pre-existing or custom questions</div>
+
+      <%= render 'partials/error_messages', resource: @scorecard_template, disable_titles: true %>
+
+
+      <div class="collapse_check_list business_questions">
+        <div class="checkbox_round sm_size">
+          <%= f.fields_for :questions do |fq| %>
+            <div class="checkbox_item question-cont">
+              <div class="checkbox-cont">
+                <% fq.object.is_selected = true if fq.object.is_selected.nil? && fq.object.persisted? %>
+                <%= fq.check_box :is_selected %>
+                <label for="check<%= fq.object.object_id %>"></label>
+                <%= fq.label :is_selected do %>
+                <% end %>
+                <%= fq.hidden_field :score_type %>
+                <%= fq.hidden_field :question_for %>
+                <%= fq.hidden_field :question_type %>
+
+                <a href="#variants<%= fq.object.object_id %>" class="collapse_check_text collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="impact_or_business">
+                  <% if fq.object.title && fq.object.title != '' %>
+                  <strong>
+                    <%= fq.object.title %>:
+                    <%= fq.hidden_field :title %>
+                  </strong>
+                  <% end %>
+                  <span class="question-body">
+                    <%= fq.object.body %>
+                  </span>
+                  <i class="icon icon_arrow_right"></i>
+                </a>
+                <a href="#" class="control_question"><i class="icon icon_edit"></i></a>
+                <div id="variants<%= fq.object.object_id %>" class="collapse">
+                  <div class="collapsed_check_content">
+
+                    <% fq.object.variants.each do |variant| %>
+                    <div class="collapsed_check_item">
+                      <div class="points">
+                        <%= t('points', count: variant.score) %>
+                      </div>
+                      <span class="variant<%= variant.score %>">
+                        <%= variant.title %>
+                      </span>
+                    </div>
+                    <% end %>
+
+                  </div>
+                </div>
+              </div>
+
+              <%= render 'edit_question', fq: fq %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
+      <div class="add_question_block" data-validate-inner>
+        <div class="grid_padding_sm form_container">
+          <%= f.fields_for @new_question do |fq| %>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <div class="fake_label">Add Custom Question</div>
+                  <%= fq.text_field :body, class: 'form-control add_guestion',
+                    placeholder: 'Type Custom Question Here',
+                    # required: true,
+                    data: {
+                      validate_required: true
+                    } %>
+                <%= hidden_field_tag :scorecard_template_id, @scorecard_template.id if @scorecard_template.persisted? %>
+                </div>
+              </div>
+            </div>
+            <div class="slide_block">
+              <ul class="inputs_list">
+                <%= fq.fields_for :variants do |fv| %>
+                  <li>
+                    <div class="points">
+                      <%= t 'points', count: fv.object.score %>
+                      <%= fv.hidden_field :score %>
+                    </div>
+                    <%= fv.text_field :title, class: 'form-control',
+                      placeholder: 'Enter Answer',
+                      # required: true,
+                      data: {
+                        validate_required: true
+                      } %>
+                  </li>
+                <% end %>
+              </ul>
+              <div class="invers_btns">
+                <a href="#" class="btn btn_bordered_const md_size btn_st_cancel_question">Cancel</a>
+                <%= button_tag 'Add Question', type: 'submit', class: 'btn btn_add', name: 'add_question' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+
+  <div class="bot_control_btns fixed_control_btns">
+    <div class="row">
+      <div class="col-xs-12 text-center more_control_btns">
+        <%= button_tag type: 'submit', class: 'control_link', name: 'back_button' do %>
+          <i class="icon icon_arrow_left"></i> BACK
+        <% end %>
+
+        <%= button_tag type: 'submit', class: 'control_link btn_open_panel' do %>
+          Preview Template <i class="icon icon_arrow_right"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

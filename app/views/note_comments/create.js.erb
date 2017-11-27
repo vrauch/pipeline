@@ -1,0 +1,10 @@
+$("#comments_<%= @note.id %>").append("<%= j render partial: '/notes/comment', locals: { comment: @comment } %>");
+$("#comment_form_<%= @note.id %>").html("<%= j render partial: '/note_comments/new', locals: { note: @note } %>")
+
+$('.request_field').on('keyup', function() {
+  if ($(this).val().length > 1) {
+    $(this).parents('.panel-body').find('.btn.btn_add').removeClass('disabled').removeAttr('disabled');
+  } else {
+    $(this).parents('.panel-body').find('.btn.btn_add').addClass('disabled').attr('disabled', 'disabled');
+  }
+});

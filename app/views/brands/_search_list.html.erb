@@ -1,0 +1,45 @@
+<%= form_for @startup.brand_startups.build, url: push_startup_path(@startup), remote: true do |f| %>
+  <% if @brands.any? %>
+    <div class="tip_item_list btn-group" data-toggle="buttons">
+      <%= hidden_field_tag :startup_id, @startup.id %>
+      <%= f.collection_radio_buttons(:brand_id, @brands, :id, :title) do |b| %>
+        <label class="btn tip_item <%= label_status(b) %>">
+          <% if @startup_brands_ids.include?(b.object.id) %>
+            <%= b.radio_button(disabled: true) %>
+          <% else %>
+            <%= b.radio_button %>
+          <% end %>
+          <span>
+            <span class="tip_item_img">
+              <% if b.object.logo? %>
+                <%= image_tag b.object.logo.thumb_small, alt: b.text %>
+              <% else %>
+                <%= b.object.initial %>
+              <% end %>
+            </span>
+            <span class="tip_item_text_holder">
+              <span class="tip_item_text">
+                <span class="tip_item_text_large"><%= b.text %></span>
+              </span>
+            </span>
+            <% if @startup_brands_ids.include?(b.object.id) %>
+              <span class="tip_label green">SENT</span>
+            <% elsif b.object.brand_startups.size >= b.object.package.number_startups %>
+              <span class="tip_label pink">REACHED LIMIT</span>
+            <% end %>
+          </span>
+        </label>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty_search">
+      <i class="icon icon_search"></i>
+      <div class="empty_search_title">
+        Nothing Found
+      </div>
+      <div class="empty_search_text">
+        Try other query. No results matched your search terms
+      </div>
+    </div>
+  <% end %>
+<% end %>

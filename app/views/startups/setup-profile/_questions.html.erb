@@ -1,0 +1,52 @@
+<div class="test_content">
+  <div class="container_sm">
+    <%= form_for(@summary, url: startup_brief_index_path(@startup), remote: true) do |f| %>
+      <% if @startup.promo_pages.any? && @questions.first.progress_step == 4 && !current_user.active? %>
+        <div class="accordion_wizard <%= 'no_step' if current_user.active? %>">
+          <% if @questions.first.progress_step == 4 %>
+            <div class="accordion_title">
+              <span>Evol8tion team questions.</span>
+              Answers are shared with Evol8tion team only
+            </div>
+          <% end %>
+          <div class="panel-group" id="accordion">
+            <%= render '/startups/setup-profile/questions_block', questions: @questions.slice(0, @questions.count - 1) %>
+          </div>
+        </div>
+        <div class="accordion_wizard <%= 'no_step' if current_user.active? %>">
+          <div class="accordion_title">
+            <span><%= @startup.promo_pages.first.brand_title %> specific questions.</span>
+            Answers are shared with brand team
+          </div>
+          <div class="panel-group" id="accordion2">
+            <% @startup.promo_pages.each do |promo_page| %>
+              <%= render '/startups/setup-profile/questions_block', questions: promo_page.promo_page_questions %>
+            <% end %>
+          </div>
+        </div>
+        <div class="accordion_wizard <%= 'no_step' if current_user.active? %>">
+          <div class="panel-group" id="accordion3">
+            <%= render '/startups/setup-profile/last_question', brief_question: @questions.last, index: @questions.count - 1 %>
+          </div>
+        </div>
+      <% else %>
+        <div class="accordion_wizard <%= 'no_step' if current_user.active? %>">
+          <% if @questions.first.progress_step == 4 %>
+            <div class="accordion_title">
+              <span>Evol8tion team questions.</span>
+              Answers are shared with Evol8tion team only
+            </div>
+          <% end %>
+          <div class="panel-group" id="accordion">
+            <%= render '/startups/setup-profile/questions_block', questions: @questions %>
+          </div>
+        </div>
+      <% end %>
+      <% if current_user.active? %>
+        <%= render 'startups/setup-profile/edit_navigation', f: f %>
+      <% else %>
+        <%= render 'startups/setup-profile/setup_navigation', f: f %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

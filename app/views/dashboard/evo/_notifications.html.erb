@@ -1,0 +1,5 @@
+<div class="dashboard__pane--aside dashboard__pane--activity clearfix">
+  <%= link_to 'view all', my_tasks_activities_path, class:'dashboard__pane--all' %>
+  <h4 class="dashboard__pane--title clearfix">NOTIFICATIONS</h4>
+  <%= render partial:'dashboard/evo/notification', collection: NoteDecorator.decorate_collection(@notifications) %>
+</div>

@@ -1,0 +1,11 @@
+<ul class="bordered_menu bordered_menu_size same_width_item">
+  <%= active_link_to 'HOME', home_startup_path(@startup), wrap_tag: :li, active: :exact %>
+  <% active_link_to 'M+MV', startup_announcements_path(@startup), wrap_tag: :li, active: :exact %>
+  <%= active_link_to 'PROFILE', cabinet_startup_path(@startup), wrap_tag: :li, active: :exact %>
+  <li>
+    <%= mail_to "pipelinesupport@startupsforbrands.com" do %>
+      CONTACT <span class="visible-lg-inline-block">EVOL8TION</span>
+    <% end %>
+  </li>
+  <li><%= link_to 'LOG OUT', destroy_user_session_path, method: :delete %></li>
+</ul>

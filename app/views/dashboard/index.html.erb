@@ -1,0 +1,5 @@
+<% if current_user.brand_team? %>
+  <%= render 'brand' %>
+<% else %>
+  <%= render 'evo' %>
+<% end %>

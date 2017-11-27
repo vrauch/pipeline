@@ -1,0 +1,17 @@
+<div class="mmv_holder">
+  <% if can? :create, Announcement %>
+    <div class="text-right hidden-xs btn_right_block">
+      <%= link_to '+ Send Announcement', new_announcement_path, remote: true, class: 'btn btn_add btn_open_panel', data: { panel: 'send_announcement' } %>
+    </div>
+  <% end %>
+  <h2 class="mobile_title visible-xs">M+MV</h2>
+  <div class="head_content head_content_padd hidden-xs">
+    <h1 class="h1_title">Madison Ave + Mountain View</h1>
+    <div class="subtitle">Content curated by the Evol8tion team.</div>
+  </div>
+  <div id="announcement-list">
+    <% unless @announcements.nil? %>
+      <%= render @announcements %>
+    <% end %>
+  </div>
+</div>

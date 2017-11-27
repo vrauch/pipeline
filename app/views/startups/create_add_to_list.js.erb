@@ -1,0 +1,13 @@
+holder = $('.add_to_list.visible');
+$("#notification").html("<%= j(render('layouts/flash_message')) %>");
+if ($("#profile-layout").length) {
+  $('.top_notification').addClass('sm_size').showFlashMessage()
+} else {
+  $('.top_notification').showFlashMessage()
+}
+
+holder.removeClass('visible');
+$("#startup_<%= @startup.id %>").replaceWith("<%= j(render('startup', startup: @startup)) %>");
+$.controlMethods.removePlaceholder();
+
+

@@ -1,0 +1,39 @@
+<div id="brand-<%= brand.id %>" class="box_row clearfix">
+  <%= render 'brands/blank_list_item' %>
+  <div class="box item_box">
+    <span class="list_item_detail">
+      <span class="brand_img_holder">
+        <%= brand.logo.thumb_small.present? ? image_tag(brand.logo.thumb_small) : brand.initial %>
+      </span>
+      <span class="list_name <%= brand.site.present? ? '' : 'centered' %>"><%= link_to brand.title, brand_path(brand.id) %></span>
+      <span class="list_site">
+        <%= brand.site.nil? ? "&nbsp;".html_safe : brand.site %>
+      </span>
+    </span>
+  </div>
+  <div class="box hidden_box hidden-xs">
+    <div class="hidden_box_left">
+      <%= brand.location ? brand.location : '&nbsp;'.html_safe %>
+    </div>
+    <div class="hidden_box_right">
+      <%= brand.active_package.package ? brand.active_package.package.name : 'undefined' %>
+    </div>
+  </div>
+  <div class="box text-center hidden-xs"><%= brand.brand_startups.size %></div>
+  <div class="box text-center hidden-xs">0</div>
+  <div class="box text-center hidden-xs"><%= brand.brand_users.size %></div>
+  <div class="box links_box text-center hidden-xs">
+    <div class="slide_icons xs_count">
+      <div>
+        <a href="javascript:;" class="scorecard_link slide_link" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Generate Scorecard"><i class="icon icon_scorecard"></i></a>
+      </div>
+      <div class="show_tip push_startup_to_brand">
+        <%= link_to new_brand_startup_path(brand), class: 'push_link slide_link',
+                    data: { toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Push Startup', remote: true } do %>
+          <i class="icon icon_push"></i>
+        <% end %>
+      </div>
+    </div>
+    <a href="javascript:;" class="dots_link"><i class="icon icon_dots"></i></a>
+  </div>
+</div>

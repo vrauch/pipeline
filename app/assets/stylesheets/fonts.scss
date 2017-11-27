@@ -1,0 +1,69 @@
+/* ==========================================================================
+  Fonts
+  ========================================================================== */
+
+@font-face {
+  font-family: 'AvenirMedium';
+  src: asset-url('AvenirLTStdMedium.eot');
+  src: asset-url('AvenirLTStdMedium.eot') format('embedded-opentype'),
+       asset-url('AvenirLTStdMedium.woff2') format('woff2'),
+       asset-url('AvenirLTStdMedium.woff') format('woff'),
+       asset-url('AvenirLTStdMedium.ttf') format('truetype'),
+       asset-url('AvenirLTStdMedium.svg#AvenirLTStdMedium') format('svg');
+}
+@font-face {
+  font-family: 'AvenirBook';
+  src: asset-url('AvenirLTStdBook.eot');
+  src: asset-url('AvenirLTStdBook.eot') format('embedded-opentype'),
+       asset-url('AvenirLTStdBook.woff2') format('woff2'),
+       asset-url('AvenirLTStdBook.woff') format('woff'),
+       asset-url('AvenirLTStdBook.ttf') format('truetype'),
+       asset-url('AvenirLTStdBook.svg#AvenirLTStdBook') format('svg');
+}
+@font-face {
+  font-family: 'AvenirHeavy';
+  src: asset-url('AvenirLTStdHeavy.eot');
+  src: asset-url('AvenirLTStdHeavy.eot') format('embedded-opentype'),
+       asset-url('AvenirLTStdHeavy.woff2') format('woff2'),
+       asset-url('AvenirLTStdHeavy.woff') format('woff'),
+       asset-url('AvenirLTStdHeavy.ttf') format('truetype'),
+       asset-url('AvenirLTStdHeavy.svg#AvenirLTStdHeavy') format('svg');
+}
+@font-face {
+  font-family: 'Avenirlight';
+  src: asset-url('avenirlight.eot');
+  src: asset-url('avenirlight.eot') format('embedded-opentype'),
+       asset-url('avenirlight.woff2') format('woff2'),
+       asset-url('avenirlight.woff') format('woff'),
+       asset-url('avenirlight.ttf') format('truetype'),
+       asset-url('avenirlight.svg#avenirlight') format('svg');
+}
+@font-face {
+  font-family: 'SFUIDisplayMedium';
+  src: asset-url('SFUIDisplayMedium.eot');
+  src: asset-url('SFUIDisplayMedium.eot') format('embedded-opentype'),
+       asset-url('SFUIDisplayMedium.woff2') format('woff2'),
+       asset-url('SFUIDisplayMedium.woff') format('woff'),
+       asset-url('SFUIDisplayMedium.ttf') format('truetype'),
+       asset-url('SFUIDisplayMedium.svg#SFUIDisplayMedium') format('svg');
+}
+
+@font-face {
+  font-family: 'SFUIDisplayBold';
+  src: asset-url('SFUIDisplayBold.eot');
+  src: asset-url('SFUIDisplayBold.eot') format('embedded-opentype'),
+       asset-url('SFUIDisplayBold.woff2') format('woff2'),
+       asset-url('SFUIDisplayBold.woff') format('woff'),
+       asset-url('SFUIDisplayBold.ttf') format('truetype'),
+       asset-url('SFUIDisplayBold.svg#SFUIDisplayBold') format('svg');
+}
+
+@font-face {
+  font-family: 'BodoniClassicTextLightPDF';
+  src: asset-url('BodoniClassicTextLightPDF.eot');
+  src: asset-url('BodoniClassicTextLightPDF.eot') format('embedded-opentype'),
+       asset-url('BodoniClassicTextLightPDF.woff2') format('woff2'),
+       asset-url('BodoniClassicTextLightPDF.woff') format('woff'),
+       asset-url('BodoniClassicTextLightPDF.ttf') format('truetype'),
+       asset-url('BodoniClassicTextLightPDF.svg#BodoniClassicTextLightPDF') format('svg');
+}

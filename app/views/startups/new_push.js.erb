@@ -1,0 +1,13 @@
+var container = $(".push_to_brand.clicked");
+if (container.find(".tip_holder").length == 0) {
+  container.addClass('visible').append("<%= j(render 'push_startup') %>");
+}
+
+$('.custom_scroll').mCustomScrollbar({
+  scrollButtons: {
+    enable: false,
+    advanced: {
+      updateOnContentResize: true
+    }
+  }
+});

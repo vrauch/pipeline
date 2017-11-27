@@ -1,0 +1,33 @@
+<div class="panel panel-default <%= 'hidden_item' unless index.zero? || current_user.active? %> <%= 'visited' if current_user.active? %>">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= index %>" class="<%= 'collapsed' if current_user.active? %>">
+        <% unless current_user.active? %>
+          <i class="icon icon_circle"></i><i class="icon icon_circle_mark"></i>
+        <% end %>
+        <%= brief_question.question_text %>
+        <i class="icon icon_arrow_right"></i></a>
+    </h4>
+  </div>
+  <div id="collapse<%= index %>" class="panel-collapse collapse <%= 'in' if index.zero? && !current_user.active? %>">
+    <div class="panel-body">
+      <div class="test_help_text">
+        Answers will be shared with the <%= brief_question.promo_page.brand_title %> team
+      </div>
+        <%= text_area_tag "promo_answers[#{brief_question.promo_page_id}][#{brief_question.id}]", 
+                          @promo_answers[brief_question.promo_page_id].present? ? @promo_answers[brief_question.promo_page_id][brief_question.id] : nil, 
+                          class: 'form-control', placeholder: 'Write your answer here', style: 'height: 91px;' %>
+      <% unless current_user.active? %>
+        <div class="btn_step_holder control_nav_btns">
+          <% if last_question %>
+            <a href="javascript:;" class="btn btn_step btn_back last_accordion_button skip" data-disabled="false">SKIP</a>
+            <%= link_to 'NEXT', 'javascript:;', class: 'btn btn_step last_accordion_button js_scroll' %>
+          <% elsif !(index == @questions.count - 1) %>
+            <a href="javascript:;" class="btn btn_step btn_back skip" data-disabled="false">SKIP</a>
+            <%= link_to 'NEXT', 'javascript:;', class: 'btn btn_step js_scroll disabled' %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

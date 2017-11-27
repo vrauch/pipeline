@@ -1,0 +1,65 @@
+<% if current_user.favorite_list.startups.include?(startup)%>
+  <div>
+    <%= link_to remove_from_favorites_lists_path(startup_id: startup.id),
+                class: 'favorites_link slide_link',
+                data: { toggle: 'tooltip', placement: 'bottom',  'original-title' => 'Remove from favorites'},
+                remote: true do %>
+      <i class="icon icon_star_fill"></i>
+    <% end %>
+  </div>
+<% else %>
+  <div>
+    <%= link_to add_to_favorites_lists_path(startup_id: startup.id),
+                class: 'favorites_link slide_link',
+                data: { toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Add to Favorites'},
+                remote: true do %>
+      <i class="icon icon_star"></i>
+    <% end %>
+  </div>
+<% end %>
+
+<% if can? :push, Startup %>
+  <div class="show_tip push_to_brand">
+    <%= link_to push_startup_path(startup),
+                class: 'push_link slide_link',
+                data: { toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Push to Brand' },
+                remote: true do %>
+      <i class="icon icon_push"></i>
+    <% end %>
+  </div>
+<% end %>
+
+<% if startup.invitable?  %>
+  <div>
+    <div class="show_tip invite_startup">
+      <%= link_to startup.invite.present? ? edit_invite_path(startup.invite) : new_startup_invites_path(resource_id: startup.id),
+                  class:'invite_link slide_link',
+                  data: { toggle: 'tooltip', placement: 'bottom', 'original-title' => startup.invite.present? ? 'Resend Invite' : 'Invite Startup' },
+                  remote: true do %>
+        <i class="icon <%= startup.invite.present? ? 'icon_letter' : 'icon_email' %>"></i>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% if @list && @list.startups.include?(startup) %>
+  <div>
+    <%= link_to remove_from_list_path(@list, startup_id: startup.id),
+                class: 'list_link slide_link',
+                data: { toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Remove from list'},
+                remote: true do %>
+      <i class="icon icon_bookmark2"></i>
+    <% end %>
+  </div>
+<% else %>
+  <div>
+    <div class="show_tip add_to_list">
+      <%= link_to add_to_list_startup_path(startup),
+                  class: 'list_link slide_link',
+                  data: { toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Add to list' },
+                  remote: true do %>
+        <i class="icon icon_bookmark"></i>
+      <% end %>
+    </div>
+  </div>
+<% end %>

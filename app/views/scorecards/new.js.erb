@@ -1,0 +1,74 @@
+$('body').css('overflow', 'hidden');
+
+$("#slidePanel").html('<%= j(render "step_#{@scorecard.current_step}") %>');
+// for cusom select
+$('.chosen-select').chosen({ 'disable_search': true });
+$("#scorecard_logo").imagePreview("#scorecard_logo_preview");
+$("#scorecard_product_image").imagePreview("#scorecard_product_image_preview");
+$("#scorecard_rs_product_image").imagePreview("#scorecard_rs_product_image_preview");
+
+<%= render 'new_on_startup_profile' %>
+
+setTimeout(function(){
+  $("#slidePanel").addClass('is-visible');
+  $("#fwSlidePanel").parents('.slide-panel').removeClass('is-visible');
+  return false;
+}, 10);
+
+
+<% if @scorecard.current_step == 'template' %>
+  var formatImg = function(state) {
+    var $state;
+    if (!state.id) {
+      return state.text;
+    }
+    var imgUrl = state.element.getAttribute('data-image');
+    var img = '';
+    if (imgUrl && imgUrl != '') {
+      img = '<img src="' + imgUrl + '" class="multiple_item_img" /> ';
+    } else {
+       img = '<span class="icon-from-title">' + state.text[0] + '</span> '
+    }
+    $state = $('<span>'+ img + state.text + '</span>');
+    return $state;
+  };
+
+  // $(".js-example-basic-multiple").select2({
+  //   templateResult: formatImg
+  // });
+
+  $('#scorecard_scorecard_template_id').select2({
+    templateResult: formatImg,
+    dropdownParent: $('#scorecardTemplateIdCont')
+  });
+
+  $('#scorecard_scorecard_template_id').on('select2:open', function() {
+    $('.select2-search__field').attr('placeholder', 'Search for template');
+  });
+
+  $('#scorecard_scorecard_template_id').on('select2:close', function() {
+    $('.select2-search__field').attr('placeholder', null);
+  });
+
+  $('#scorecard_startup_id').select2({
+    templateResult: formatImg,
+    dropdownParent: $('#startupIdCont')
+  });
+
+  $('#scorecard_startup_id').on('select2:open', function() {
+    $('.select2-search__field').attr('placeholder', 'Search for startup');
+  });
+
+  $('#scorecard_startup_id').on('select2:close', function() {
+    $('.select2-search__field').attr('placeholder', null);
+  });
+<% end %>
+
+$(".slide-panel .fixed_control_btns").each(function() {
+  var btnsWidth = $(this).parents('.slide-panel').find('.slide-panel-content').innerWidth();
+  $(this).css('width', btnsWidth);
+});
+
+<% if @scorecard.persisted? %>
+  $('#deleteScorecardModal .confirm_link').prop('href', '<%= scorecard_url(@scorecard) %>')
+<% end %>

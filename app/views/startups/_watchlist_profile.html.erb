@@ -1,0 +1,53 @@
+<div class="inner_scroll">
+  <div class="sidebar_detail_head">
+    <a href="#" class="link_nav dismiss_panels"><i class="icon icon_close"></i></a>
+
+    <span class="sidebar_ava">
+      <%= @startup.initial %>
+    </span>
+    <h2 class="sidebar_title"><%= @startup.title %></h2>
+    <div class="sidebar_subtitle hidden-xs"><%= @startup.member_since %></div>
+    <div>
+      <a href="#" class="btn btn_bordered_rounded visible-xs-inline-block hide_show_details">View Details</a>
+    </div>
+  </div>
+  <div class="sidebar_detail_body">
+    <div class="inner">
+      <ul class="tool_bar clearfix hidden-xs">
+        <% if can? :edit_watchlist, @startup %>
+          <li class="tool_bar_li">
+            <%= link_to edit_watchlist_startup_path(@startup),
+                        remote: true do %>
+              <i class="icon icon_edit"></i><span>EDIT</span></a>
+            <% end %>
+          </li>
+        <% end %>
+        <!--<li class="tool_bar_li">-->
+          <!--<a href="#">-->
+            <!--<i class="icon icon_scorecard"></i>-->
+            <!--<span><% current_user.brand_team? ? 'REQUEST SCORECARD' : '+ SCORECARD' %></span>-->
+          <!--</a>-->
+        <!--</li>-->
+        <% if can? :push, Startup %>
+          <li class="tool_bar_li show_tip push_to_brand">
+            <%= link_to push_startup_path(@startup),
+                        remote: true do %>
+              <i class="icon icon_push"></i>
+              <span>PUSH</span>
+            <% end %>
+          </li>
+        <% end %>
+        <li class="tool_bar_li white_arrow show_tip invite_startup">
+          <% unless @startup.owner.present? %>
+            <%= link_to @startup.invite.present? ? edit_invite_path(@startup.invite) : new_startup_invites_path(resource_id: @startup.id),
+                        remote: true do %>
+              <i class="icon <%= @startup.invite.present? ? 'icon_letter' : 'icon_email' %>"></i><span><%= @startup.invite.present? ? 'RESEND' : 'INVITE' %></span>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+
+      <%= render 'layouts/startup/startup_information' %>
+    </div>
+  </div>
+</div>

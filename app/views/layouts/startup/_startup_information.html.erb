@@ -1,0 +1,101 @@
+<div class="detail_item">
+  <div class="detail_item_title">EVOL8TION SCORECARD</div>
+  <div class="detail_item_content">
+    <% if @scorecards.try(:any?) %>
+      <% @scorecards.each do |scorecard| %>
+        <strong>
+          <%= link_to scorecard.scorecard_template.try(:title), scorecard_path(scorecard, back_url: profile_startup_url(@startup, skip_back_referer: true)), class: 'sidebar_link' %>
+        </strong>
+        <br>
+      <% end %>
+    <% else %>
+      no scorecard available
+    <% end %>
+  </div>
+</div>
+<div class="detail_item">
+  <div class="detail_item_title">DESCRIPTION</div>
+  <div class="detail_item_content">
+    <%= @startup.full_description %>
+  </div>
+</div>
+<div class="detail_item">
+  <div class="detail_item_title">DETAILS</div>
+  <div class="detail_item_content">
+    <ul class="detail_list">
+      <li><span>Location:</span> <%= @startup.location_name %></li>
+      <% unless @startup.type_of_startup(current_user)[:value] == 'Watchlist' %>
+        <li><span>Date Founded:</span> <%= @startup.founded_date.try(:strftime, '%m-%Y') %></li>
+      <% end %>
+      <li><span>Website:</span> <%= @startup.website_url %></li>
+      <% if @startup.type_of_startup(current_user)[:value] == 'Watchlist' %>
+        <li><span>Founder Name:</span> <%= @startup.try(:founders).try(:map, &:name).try(:join, ', ') %></li>
+      <% else %>
+        <li><span>Contact Name:</span> <%= @startup.owner_full_name %></li>
+        <li><span>Contact Email:</span> <%= @startup.owner_email %></li>
+      <% end %>
+      <li><span>Twitter:</span> <%= @startup.twitter_link %></li>
+      <li><span>Video:</span><%= @startup.video %></li>
+    </ul>
+    <% if @startup.promo_briefs.any? && current_user.evo_team? %>
+      <div class="user_details user_details_sm_padd">
+        <div class="user_details_img with_bg">
+          <% if @from_brand.deleted? %>
+            <%= @from_brand.logo_url %>
+          <% else %>
+            <%= link_to brand_path(@from_brand.id) do  %>
+              <%= @from_brand.logo_url %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="user_details_info">
+          <div>Came from:</div>
+          <div>
+            <% if @from_brand.deleted? %>
+              <%= @from_brand.title %>
+            <% else %>
+              <%= link_to @from_brand.title, brand_path(@from_brand.id), class: 'sidebar_link' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="tag-holder" class="detail_item <%= @startup.lighten %>">
+  <%= render 'startup_tags/index' %>
+</div>
+
+<% if current_user.evo_team? && !@startup_pushed %>
+  <div class="detail_item">
+    <div class="detail_item_title"><%= current_user.evo_team? ? 'EVOL8TION ' : '' %>POINT OF CONTACT</div>
+    <% @startup.watchers.each do |watcher| %>
+      <div class="detail_item_content">
+        <div class="user_details">
+          <div class="user_details_img">
+            <%= image_tag watcher.photo.thumb_small, alt:'Avatar' %>
+          </div>
+          <div class="user_details_info">
+            <div><%= watcher.f_name %></div>
+            <div><%= watcher.l_name %></div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="detail_item">
+    <div class="detail_item_title">CONNECTION HISTORY</div>
+    <div class="detail_item_content">
+      <ul class="detail_list">
+        <li><span>Source:</span> <%= @startup.connection_source_info %></li>
+        <li><span>Outreach Status:</span> <%= @startup.outreach_status_info %></li>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<ul class="profile_info_list">
+  <li><%= startup_creation_date(@startup) %></li>
+  <li><%= startup_last_update_date(@startup) %></li>
+</ul>

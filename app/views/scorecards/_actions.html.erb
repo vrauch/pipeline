@@ -1,0 +1,59 @@
+<% if can?(:push, Scorecard) && scorecard.complete? %>
+  <span class="show_tip push_to_brand">
+    <%= link_to scorecard_push_path(scorecard_id: scorecard.id), method: :patch,
+                                    remote: true,
+                                    class: 'card_middle_btn_item',
+                                    data: {
+                                      toggle: 'tooltip',
+                                      placement: 'bottom',
+                                      'original-title' => 'Push to Brand'
+                                    } do %>
+      <i class="icon icon_push"></i> <br>PUSH TO<br>BRAND
+    <% end %>
+  </span>
+<% end %>
+
+<% if can?(:show, Scorecard) %>
+  <%= link_to scorecard_path(scorecard, format: :pdf), target: '_blank', class: 'card_middle_btn_item' do %>
+    <i class="icon icon_pdf"></i> <br>DOWNLOAD<br>PDF
+  <% end %>
+<% end %>
+
+<span class="card_middle_btn_item show_tip">
+  <i class="icon icon_link"></i> <br>COPY<br>LINK
+  <div class="tip_holder tip_copy sc_link_tip">
+    <div class="tip_head">
+      USE THIS LINK TO SHARE A SCORECARD
+    </div>
+    <div class="tip_body">
+      <div class="tip_copy_content">
+        <div class="form-group">
+          <input id="shareLink<%= scorecard.id %>" type="text" class="form-control" value="<%= show_by_token_scorecards_url(token: scorecard.token) %>">
+        </div>
+        to view a scorecard following this link no password required
+      </div>
+    </div>
+    <div class="tip_group_btns clearfix">
+      <%= link_to 'OPEN IN NEW TAB', show_by_token_scorecards_url(token: scorecard.token), target: '_blank', class: 'btn btn_default btn_gray inner-link' %>
+      <button class="btn btn_default btn_black"
+        data-copy-input="#shareLink<%= scorecard.id %>"
+        data-msg-title="DONE"
+        data-msg-text="Link copied to clipboard">
+        COPY TO CLIPBOARD
+      </button>
+    </div>
+
+  </div>
+</span>
+
+<% if can?(:edit, Scorecard) %>
+  <%= link_to edit_scorecard_path(scorecard), remote: true, class: 'card_middle_btn_item' do %>
+    <i class="icon icon_edit"></i> <br>EDIT<br>SCORECARD
+  <% end %>
+<% end %>
+
+<% if can?(:destroy, Scorecard) && scorecard.draft? %>
+  <%= link_to scorecard_path(scorecard), method: :delete, class: 'card_middle_btn_item' do %>
+    <i class="icon icon_delete"></i> <br>DELETE<br>DRAFT
+  <% end %>
+<% end %>

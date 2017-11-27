@@ -1,0 +1,7 @@
+form = $("#new_list_form");
+item = $("#item_form");
+
+form.html("<%= j(render 'new') %>");
+
+item.siblings('.add_card_block').find('.btn_invite_card').removeClass('active');
+item.siblings('.add_card_block').fadeIn(400);

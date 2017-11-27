@@ -1,0 +1,64 @@
+<div id="package-<%= package.id %>">
+  <div class="light_block package_item">
+    <% if can? :manage, Package %>
+      <div class="item_control_btns">
+        <%= link_to edit_package_path(package.id), remote: true, class:'package_edit item_control_btn  hidden-xs' do %>
+          <i class="icon icon_edit btn_open_panel" data-panel="add_package"></i>
+        <% end %>
+        <%= link_to delete_package_path(package.id), remote: true, class: 'package_remove item_control_btn  hidden-xs' do %>
+          <i class="icon icon_delete"></i>
+        <% end %>
+      </div>
+    <% end %>
+    <h3 class="light_block_title changed">
+      <% if current_user.brand_team? %>
+        <div class="light_block_subtitle">CURRENT PACKAGE</div>
+      <% end %>
+      <i class="icon icon_case"></i>
+      <%= package.name.upcase %>
+    </h3>
+    <div class="light_block_body">
+      <div class="row">
+        <div class="col-sm-4">
+          <dl class="dl-horizontal dl-horizontal_styled">
+            <dt>Brand Briefs</dt>
+            <dd><%= package.number_brand_briefs %></dd>
+            <dt>External Pages</dt>
+            <dd><%= package.number_external_pages %></dd>
+            <dt>Users</dt>
+            <% if package.unlimited_users %>
+              <dd>Unlimited</dd>
+            <% else %>
+              <dd><%= package.number_users %></dd>
+            <% end %>
+          </dl>
+        </div>
+        <div class="col-sm-4">
+          <dl class="dl-horizontal dl-horizontal_styled">
+            <dt>Custom Questions </dt>
+            <dd><%= package.number_questions %></dd>
+            <dt>Curated Startups </dt>
+            <dd><%= package.number_startups %></dd>
+            <dt>Scorecards  </dt>
+            <dd><%= package.number_scorecards %></dd>
+          </dl>
+        </div>
+        <div class="col-sm-4">
+          <dl class="dl-horizontal dl-horizontal_styled">
+            <dt>Scorecards Requests</dt>
+            <dd><%= package.number_scorecard_requests %></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if current_user.brand_team? %>
+    <div class="panel_help_text">
+
+    </div>
+  <% end %>
+</div>
+
+
+
+

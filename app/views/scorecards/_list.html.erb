@@ -1,0 +1,12 @@
+<% if scorecards.try(:any?) %>
+  <ul class="card_list clearfix">
+    <% scorecards.each do |scorecard| %>
+      <% scorecard = scorecard.decorate %>
+      <li id="scorecard<%= scorecard.id %>">
+        <%= render 'scorecard',  scorecard: scorecard %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <%= render 'scorecards/empty_folder' %>
+<% end %>

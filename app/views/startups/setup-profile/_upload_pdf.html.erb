@@ -1,0 +1,27 @@
+<div class="fake_label">OVERVIEW DECK</div>
+<p>Upload an existing sales or investor pitch deck, only including slides you are comfortable sharing with Evol8tion and brand clients.</p>
+<div class="files_list">
+  <div class="row">
+    <% @startup.pdf_documents.each do |pdf| %>
+      <div class="col-sm-6">
+        <div id="startupPDF<%= pdf.id %>" class="file_link_wrap">
+          <%= link_to pdf.file.url, class: 'file_link', target: '_blank' do %>
+            <i class="icon icon_upload_file"></i><%= pdf.original_filename %>
+          <% end %>
+          <%= link_to startup_destroy_pdf_path(pdf_id: pdf.id, startup_id: @startup.id),
+            method: :delete, remote: true, class: 'edit_file_link' do %>
+            <i class="icon icon_delete"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="upload_line">
+
+  <a href="#" class="btn btn_add btn_file">Upload PDF
+    <input id="startupUploadPDF" type="file" accept="application/pdf">
+    <%= render '/layouts/loader' %>
+  </a>
+  <span>File must be saved as a PDF and under 2 MB</span>
+</div>

@@ -1,0 +1,10 @@
+$('#search-container').html("<%= j(render 'edit') %>");
+$.controlMethods.showPanel('advance_search');
+$.searchMethods.initCalendar();
+$.searchMethods.initSelect();
+$(".category-value:checked").each(function() {
+  $(this).parents('label').addClass('active');
+});
+$('.collapse_link').each(function() {
+  $.searchMethods.collapsedCategories($(this));
+});

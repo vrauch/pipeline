@@ -1,0 +1,6 @@
+form = $("#list_form_<%= @list.id %>");
+item = $("#list_item_<%= @list.id %>");
+form.html("<%= j(render 'delete_alert') %>");
+
+item.siblings('.add_card_block').find('.btn_invite_card').removeClass('active');
+item.siblings('.add_card_block').fadeIn(400);

@@ -1,0 +1,21 @@
+<h1 class="h1_title">Invite Super User</h1>
+<div class="subtitle">You can invite brand team users after adding a brand</div>
+
+<div class="grid_padding_sm form_container">
+  <div class="row">
+    <div class="col-xs-6">
+      <%= f.text_field :invite_user_name, class: 'form-control', placeholder: 'First and Last Name' %>
+    </div>
+    <div class="col-xs-6">
+      <%= f.hidden_field :logo_cache %>
+      <%= f.email_field :invite_email, class: 'form-control', placeholder: 'Email Address' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel_help_text">
+        The brand admin will have super user permissions. As part of their onboarding, they will fill out a digital brand brief to guide the types of startups Evol8tion curates for their team.
+      </div>
+    </div>
+  </div>
+</div>

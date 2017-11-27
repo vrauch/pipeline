@@ -1,0 +1,10 @@
+<div class="dashboard__pane--logos_empty">
+  <i class="icon icon_empty_dash"></i>
+  <% if current_user.evo_team? %>
+    <strong>Inspire startups to apply</strong>
+    <p>You have no startups, applied form<br>Evol8tion Promo Page</p>
+  <% else %>
+    <strong>Reach out to founders directly!</strong>
+    <p>The most recent startups that submit their profile directly to you will show up here.</p>
+  <% end %>
+</div>

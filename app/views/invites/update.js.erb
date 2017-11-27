@@ -1,0 +1,25 @@
+<% if @invite.errors.any? %>
+  <% if @invite.startup? %>
+    $('.tip_holder').replaceWith("<%= j render 'edit' %>");
+  <% else %>
+    $("#invite-<%= @invite.id %>").find(".resend_invite_wrap").html("<%= j render 'edit' %>");
+  <% end %>
+<% else %>
+  <% if @invite.startup? %>
+    $('.btn_tip_add').addClass('active');
+    $("#startup_<%= @invite.resource_id %>").html("<%= j render 'startups/startup', startup: @invite.startup %>");
+    $("#startup_sidebar").html("<%= j render 'layouts/startup/sidebar' %>");
+  <% else %>
+    $('.btn_tip_add').addClass('active');
+    $("#invite-<%= @invite.id %>").html("<%= j render 'users/invited_user', invite: @invite %>");
+  <% end %>
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  <% if @invite.user_group == 'brand_team' && current_user.evo_team? || @invite.startup? && @invite.startup.prefilled_brief? %>
+    $('.top_notification').addClass('sm_size').showFlashMessage();
+  <% else %>
+    $('.top_notification').showFlashMessage();
+  <% end %>
+<% end %>
+$.controlMethods.removePlaceholder();
+$.controlMethods.hideAllPanels();
+$.publicMethods.initTags();

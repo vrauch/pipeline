@@ -1,0 +1,20 @@
+<div class="top_panel clearfix">
+  <div class="top_panel_text_holder pull-left">
+    <div class="top_panel_text">
+      <a href="#" class="top_panel_link">
+        <% if @list.favorite %>
+          <span class="top_panel_action">FAVORITE STARTUPS</span>
+        <% else %>
+            <span class="top_panel_user_img"><%= image_tag @list.author.photo.thumb_small %></span>
+            <span class="top_panel_user_details">
+            <span class="top_panel_action"><%= @list.name.upcase %></span> <br>
+            <span class="top_panel_user_name"><%= "By #{@list.author.full_name}" %></span>
+          <% end %>
+        </span>
+      </a>
+    </div>
+  </div>
+  <%= link_to lists_path, class:'close_panel' do %>
+    <i class="icon icon_close"></i>
+  <% end %>
+</div>

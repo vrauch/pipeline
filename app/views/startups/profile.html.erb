@@ -1,0 +1,12 @@
+<%= render 'layouts/startup/sidebar_details' %>
+<div class="content_sm content_pt content_white">
+  <%= render 'layouts/startup/top_menu' %>
+  <div id="elevator_pitch" class="text_content text_content_pt changed_mob_ff">
+    <%= render 'elevator_pitch' %>
+  </div>
+</div>
+
+<% if can?(:create, Scorecard) %>
+  <div id="slidePanel" class="slide-panel from-right template_panel">
+  </div> <!-- slide-panel -->
+<% end %>

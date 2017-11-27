@@ -1,0 +1,44 @@
+<%= form_for @brand.brand_startups.build, url: brand_startups_path(@brand), remote: true do |f| %>
+  <% if @startups.any? %>
+    <div class="tip_item_list btn-group" data-toggle="buttons">
+      <%= hidden_field_tag :brand_id, @brand.id %>
+      <%= hidden_field_tag :back_page, request.referer == brands_url ? 'multi' : 'solo' %>
+      <%= f.collection_radio_buttons(:startup_id, @startups, :id, :title) do |b| %>
+        <label class="btn tip_item <%= @pushed_startups_ids.include?(b.object.id) ? 'has_label disabled' : '' %>">
+          <% if @pushed_startups_ids.include?(b.object.id) %>
+            <%= b.radio_button(disabled: true) %>
+          <% else %>
+            <%= b.radio_button %>
+          <% end %>
+          <span>
+            <span class="tip_item_img">
+              <% if b.object.logo? %>
+                <%= image_tag b.object.logo.thumb_small, alt: b.text %>
+              <% else %>
+                <%= b.object.initial %>
+              <% end %>
+            </span>
+            <span class="tip_item_text_holder">
+              <span class="tip_item_text">
+                <span class="tip_item_text_large"><%= b.text %></span>
+              </span>
+            </span>
+            <% if @pushed_startups_ids.include?(b.object.id) %>
+              <span class="tip_label green">PUSHED</span>
+            <% end %>
+          </span>
+        </label>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty_search">
+      <i class="icon icon_search"></i>
+      <div class="empty_search_title">
+        Nothing Found
+      </div>
+      <div class="empty_search_text">
+        Try other query. No results matched your search terms
+      </div>
+    </div>
+  <% end %>
+<% end %>

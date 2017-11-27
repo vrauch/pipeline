@@ -1,0 +1,18 @@
+<% unless @invite %>
+  <%= fields_for @user.startup do |s| %>
+    <div class="form-group">
+      <%= s.text_field :title, class: 'form-control input_styled',
+                       placeholder: 'Company Name' %>
+    </div>
+  <% end %>
+<% end %>
+<div class="form-group">
+  <%= f.text_field :full_name, class: 'form-control input_styled',
+                   placeholder: 'Your Full Name' %>
+</div>
+<% unless @invite %>
+  <div class="form-group">
+    <%= f.text_field :email, class: 'form-control input_styled',
+                     autocomplete: 'off', placeholder: 'Email'  %>
+  </div>
+<% end %>

@@ -1,0 +1,98 @@
+<h1 class="h1_title">Edit Profile</h1>
+<div class="subtitle">Update your profile information.</div>
+
+<%= form_for @user, url: user_path(@user), remote: true do |f| %>
+  <div class="grid_padding_sm form_container">
+    <div class="row">
+      <div class="col-xs-12 block_for_upload">
+
+        <div class="default_upload_file_holder rounded">
+          <div class="default_upload_file <%= @user.photo? ? 'active' : '' %>">
+            <div class="inner photo-preview-image" style="<%= @user.photo? ? "background-image: url(#{asset_path @user.photo.thumb_large});" : ''%>">
+              <%= f.file_field :photo, class: 'upload_img photo-image-input' %>
+              <%= f.hidden_field :photo_cache %>
+            </div>
+            <div class="upload_text visible_before"><i class="icon icon_arrow_up_round"></i>
+              ADD PHOTO
+            </div>
+            <div class="upload_text visible_after"><i class="icon icon_arrow_up_round"></i>
+              CHANGE PHOTO
+            </div>
+          </div>
+          <div class="change_img_text" id="logo_user">
+            <span>Change photo</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.text_field :full_name, class: 'form-control', placeholder: 'Enter your Name' %>
+        </div>
+        <div class="form-group">
+          <%= f.email_field :email, class: 'form-control', placeholder: 'Enter your Email' %>
+        </div>
+        <div class="form-group">
+          &nbsp;
+        </div>
+      </div>
+    </div>
+
+    <div class="row row_mt_sm">
+      <div class="col-xs-12 form-group_mb">
+        <div class="row">
+          <div class="col-xs-6 form-group_mb">
+            <div class="form-group">
+              <label for="">DETAILS</label>
+              <div class="custom_select">
+                <% if current_user.id == @user.id %>
+                  <input class="form-control" value="Permissions: <%= User::ROLES[@user.role.to_sym] %>" readonly="true">
+                <% else %>
+                  <% if @user.brand_team? %>
+                    <%= f.select :role, [['Permissions: Super Brand User', :brand_super],
+                                         ['Permissions: Brand User', :brand]], {},
+                                        class: 'chosen-select' %>
+                  <% else %>
+                    <%= f.select :role, [['Permissions: Super Evo User', :evo_super],
+                                         ['Permissions: Evo User', :evo]], {},
+                                 class: 'chosen-select' %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+            <% if false %>
+              <div class="form-group">
+                <div class="custom_select">
+                  <% if current_user.id == @user.id %>
+                    <input class="form-control" value="Status: <%= User::ACTIVITY[@user.active.to_sym] %>" readonly="true">
+                  <% else %>
+                    <%= f.select :active, [['Status: Active', :active],
+                                           ['Status: Inactive', :inactive]], {},
+                                        class: 'chosen-select' %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-xs-6">
+            <div class="form-group no_label_mt">
+              <%= f.text_area :about, class: 'form-control textarea_desc', placeholder: 'Tell briefly about you' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<a href="#" class="btn btn_bordered_const md_size btn_change_pass_padd">Change Password</a>-->
+
+
+  </div>
+
+  <div class="bot_control_btns">
+    <div class="row">
+      <div class="col-xs-6 left text-right">
+        <a href="javascript:;" class="control_link dismiss_panels">CANCEL</a>
+      </div>
+      <div class="col-xs-6 right text-left">
+        <%= f.submit 'SAVE', class: 'control_link' %>
+      </div>
+    </div>
+  </div>
+<% end %>

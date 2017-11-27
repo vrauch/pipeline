@@ -1,0 +1,46 @@
+<%= form_for(@brand_brief_summary, remote: true) do |f| %>
+  <div class="slide-panel-container width_sm">
+    <div class="slide-panel-content slide-panel-content_pb">
+      <h1 class="h1_title">Modify Brand Brief</h1>
+      <div class="subtitle">After adding you can invite a startup to Pipeline Project</div>
+
+      <div class="accordion_wizard modify_brief">
+        <div class="panel-group" id="accordion">
+          <% @brief_questions.each_with_index do |brief_question, index| %>
+            <div class="panel panel-default visited">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapse<%= index %>">
+                    <%= brief_question.content %>
+                    <i class="icon icon_arrow_right"></i>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapse<%= index %>" class="panel-collapse collapse">
+                <% if brief_question.single? %>
+                  <%= render '/brand_brief_summaries/single_test', brief_question: brief_question, index: index %>
+                <% elsif brief_question.multi? %>
+                  <%= render '/brand_brief_summaries/multi_test', brief_question: brief_question, index: index %>
+                <% else %>
+                  <%= render '/brand_brief_summaries/text_test', brief_question: brief_question, index: index %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot_control_btns fixed_control_btns">
+    <div class="row">
+      <div class="col-xs-6 left text-right">
+        <a href="#" class="control_link dismiss_one_panel">CANCEL</a>
+      </div>
+      <div class="col-xs-6 right text-left">
+        <%= f.submit 'MODIFY BRIEF', class:'control_link btn_call_notification dismiss_one_panel' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+

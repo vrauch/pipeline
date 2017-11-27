@@ -1,0 +1,2 @@
+$("#manage-question").empty()
+$("#question-<%= @question.id %>").html("<%= j(render 'question', question: @question) %>")

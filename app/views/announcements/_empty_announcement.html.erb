@@ -1,0 +1,10 @@
+<div id="empty-announcement" class="empty_block empty_block_pt">
+  <div class="text-right hidden-xs btn_right_block">
+    <% if can? :create, Announcement %>
+      <%= link_to '+ Send Announcement', new_announcement_path, remote: true, class: 'btn btn_add btn_in_empty absolute', data: { panel: 'send_announcement' } %>
+    <% end %>
+  </div>
+  <i class="icon icon_page"></i>
+  <h1 class="empty_title"><span class="empty_title_inner">Madison + Mountain View</span></h1>
+  <p class="empty_text">Insights from the world of startups and brands</p>
+</div>

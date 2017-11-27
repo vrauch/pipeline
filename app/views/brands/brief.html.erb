@@ -1,0 +1,10 @@
+<% if @brand.brand_brief.nil? %>
+  <%= render 'empty_brief' %>
+<% else %>
+  <div class="top_btns hidden-xs">
+    <%= link_to 'Modify', modify_brand_path(@brand), remote: true, class:'btn btn_bordered_const btn_open_panel', data: { panel: 'modify_questions' } %>
+  </div>
+  <div id="brief-body">
+    <%= render 'brief_body' %>
+  </div>
+<% end %>

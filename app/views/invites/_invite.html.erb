@@ -1,0 +1,13 @@
+<%= link_to new_invite_path(user_group: user_group, resource_id: resource_id),
+            remote: true, class: user_group == :evo_team ? 'card_item add_card md_size user_card' : 'card_item add_card xs_size brand_users' do %>
+  <span class="card_middle_block">
+    <i class="icon icon_add_user"></i>
+    <h3 class="card_title">
+      <% if user_group == :evo_team %>
+        Invite Evol8tion <br>Team User
+      <% else %>
+        Invite <%= @brand.title %> <br>Team User
+      <% end %>
+    </h3>
+  </span>
+<% end %>

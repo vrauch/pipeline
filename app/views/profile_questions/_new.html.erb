@@ -1,0 +1,23 @@
+<div class="simple_form">
+  <%= form_for @profile_question, remote: true do |f| %>
+    <!--<div class="form-group">-->
+      <% f.text_field :title, class:'form-control', placeholder:'Enter title' %>
+    <!--</div>-->
+    <div class="form-group">
+      <%= f.text_area :body, class:'form-control', placeholder: 'Type request here', style: 'height: 255px;' %>
+    </div>
+    <div class="bot_control_btns">
+      <div class="row">
+        <div class="col-xs-6 left text-right">
+          <a href="#" class="control_link dismiss_one_panel">CANCEL</a>
+        </div>
+        <div class="col-xs-6 right text-left">
+          <%= f.button  class:'control_link btn_loader', type: 'submit' do %>
+            SEND
+            <%= render '/layouts/loader' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

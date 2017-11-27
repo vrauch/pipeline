@@ -1,0 +1,17 @@
+<div class="empty_block empty_block_pt">
+  <% if current_user.evo_team? %>
+      <i class="icon icon_apply"></i>
+      <h1 class="empty_title"><span class="empty_title_inner">This Brand Has Not Created Any Landing Pages</span></h1>
+      <p class="empty_text">Brand external landing pages for startups will appear here</p>
+  <% else %>
+      <div class="curved_lines"></div>
+      <% if can? :create, PromoPage %>
+        <%= link_to 'Create Landing Page', new_promo_page_path, remote: true,
+                    class: 'btn btn_add btn_open_pane add_promo_page pull-right absolute btn_in_empty',
+                    data: { panel: 'intro' } %>
+      <% end %>
+      <i class="icon icon_apply"></i>
+      <h1 class="empty_title"><span class="empty_title_inner">Create Landing Page</span></h1>
+      <p class="empty_text">Create an external landing page to encourage startups to submit a profile to your Pipeline</p>
+<% end %>
+</div>

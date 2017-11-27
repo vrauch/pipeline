@@ -1,0 +1,12 @@
+<li class="tool_bar_li">
+  <%= link_to new_request_path(startup_id: @startup.id), class: "add_link", remote: true do %>
+    <i class="icon icon_message"></i><span>SEND QUESTION</span>
+  <% end %>
+</li>
+<% if current_user.brand_team? && @scorecards.try(:empty?) %>
+  <li class="tool_bar_li">
+    <%= link_to new_request_path(startup_id: @startup.id, startup_scorecard: true), class: "add_link", remote: true do %>
+      <i class="icon icon_scorecard"></i><span>REQUEST  SCORECARD</span>
+    <% end %>
+  </li>
+<% end %>

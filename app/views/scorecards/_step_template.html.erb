@@ -1,0 +1,59 @@
+<%= form_for @scorecard, remote: true do |f| %>
+  <div class="slide-panel-container">
+    <div class="slide-panel-content slide-panel-content_pb">
+      <ul class="step_name_list lg_size step_name_list_padd clearfix">
+        <li class="pull-left name_main_step">SCORECARD GENERATOR</li>
+        <li class="active">TEMPLATE</li>
+        <li>OVERVIEW</li>
+        <li>PRODUCT</li>
+        <li>COLLABORATION</li>
+        <li>BUSINESS</li>
+        <li>RECOMMENDATION</li>
+      </ul>
+      <h1 class="h1_title">Template and Startup</h1>
+
+      <div class="grid_padding_sm form_container">
+        <%= render 'partials/error_messages', resource: @scorecard, disable_titles: true %>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <div id="scorecardTemplateIdCont" class="form-group multiple_tag_select single_select">
+              <%= f.select :scorecard_template_id,
+                    templates_for_select(@scorecard_templates, @scorecard.scorecard_template.try(:id)),
+                    { include_blank: true },
+                    class: 'js-example-basic-single',
+                    data: { placeholder: 'Select tempate' } %>
+            </div>
+
+            <!-- <div id="startupIdCont" class="form-group multiple_tag_select single_select"> -->
+              <%# f.select :startup_id,
+                    startups_for_select(@startups, @scorecard.startup.try(:id)),
+                    { include_blank: true },
+                    class: 'js-example-basic-single',
+                    data: { placeholder: 'Start typing startup name' } %>
+            <!-- </div> -->
+
+            <%= render 'scorecards/select_startups', f: f %>
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div> <!-- slide-panel-content -->
+  </div> <!-- slide-panel-container -->
+  <div class="bot_control_btns fixed_control_btns">
+    <div class="row">
+      <div class="col-xs-6 left text-right">
+        <%= link_to 'CANCEL', cancel_scorecards_path, remote: true, class: 'control_link' %>
+      </div>
+      <div class="col-xs-6 right text-left">
+        <%= button_tag type: 'submit', class: 'control_link btn_open_panel' do %>
+          NEXT <i class="icon icon_arrow_right"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

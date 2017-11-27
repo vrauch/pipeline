@@ -1,0 +1,51 @@
+<div class="page_container">
+  <div class="header" style="background-image: url(<%= asset_path 'layout/brief_header_bg01.png' %>);">
+    <div class="container_sm">
+
+      <a href="#" class="logo"><%= image_tag 'layout/logo.png', alt: 'Logo' %></a>
+      <h1 class="h1_large">Please answer the following questions to continue
+        <span>Your answers will help Evol8tion curate relevant startups for you</span>
+      </h1>
+      <ul class="bordered_menu bordered_menu_size">
+        <!--<li class="active"><a href="javascript:;">FOCUS</a></li>-->
+        <!--<li><a href="javascript:;">AUDIENCE</a></li>-->
+        <!--<li><a href="javascript:;">STRATEGY</a></li>-->
+        <!--<li><a href="javascript:;">STARTUPS</a></li>-->
+      </ul>
+    </div>
+  </div>
+  <div class="test_content">
+    <div class="container_sm">
+      <div class="accordion_wizard">
+        <%= form_for(@brand_brief_summary, remote: true) do |f| %>
+          <div class="panel-group" id="accordion">
+            <%= hidden_field_tag :invite_token, @invite.token %>
+            <% @brief_questions.each_with_index do |brief_question, index| %>
+              <div class="panel panel-default <%= 'hidden_item' unless index.zero? %>">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index %>">
+                      <i class="icon icon_circle"></i>
+                      <i class="icon icon_circle_mark"></i>
+                      <%= brief_question.content %>
+                      <i class="icon icon_arrow_right"></i>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse<%= index %>" class="panel-collapse collapse <%= 'in' if index.zero? %>">
+                  <% if brief_question.single? %>
+                    <%= render 'single_test', f: f, brief_question: brief_question, index: index %>
+                  <% elsif brief_question.multi? %>
+                    <%= render 'multi_test', f: f, brief_question: brief_question, index: index %>
+                  <% else %>
+                    <%= render 'text_test', f: f, brief_question: brief_question, index: index %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

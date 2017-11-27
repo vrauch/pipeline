@@ -1,0 +1,27 @@
+<div class="promo__bar">
+    <div class="pull-left">
+      <%= link_to (promo_pages_brand_path(@promo_page.brand)), remote: true, class: "promo__bar--back" do %>
+        <i class="icon icon_arrow_left"></i>
+        Back
+      <% end %>
+    </div>
+    <div class="pull-right">
+      <% if @promo_page.promo_page_status == "PUBLISHED" %>
+        <span class="promo__bar--btn_primary active">
+          <i class="icon icon_mark"></i>
+          Published
+        </span>
+      <% else %>
+        <%= link_to (reject_promo_page_path(@promo_page)), remote: true, id: "add_reject_btn", class:  @promo_page.promo_page_status == "REJECTED" ? "promo__bar--btn_secondary btn_show_mark active" : "promo__bar--btn_secondary btn_show_mark" do %>
+          <span>Reject</span> <i class="icon icon_mark"></i>
+        <% end %>
+        <%= link_to (approve_promo_page_path(@promo_page)), method: :post, remote: true, id: "add_approve_btn", class: @promo_page.promo_page_status == "APPROVE" ? "promo__bar--btn_primary btn_show_mark active" : "promo__bar--btn_primary btn_show_mark" do %>
+          <span>Approve</span> <i class="icon icon_mark"></i>
+        <% end %>
+        <div id="reject-form"></div>
+      <% end %>
+    </div>
+    <div class="promo__bar--title has_right_btns">
+      <%= @promo_page.name %>
+    </div>
+</div>

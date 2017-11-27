@@ -1,0 +1,76 @@
+<% if @tag.present? %>
+  <%= render '/tags/top_bar_tag', tag: @tag  %>
+<% else %>
+  <div class="top_bar">
+    <div class="row">
+      <div class="col-md-6 search_b">
+        <%= form_tag quick_search_index_path, remote: true, id: 'quick-search' do |f| %>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <span class="btn btn_search">
+                <i class="icon <%= @custom_search_icon || 'icon_search' %>"></i>
+              </span>
+            </span>
+            <%= text_field_tag 'search', @custom_search_query,
+                               class: 'form-control field_search',
+                               placeholder: 'Search for startups',
+                               disabled: @custom_search_query.present? %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-xs-6 top_bar_control">
+        <ul class="control_list">
+          <% if can? :create, Request %>
+            <li>
+              <%= link_to new_request_path, class: 'add_link', data: { toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Ask Evol8tion'  }, remote: true do %>
+                <i class="icon icon_pen_round"></i>
+              <% end %>
+            </li>
+          <% end %>
+          <% if current_user.evo_team? %>
+            <li class="dropdown custom_dropdown with_round_triangle">
+              <a data-toggle="dropdown" class="dropdown-toggle add_link" href="#">
+                <i class="icon icon_add_link"></i>
+              </a>
+              <ul class="dropdown-menu" id="add_startup">
+                <li><%= link_to 'Add Startup to Watchlist', new_startup_path, remote: true %></li>
+                <li><%= link_to 'Create full startup profile', new_startup_path(full_profile: true), remote: true %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to new_startup_path, class:'add_link', data: { toggle: 'tooltip', placement: 'bottom', 'original-title' => 'Add Startup'  }, remote: true do  %>
+                <i class="icon icon_add_link"></i>
+              <% end %>
+            </li>
+          <% end %>
+          <li class="dropdown custom_dropdown with_round_triangle">
+            <a data-toggle="dropdown" class="dropdown-toggle profile_link" href="#">
+              <%= image_tag(current_user.photo.thumb_small.present? ? current_user.photo.thumb_small.url : 'layout/user_mask.png', width: 35) %>
+            </a>
+            <ul class="dropdown-menu" id="menu1">
+              <li><%= link_to 'View profile', activity_user_path(current_user) %></li>
+              <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="search_btns<%= ' active' if @back_link %>">
+          <%= link_to 'Advanced', new_search_path, class: 'btn btn_default btn_middle btn_dark_gray btn_open_search', data: { panel: 'advance_search' } %>
+          <button id="quick-search-btn" class="btn btn_default btn_middle btn_black panel_btn_search btn_loader">
+            Search
+            <%= render '/layouts/loader' %>
+          </button>
+          <% if @back_link %>
+            <div class="clear_search_holder active">
+              <%= link_to @back_title || 'X Clear Search', @back_link, class: "clear_search pull-right" %>
+            </div>
+          <% else %>
+            <div class="clear_search_holder">
+              <a id="clear-quick-search" href="#" class="clear_search pull-right">X<span class="hidden-xs"> Clear Search</span></a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

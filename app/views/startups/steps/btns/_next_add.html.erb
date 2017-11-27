@@ -1,0 +1,5 @@
+<%= f.button type: 'submit', name: @startup.button_name, class: 'control_link btn_loader' do %>
+  <%= @startup.next_or_save %>
+  <i class="icon icon_arrow_right"></i>
+  <%= render '/layouts/loader' %>
+<% end %>

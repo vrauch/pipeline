@@ -1,0 +1,10 @@
+<% if resource.errors.any? %>
+  <% resource.errors.messages.each do |key, msg| %>
+    <div class="subtitle error-message">
+      <% unless defined?(disable_titles) && disable_titles %>
+        <b><%= key.to_s.humanize %></b>:
+      <% end %>
+      <%= msg.reject(&:empty?).join(', ') %>
+    </div>
+  <% end %>
+<% end %>

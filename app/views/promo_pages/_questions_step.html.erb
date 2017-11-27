@@ -1,0 +1,17 @@
+<h1 class="h1_title">Add Custom Questions</h1>
+<div class="subtitle">Create up to 5 additional questions that you want to ask startups</div>
+
+<div id="created-questions" class="clearfix">
+  <%= render 'created_questions', edit: true %>
+</div>
+
+<div id="questions" class="add_question_block">
+  <%= f.hidden_field :current_step %>
+  <%= f.fields_for :promo_page_questions do |promo_page_question| %>
+    <%= render 'promo_page_question_fields', f: promo_page_question %>
+  <% end %>
+  <div class="links add_question_button form_container">
+    <input id="add_question" class="form-control <%= @promo_page.errors.any? || @promo_page.limit_question_reached ? 'hidden' : '' %>" autocomplete="off" placeholder="Enter Question Text" type="text">
+    <%= link_to_add_association '+ Add more question', f, :promo_page_questions, class: 'btn btn-default hidden' %>
+  </div>
+</div>

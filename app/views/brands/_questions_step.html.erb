@@ -1,0 +1,20 @@
+<h1 class="h1_title">Add Brand Custom Questions</h1>
+<div class="subtitle">The brand team will be able to edit the questions after set-up.</div>
+
+<%= f.fields_for :email_template do |email_template| %>
+  <%= email_template.hidden_field :email_logo_cache %>
+<% end %>
+
+<div id="created-questions" class="clearfix">
+  <%= render 'created_questions', edit: true %>
+</div>
+
+<div id="questions" class="add_question_block">
+  <%= f.fields_for :brand_questions do |brand_question| %>
+    <%= render 'brand_question_fields', f: brand_question %>
+  <% end %>
+  <div class="links add_question_button form_container">
+    <input id="add_question" class="form-control <%= @brand.errors.any? ? 'hidden' : '' %>" autocomplete="off" placeholder="Enter Question Text" type="text">
+    <%= link_to_add_association '+ Add more question', f, :brand_questions, class: 'btn btn-default hidden' %>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="collapse_users">
+  <a href="#send_reminder" class="collapse_user_link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="send_reminder">
+    POINT OF CONTACT <i class="icon icon_arrow_down"></i>
+  </a>
+  <div id="send_reminder" class="collapse" aria-expanded="false">
+    <div class="btn-group btn_check_group" data-toggle="buttons">
+      <%= f.collection_check_boxes(:watcher_ids, current_user.evo_team? ? User.evo_users : current_user.brand.users, :id, :full_name) do |b| %>
+        <label class="<%= f.object.watcher_ids.include?(b.value) ? "btn user_check active" : "btn user_check" %>">
+          <%= b.check_box(autocomplete: false) %>
+          <span class="user_details">
+            <span class="user_details_img <%= b.object.photo.thumb_small.present? ? '' : 'brand_img_holder' %>">
+              <%= b.object.photo.thumb_small.present? ? image_tag(b.object.photo.thumb_small, alt:'Logo', width: 40) : b.object.initial %>
+            </span>
+            <span class="user_details_info">
+              <span><%= b.object.f_name %></span>
+              <span><%= b.object.l_name %></span>
+            </span>
+          </span>
+        </label>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="head_content head_content_padd has_btn hidden-xs">
+  <h1 class="h1_title">Brand Packages Settings</h1>
+  <div class="subtitle">Below are the different types of brand packages that can be elected when setting up a new Pipeline.</div>
+  <% if can? :manage, Package %>
+    <%= link_to '+ Add Package', new_package_path, remote: true, class:'btn btn_add btn_open_panel', data: { panel: 'add_package' } %>
+  <% end %>
+  <% if current_user.brand_super? %>
+    <%= link_to 'Upgrade Package', new_request_path(setting: "packages"), remote: true, class:'btn btn_add btn_open_panel', data: { panel: 'request' } %>
+  <% end %>
+</div>
+<% if current_user.brand_super? %>
+  <%= link_to 'Upgrade Package', new_request_path(setting: "packages"), remote: true, class:'btn btn_open_panel btn_add btn_mobile visible-xs', data: { panel: 'request' } %>
+<% end %>
+<div class="slide-panel from-right" data-btn="add_package">
+  <div class="slide-panel-container">
+    <div class="slide-panel-content">
+      <div id="package-form"></div>
+    </div>
+  </div>
+</div>
+
+<div class="package_holder">
+  <% if can? :manage, Package %>
+    <%= render @packages %>
+  <% else %>
+    <%= render current_user.brand.package %>
+  <% end %>
+</div>

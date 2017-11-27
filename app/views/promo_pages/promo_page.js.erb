@@ -1,0 +1,7 @@
+$("#flash-messages").html("<%= j( render 'shared/flash_messages' ) %>");
+<% if @promo_page.errors.any? %>
+  $("#new-promo-page").html("<%= j( render 'new' ) %>");
+<% else %>
+  $("#new-promo-page").empty();
+  $("#new-promo-page").html("<%= j(render 'promo_page') %>");
+<% end %>

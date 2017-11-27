@@ -1,0 +1,28 @@
+<% if @user.errors.any? || (@startup && @startup.errors.any?) %>
+  <% if remotipart_submitted? %>
+    $("#new-user-wrapper").html("<%= j("#{render 'form'}") %>");
+  <% else %>
+    $("#new-user-wrapper").html("<%= j(render 'form') %>");
+  <% end %>
+  $(".upload_img").previewImage(".photo-preview-image");
+<% else %>
+  <% if @user.instance_of?(UserEvo) %>
+    window.location = "<%= dashboard_path %>"
+  <% elsif @user.instance_of?(UserBrand) %>
+    <% if @brief %>
+      window.location = "<%= dashboard_path %>"
+    <% else %>
+      $("#new-user-wrapper").html("<%= j(render 'brief') %>")
+    <% end %>
+  <% else %>
+    <% if @user.invite_token_id %>
+      window.location = "<%= edit_startup_path(@user.startup) %>"
+    <% else %>
+      <% if @user.confirmed_at %>
+        window.location = "<%= root_path %>"
+      <% else %>
+        $("#new-user-wrapper").html("<%= j(render 'thanks') %>")
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

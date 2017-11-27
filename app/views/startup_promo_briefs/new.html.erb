@@ -1,0 +1,22 @@
+<div class="test_content">
+  <div class="container_sm">
+    <div class="accordion_wizard">
+      <%= form_for(@summary, url: startup_promo_brief_path(@promo.alias)) do |f| %>
+        <div class="panel-group" id="accordion">
+          <% @promo_questions.each_with_index do |brief_question, index| %>
+            <% if brief_question.single? %>
+              <%= render 'single', brief_question: brief_question, index: index %>
+            <% elsif brief_question.multi? %>
+              <%= render 'multi', brief_question: brief_question, index: index %>
+            <% else %>
+              <%= render 'text', brief_question: brief_question, index: index %>
+            <% end %>
+          <% end %>
+         </div>
+         <div class="btn_step_holder">
+           <%= f.submit 'SUBMIT', class:'btn btn_step btn_lg' %>
+         </div>
+       <% end %>
+     </div>
+   </div>
+ </div>

@@ -1,0 +1,4 @@
+$("body").append("<%= j render 'shared/alert', modal_id: "note#{@note.id}", title: 'Are you sure?',
+                               text: 'This action can make uneditable changes.',
+                               link: { href: @note, remote: true, button_text: 'Delete', method: :delete } %>");
+$("#note<%= @note.id %>").modal();

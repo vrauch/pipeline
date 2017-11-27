@@ -1,0 +1,23 @@
+<% if @scorecard_templates.nil? || @scorecard_templates.empty? %>
+  <%= render 'partials/nothing_found' %>
+<% else %>
+  <div class="list_holder">
+    <% if @drafts.try(:any?) %>
+      <div class="search_panel">
+        Drafts
+      </div>
+
+      <%= render 'scorecards/list', scorecards: @drafts %>
+    <% end %>
+
+    <% @scorecard_templates.each do |scorecard_template, scorecards| %>
+      <div class="search_panel">
+        <%= scorecard_template.title %>
+      </div>
+
+      <%= render 'scorecards/list', scorecards: scorecards %>
+    <% end %>
+
+
+  </div>
+<% end %>

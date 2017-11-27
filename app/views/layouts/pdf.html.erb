@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Evol8tion PDF</title>
+  <meta charset="utf-8">
+  <%= wicked_pdf_stylesheet_link_tag '//fonts.googleapis.com/css?family=Lato:400,300,700', media: 'all' %>
+  <%= wicked_pdf_stylesheet_link_tag '//fonts.googleapis.com/css?family=Montserrat:400,700', media: 'all' %>
+  <%= yield :custom_head if content_for?(:custom_head) %>
+  <%= yield :custom_js if content_for?(:custom_js) %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body class="white_bg" onload="<%= yield :onload_func if content_for?(:onload_func) %>">
+  <%= yield %>
+</body>
+</html>

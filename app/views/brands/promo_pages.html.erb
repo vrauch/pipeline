@@ -1,0 +1,15 @@
+<% if @promo_pages.empty? %>
+  <%= render 'empty_promo_page' %>
+<% else %>
+    <div id="show-questions"></div>
+    <div id="edit-promo-page"></div>
+    <div class="head_content hidden-xs">
+      <h1 class="h1_title">External Landing Pages</h1>
+      <div class="subtitle">Manage and approve external landing pages for startups.</div>
+    </div>
+    <div id="promo-pages" class="promo_holder">
+      <div id="new-brand">
+      </div>
+      <%= render @promo_pages %>
+  </div>
+<% end %>

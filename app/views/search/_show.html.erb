@@ -1,0 +1,11 @@
+<% if @startups.any? %>
+  <div class="list_holder">
+    <div class="boxer hovered styled_list">
+      <%= render 'startups/header' %>
+      <%= render partial: '/startups/startup', collection: @startups %>
+      <%= paginate @startups, remote: true %>
+    </div>
+  </div>
+<% else %>
+  <%= render 'nothing_found' %>
+<% end %>

@@ -1,0 +1,31 @@
+<div class="">
+  <div class="slider_item">
+    <div class="half_block sign_up_left">
+
+      <div class="left_block_content half_block_content arrow_right_sm">
+
+        <div class="question_title wow" data-wow-delay=".15s">To what do you agree with the following statement?</div>
+        <h2 class="question_text wow" data-wow-delay=".3s">
+          <%= question.question_text %>
+        </h2>
+      </div>
+    </div>
+    <div class="half_block sign_up_right">
+      <div class="right_block_content half_block_content">
+        <div class="question_item">
+          <div class="question_item_title">Select answer to continue</div>
+          <div class="btn-group" data-toggle="buttons">
+            <% question.answers.each_with_index do |answer, index| %>
+              <%= label_tag '', class: "btn btn_question wow btn_#{UserDiagnosticSummary::LETTERS[index]}",
+                            data: { last_index: last_index, wow_delay: "#{(index + 1) * 0.15}s" }  do %>
+                <span><%= UserDiagnosticSummary::LETTERS[index].upcase %></span>
+                <%= radio_button_tag "user_diagnostic_summary[#{question.id}][answer_id]", answer.id, false %>
+                <%= answer.answer_text %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

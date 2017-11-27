@@ -1,0 +1,3 @@
+$("#startups-index").html("<%= j(render @startups) %>");
+$("#startups-pagination").html("<%= j(paginate @startups) %>");
+$.controlMethods.removePlaceholder();

@@ -1,0 +1,8 @@
+<div class="empty_block empty_block_pt">
+  <div class="curved_lines" style="left: 628.5px; bottom: 276px;"></div>
+  <%= link_to '+Add New Comment', new_note_path(startup_id: @startup.id, type: 'comment'),
+              class:'btn btn_add btn_in_empty absolute', remote: true  %>
+  <i class="icon icon_doc_pen"></i>
+  <h1 class="empty_title"><span class="empty_title_inner">Comments</span></h1>
+  <p class="empty_text">Add a comment to share your thoughts about this startup with other team members</p>
+</div>

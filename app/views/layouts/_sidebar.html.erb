@@ -1,0 +1,28 @@
+<div class="inner_scroll">
+  <div role="banner" class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        <%= link_to dashboard_path, class: "navbar-brand #{ current_user.brand_team? ? 'mobile_brand' : '' }" do %>
+          <% if current_user.brand_team? %>
+            <%= image_tag(current_user.brand.logo? ? current_user.brand.logo : 'layout/user_mask.png', width: 90, alt: 'Logo') %>
+          <% else%>
+            <%= image_tag('layout/pipeline_logo.png', alt: 'Pipeline', width: 75) %>
+          <% end %>
+        <% end %>
+        <a href='' class="toggle_search"><i  class="icon icon_search"></i></a>
+      </div>
+      <div class="navbar-inverse side-collapse in">
+        <%= render 'layouts/navbar' %>
+      </div>
+    </div>
+  </div>
+  <% if current_user.brand_team? %>
+    <div class="bottom_logo">
+      <%= link_to root_path do %>
+        <%= image_tag('layout/pipeline_logo.png', alt: 'Pipeline', width: 75) %>
+        <span>BETA</span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

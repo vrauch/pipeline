@@ -1,0 +1,44 @@
+$('body').css('overflow', 'hidden');
+<% if params[:add_question] || params[:select_brand] %>
+  var scrollOffset = $('.slide-panel-container').scrollTop();
+<% end %>
+
+$("#slidePanel").html('<%= j(render "step_#{@scorecard_template.current_step}") %>');
+
+<% if params[:add_question] || params[:select_brand] %>
+  $('.slide-panel-container').scrollTop(scrollOffset);
+<% end %>
+// for cusom select
+$('.chosen-select').chosen({ 'disable_search': true });
+$(".logo-image-input").previewImage(".logo-preview-image", true);
+
+setTimeout(function(){
+  $("#slidePanel").addClass('is-visible');
+  return false;
+}, 10);
+
+<% if @scorecard_template.current_step != 'business' %>
+  $('#scorecard_template_brand_id').on('change', function(e){
+    var titleBrand = $("#scorecard_template_brand_id option:selected").text();
+    $('#scorecard_template_title_brand').val(titleBrand);
+    <% if @scorecard_template.current_step == 'template' && !@scorecard_template.logo? %>
+      var form = $(this).parents('form');
+      form.append('<input type="hidden" name="select_brand" value="1">')
+      form.submit();
+    <% end %>
+  });
+<% end %>
+
+$(".btn_st_cancel_question").click(function(e) {
+		$('.slide_block').slideUp();
+		$(this).parents('.slide-panel-content').find('.bot_control_btns').fadeIn();
+		$(this).parents('.slide-panel-container').siblings('.bot_control_btns').fadeIn();
+	});
+$(".slide-panel .fixed_control_btns").each(function() {
+  var btnsWidth = $(this).parents('.slide-panel').find('.slide-panel-content').innerWidth();
+  $(this).css('width', btnsWidth);
+});
+
+<% if @scorecard_template.persisted? %>
+  $('#deleteScorecardTemplateModal .confirm_link').prop('href', '<%= scorecard_template_url(@scorecard_template) %>')
+<% end %>

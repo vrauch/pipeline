@@ -1,0 +1,43 @@
+<div class="grid_padding_sm form_container nested-fields <%= f.object.errors.empty? && !f.object.first_init.nil? || f.object.persisted? ? 'hidden' : '' %>"
+     question-data-id="<%= f.object.question_data_id.present? ? f.object.question_data_id : "promo_page_promo_page_questions_attributes_#{f.object.id}_question_text" %>">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <%= f.hidden_field :first_init, value: f.object.persisted? ? false : '', class: 'first_init' %>
+        <%= f.hidden_field :question_data_id, class: 'question_data_id' %>
+        <%= f.text_field :question_text, class: 'form-control add_guestion', autocomplete: :off, placeholder: 'Enter Question Title' %>
+        <%= link_to_remove_association "- Remove Question", f, class: 'btn btn-danger btn-sm remove-question-hidden hidden' %>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="radio answer_type promo_answer_type">
+      <div class="radio_title">
+        SELECT ANSWER TYPE
+      </div>
+      <%= f.collection_radio_buttons(:answer_type, PromoPageQuestion::TYPES, :first, :last,
+                                     { checked: f.object.answer_type ? f.object.answer_type : PromoPageQuestion::ANSWER_TYPE.first }) do |b| %>
+        <div class="radio_item">
+          <%= b.radio_button %>
+          <%= b.label %>
+        </div>
+      <% end %>
+    </div>
+    <ol type="A" class="abc_list">
+      <%= f.fields_for :promo_page_question_answers do |answer| %>
+        <%= render 'promo_page_question_answer_fields', f: answer %>
+      <% end %>
+      <div class="links <%= f.object.text? ? 'hidden' : '' %>">
+        <%= link_to_add_association '+ Add more answers', f, :promo_page_question_answers, class: 'btn btn-default' %>
+      </div>
+    </ol>
+    <div class="invers_btns">
+      <a href="#" class="btn btn_bordered_const md_size btn_cancel_question">Cancel</a>
+      <%= link_to @promo_page.persisted? ? update_question_promo_page_path(@promo_page) : create_question_promo_pages_path,
+                  class: 'btn btn_add btn_add_question btn_loader' do %>
+        <%= f.object.first_init.nil? && f.object.id.blank? ? 'Add Question' : 'Update Question' %>
+        <%= render '/layouts/loader' %>
+      <% end %>
+    </div>
+  </div>
+</div>

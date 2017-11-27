@@ -1,0 +1,16 @@
+<li class="dashboard__pane--label">
+  <i style="<%= @startups_all_count > 0 ? 'background-color: #f66bb0;' : '' %>"></i>
+  Founder Submitted <span id="segment-1" data-segment-1 = "<%= @founder_total %>"><%= @founder_total %></span>
+</li>
+<li class="dashboard__pane--label">
+  <i style="<%= @startups_all_count > 0 ? 'background-color: #52586b;' : '' %>"></i>
+  Via Brand <span id="segment-2" data-segment-2 = "<%= @founder_brand_total %>"><%= @founder_brand_total %></span>
+</li>
+<li class="dashboard__pane--label">
+  <i style="<%= @startups_all_count > 0 ? 'background-color: #DAE3F9;' : '' %>"></i>
+  Evolution Generated <span id="segment-3" data-segment-3 = "<%= @evo_generated_total %>"><%= @evo_generated_total %></span>
+</li>
+<li class="dashboard__pane--label">
+  <i style="<%= @startups_all_count > 0 ? 'background-color: #f0f0f0;' : '' %>"></i>
+  Our Watchlist <span id="segment-4" data-segment-4 = "<%= @startups_watclist_count %>"><%= @startups_watclist_count %></span>
+</li>

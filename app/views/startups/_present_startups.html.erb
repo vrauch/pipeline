@@ -1,0 +1,13 @@
+<%= render 'filter_startups' %>
+<div class="list_holder">
+  <h2 class="mobile_title visible-xs"><% current_page?(watchlist_startups_path) ? 'Watchlist' : 'All startups' %></h2>
+  <div class="boxer hovered styled_list">
+    <%= render 'startups/header' %>
+    <div id="startups-index">
+      <%= render @startups %>
+    </div>
+  </div>
+  <div id="startups-pagination">
+    <%= paginate @startups if @startups.any? %>
+  </div>
+</div>

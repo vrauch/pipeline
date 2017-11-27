@@ -1,0 +1,30 @@
+<div class="heading hidden-xs clearfix">
+  <div class="dropdown dropdown_text custom_dropdown with_round_triangle pull-left">
+    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Arrange by <i class="icon icon_arrow_down"></i></a>
+    <ul class="dropdown-menu" id="menu1">
+      <li data-sort="title_asc" class="sort-type">
+        <%= sortable_startup "title", "Startup Name: A - Z", "asc", params[:type], @search_params %>
+      </li>
+      <li data-sort="title_desc" class="sort-type">
+        <%= sortable_startup "title", "Startup Name: Z - A", "desc", params[:type], @search_params %>
+      </li>
+      <li data-sort="location_asc" class="sort-type">
+        <%= sortable_startup "location", "Location A-Z", "asc", params[:type], @search_params %>
+      </li>
+      <li data-sort="location_asc" class="sort-type">
+        <%= sortable_startup "location", "Location Z-A", "desc", params[:type], @search_params %>
+      </li>
+      <li class="active sort-type" data-sort="created_at_asc" class="sort-type">
+        <%= sortable_startup "brands_startups.created_at", "Date Added: Newest to Oldest", "desc", params[:type], @search_params %>
+      </li>
+      <li data-sort="created_at_desc" class="sort-type">
+        <%= sortable_startup "created_at", "Date Added: Oldest to Newest", "asc", params[:type], @search_params %>
+      </li>
+    </ul>
+  </div>
+
+  <%= render 'startups/export' %>
+</div>
+
+
+<%= render partial: "show" %>

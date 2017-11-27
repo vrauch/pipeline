@@ -1,0 +1,136 @@
+<div class="test_content">
+  <div class="container_sm">
+    <div class="vitals_form">
+      <%= form_for @startup, html: { multipart: true }, remote: true do |f| %>
+        <div class="default_upload_file_holder relative">
+          <div class="default_upload_file md_size <%= f.object.logo? ? 'active' : '' %>">
+            <div class="inner startup-logo-preview" style="<%= @startup.logo? ? "background-image: url(#{asset_path @startup.logo.thumb_large.url})" : ''%>">
+              <%= f.file_field :logo, accept: 'image/png, image/jpeg', class:'upload_img startup-logo-input', id: "upload_statup_logo" %>
+              <%= f.hidden_field :logo_cache %>
+            </div>
+            <% unless f.object.errors[:logo].blank? %>
+              <div class='error_field'><span class='error_text'>Logo required</span></div>
+            <% end %>
+            <div class="upload_text visible_before"><i class="icon icon_arrow_up_round"></i>
+              ADD LOGO
+            </div>
+          </div>
+          <div class="change_img_text" id="logo_startup">
+            <span>Change Logo</span>
+          </div>
+          <div class="help_text">Recommended size 500 x 500 px</div>
+        </div>
+        <div class="grid_padding_xs">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.text_field :title, class:'form-control', placeholder: 'Startup Name*' %>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.text_field :location, class:'form-control', placeholder: 'Location*' %>
+              </div>
+            </div>
+          </div>
+          <% if current_user.active? %>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <%= fields_for current_user do |u| %>
+                    <%= u.email_field :email, class:'form-control' %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <%= link_to '#', data: { toggle: 'modal', target: '#reset_pass' }, class: 'btn btn_bordered_const btn_bordered_red edit_style_btn btn_reset_pass' do %>
+                  <span>Reset Password</span>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group with_mark">
+                <%= f.text_field :website, id: 'startup_website', class:'form-control', placeholder: 'www.website.com*' %>
+                <span class="mark_span <%= 'black' unless f.object.website.blank? %>">http://</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="choose_date clearfix">
+                <span class="choose_date_text">DATE <br>FOUNDED</span>
+                <div class="custom_select custom_date_select pull-left">
+                  <%= f.date_select :month, { use_month_numbers: true, discard_year: true,
+                                              discard_day: true, prompt: 'MM*',
+                                              selected: f.object.persisted? ? f.object.date_founded : false },
+                                            { class:'chosen-select', "data-placeholder" => 'MM*' } %>
+                </div>
+                <div class="custom_select custom_date_select pull-right">
+                  <%= f.date_select :year, { discard_month: true, start_year: Date.today.year, end_year: 1980,
+                                             discard_day: true, prompt: 'YYYY*',
+                                             selected: f.object.persisted? ? f.object.date_founded : false },
+                                           { class:'chosen-select', "data-placeholder" => 'YYYY*' } %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row row_mt_sm">
+            <div id='founders' class="col-sm-6 founders_holder">
+            <label for="founders" class="label_relative">FOUNDERS</label>
+              <%= f.fields_for :founders, @startup.founders.any? ? @startup.founders : @startup.founders.new do |founder| %>
+                <%= render '/startups/founder_fields', f: founder %>
+              <% end %>
+            </div>
+            <div class="col-sm-6">
+              <div class="no_label_mt">
+                <%= link_to_add_association '+ Add more founders', f, :founders,
+                    { partial: '/startups/founder_fields',
+                      class: 'add_more_link',
+                             'data-association-insertion-method' => 'append',
+                             'data-association-insertion-node' => '#founders' } %>
+              </div>
+            </div>
+          </div>
+          <div class="row row_mt_sm">
+            <div class="col-sm-6">
+              <div class="form-group with_mark">
+                <label for="details">DETAILS</label>
+                <%= f.text_field :twitter, id:'details', class: 'form-control twitter-input', placeholder: 'Twitter Username' %>
+                <span class="mark_span <%= 'black' unless f.object.twitter.blank? %>">@</span>
+              </div>
+              <div class="form-group">
+                <%= f.text_field :video_url, class: 'form-control', placeholder: 'Video URL' %>
+                <span class="field_help_text">Add a demo of your product or a video of you pitching.</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group no_label_mt">
+                <%= f.text_area :elevator_pitch, class: 'form-control', placeholder: 'Elevator Pitch*', style:"height: 163px;" %>
+              </div>
+            </div>
+          </div>
+
+          <div id="startupPdfUploadCont" class="upload_block">
+            <%= render 'startups/setup-profile/upload_pdf' %>
+          </div>
+
+          <% if current_user.active? %>
+            <%= render 'startups/setup-profile/edit_navigation', f: f %>
+          <% else %>
+            <div class="btn_step_holder">
+              <button class="btn btn_step btn_lg btn_loader">
+                CONTINUE
+                <%= render '/layouts/loader' %>
+              </button>
+              <%# f.submit 'CONTINUE', class:'btn btn_step btn_lg' %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= form_for @startup.pdf_documents.build, url: startup_add_pdf_url(startup_id: @startup.id), remote: true, html: { class: 'hidden' } do |f| %>
+        <%= f.file_field :file %>
+      <% end %>
+    </div>
+  </div>
+</div>

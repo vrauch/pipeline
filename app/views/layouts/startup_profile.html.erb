@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <title>Evol8tion</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <%= favicon_link_tag '/favicon.ico' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <%= csrf_meta_tags %>
+  <%= include_gon(init: true) %>
+</head>
+<body>
+  <div class="page_container">
+    <div id="notification">
+      <%= render 'layouts/startup_flashes' %>
+    </div>
+    <div id="profile-layout"></div>
+    <%= yield %>
+  </div>
+
+  <div class="slide-panel from-right visible_panel" data-btn="send_questions">
+    <div class="slide-panel-container width_xs">
+      <div class="slide-panel-content slide-panel-content_pb">
+        <h1 class="h1_title">Send Questions</h1>
+        <div class="subtitle">Ask startup about product, team and else</div>
+          <div id="question-form"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-panel from-right visible_panel" data-btn="add_note">
+    <div class="slide-panel-container width_xs">
+      <div class="slide-panel-content slide-panel-content_pb">
+        <div id="note_form"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-panel from-right" data-btn="watchlist-form">
+    <div class="slide-panel-container width_sm">
+      <div id="watchlist-form" class="slide-panel-content slide-panel-content_pb">
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-panel from-right visible_panel" data-btn="send_request">
+    <div class="slide-panel-container width_xs">
+      <div class="slide-panel-content slide-panel-content_pb">
+        <h1 class="h1_title">Ask Evol8tion</h1>
+        <div id="request-form" class="subtitle">Ask Evol8tion team about startups, tech assistance and else</div>
+      </div>
+    </div>
+  </div>
+
+  <% if can?(:preview, Scorecard) %>
+    <div class="slide-panel from-right">
+      <div class="slide-panel-container full_width">
+        <div id="fwSlidePanel" class="slide-panel-content slide-panel-content_no_padd"></div>
+      </div>
+    </div>
+
+    <%= render 'partials/spinner' %>
+  <% end %>
+
+  <%= render 'startups/full_profile_panels', width: 'width_sm' %>
+</body>
+</html>

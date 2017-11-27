@@ -1,0 +1,3 @@
+<%= render 'partials/notification' %>
+
+$('#scorecard<%= @scorecard.id %>').html("<%= j(render('scorecard', scorecard: @scorecard)) %>")

@@ -1,0 +1,27 @@
+holder = $('.push_to_brand.visible')
+<% if @brand_startup %>
+  setTimeout(function(){
+    holder.find('.btn_tip_add').addClass('active');
+  }, 500);
+
+  setTimeout(function(){
+    holder.removeClass('visible');
+    holder.find('.tip_group_btns').fadeOut(400);
+    holder.find('.tip_holder').remove();
+    $("#startup_<%= @startup.id %>").replaceWith("<%= j(render('startup', startup: @startup)) %>")
+    $.controlMethods.removePlaceholder()
+  }, 1500);
+<% end %>
+
+if ($('.list_holder').length) {
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  $('.top_notification').showFlashMessage();
+}
+else {
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  $('.top_notification').addClass('sm_size').showFlashMessage();
+} 
+
+holder.removeClass('visible');
+$("#startup_<%= @startup.id %>").replaceWith("<%= j(render('startup', startup: @startup)) %>");
+$.controlMethods.removePlaceholder();

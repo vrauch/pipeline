@@ -1,0 +1,16 @@
+$("#promo_page_<%= @promo_page.id %>").replaceWith("<%= j(render('promo_page', promo_page: @promo_page)) %>");
+<% if params[:preview] %>
+  $("#promo_page_preview").find(".approve").delay(500).queue(function(){
+    $(this).addClass('active');
+    window.setTimeout(function () {
+      $(".promo_page_preview").removeClass('is-visible');
+      $('body').css('overflow-y', 'auto');
+      $.controlMethods.removePlaceholder();
+      <%= render 'partials/notification' %>
+    }, 1000);
+  });
+<% else %>
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  $('.top_notification').addClass('sm_size').showFlashMessage();
+  $.controlMethods.removePlaceholder();
+<% end %>

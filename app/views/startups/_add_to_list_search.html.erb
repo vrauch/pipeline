@@ -1,0 +1,44 @@
+<%= form_for @startup.list_startups.build, url: add_to_list_startup_path(@startup), remote: true do |f| %>
+  <% if @lists.any? %>
+    <div class="tip_item_list btn-group" data-toggle="buttons">
+      <%= hidden_field_tag :startup_id, @startup.id %>
+      <%= f.collection_radio_buttons(:list_id, @lists, :id, :name) do |b| %>
+        <label class="btn tip_item <%= @startup_lists.include?(b.object.id) ? 'has_label' : '' %>">
+          <% if @startup_lists.include?(b.object.id) %>
+            <%= b.radio_button(disabled: true) %>
+          <% else %>
+            <%= b.radio_button %>
+          <% end %>
+          <span>
+            <span class="tip_item_img">
+              <% if b.object.author.photo.present? %>
+                <%= image_tag(b.object.author.photo.thumb_small, size: 50, alt: 'Photo') %>
+              <% else %>
+                <%= b.object.author.initial %>
+              <% end %>
+            </span>
+            <span class="tip_item_text_holder">
+              <span class="tip_item_text">
+                <span class="tip_item_text_large"><%= b.text %></span><br/>
+                <span class="tip_item_text_small"><%= b.object.author.full_name %></span>
+              </span>
+            </span>
+            <% if @startup_lists.include?(b.object.id) %>
+              <span class="tip_label green">ADDED</span>
+            <% end %>
+          </span>
+        </label>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty_search">
+      <i class="icon icon_search"></i>
+      <div class="empty_search_title">
+        Create a List
+      </div>
+      <div class="empty_search_text">
+        <!--Try other query. No results matched your search terms -->
+      </div>
+    </div>
+  <% end %>
+<% end %>

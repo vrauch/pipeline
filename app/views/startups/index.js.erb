@@ -1,0 +1,4 @@
+$("#startups-index").html("<%= j(render @startups) %>");
+$("#startups-pagination").html("<%= j(paginate @startups) %>");
+$('[data-toggle=tooltip]').tooltip();
+$.controlMethods.removePlaceholder();

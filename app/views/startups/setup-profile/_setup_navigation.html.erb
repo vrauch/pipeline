@@ -1,0 +1,5 @@
+<div class="control_nav_btns">
+  <%= link_to 'BACK', to_step_startup_brief_index_path(@startup, progress_step: @questions.first.progress_step, back: true), remote: true, class: 'btn btn_step btn_lg btn_back' %>
+  <%= f.hidden_field "progress_step", value: @questions.first.progress_step %>
+  <%= f.submit @questions.first.progress_step == StartupBriefQuestion::LAST_STEP ? 'DONE' : 'NEXT', class: 'btn btn_step submit btn_lg btn_next', disabled: @questions.first.progress_step == StartupBriefQuestion::LAST_STEP ? false : 'disabled' %>
+</div>

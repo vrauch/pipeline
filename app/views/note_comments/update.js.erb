@@ -1,0 +1,14 @@
+<% if @comment.errors.any? %>
+  $("#note_form").html("<%= j render 'edit' %>")
+  $.myMethods.calendar_init();
+<% else %>
+  $("#noteComment<%= @comment.id %>").replaceWith("<%= j(render 'notes/comment', comment: @comment) %>");
+  $.controlMethods.hidePanel("add_note");
+  $.controlMethods.removePlaceholder();
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  if ($(".activity_holder").length) {
+    $('.top_notification').showFlashMessage();
+  } else {
+    $('.top_notification').addClass('sm_size').showFlashMessage();
+  }
+<% end %>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <title>Evol8tion</title>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <%= favicon_link_tag '/favicon.ico' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <%= csrf_meta_tags %>
+  <%= Gon::Base.render_data %>
+</head>
+<body>
+<div class="page_container container_table <%= sign_in_page? ? 'sign_in_page' : '' %>">
+  <div class="half_block sign_up_left">
+    <div class="left_block_content half_block_content arrow_right_sm">
+      <div class="sign_up_logo">
+        <% if @invite.present? && @invite.brand_team? %>
+          <%= image_tag @invite.brand.logo, width: '94' %>
+        <% elsif @promo_page %>
+          <%= image_tag @promo_page.brand.logo, width: '94' %>
+        <% elsif @brand %>
+          <%= image_tag @brand.logo, width: '94' %>
+        <% else %>
+          <%= image_tag 'layout/pipeline_logo.png' %>
+        <% end %>
+      </div>
+      <h1 class="welcome_title <%= sign_in_page? ? 'hidden-xs' : '' %>">
+        Welcome <br> to Pipeline
+      </h1>
+      <div class="welcome_text <%= sign_in_page? ? 'hidden-xs' : '' %>">
+        <!--We believe that the future of marketing is intextricably tied to technology. But a gap exist. A gap between how marketers are thinking-->
+        <!--and acting with regards to technology.-->
+      </div>
+      <div class="bot_info_text <%= sign_in_page? ? 'hidden-xs' : '' %>">
+        powered by <%= image_tag 'layout/logo.png', alt: 'EVOL8TION' %>
+      </div>
+    </div>
+  </div>
+  <div class="half_block sign_up_right">
+    <%= yield %>
+  </div>
+</div>
+
+</body>
+</html>

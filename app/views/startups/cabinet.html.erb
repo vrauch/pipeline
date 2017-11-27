@@ -1,0 +1,11 @@
+<div class="startup_content">
+  <div class="container_md">
+    <h3 class="simple_title has_btn">
+      Here is your profile
+      <%= link_to 'Edit Profile', edit_startup_path(@startup), class:'btn btn_bordered_const lg_size hidden-xs' %>
+    </h3>
+    <div class="brief_block">
+      <%= render 'elevator_pitch' %>
+    </div>
+  </div>
+</div>

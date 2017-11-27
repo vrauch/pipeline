@@ -1,0 +1,42 @@
+<div class="panel panel-default <%= 'hidden_item' unless index.zero? || current_user.active? %> <%= 'visited' if current_user.active? %>">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion3" href="#collapse<%= index %>" class="<%= 'collapsed' if current_user.active? %>">
+        <% unless current_user.active? %>
+          <i class="icon icon_circle"></i><i class="icon icon_circle_mark"></i>
+        <% end %>
+        <%= brief_question.alias.humanize.titleize %>
+        <i class="icon icon_arrow_right"></i></a>
+    </h4>
+  </div>
+  <div id="collapse<%= index %>" class="panel-collapse collapse <%= 'in' if index.zero? && !current_user.active? %>">
+    <div class="panel-body">
+      <div class="test_help_text">
+        <%= brief_question.content %>
+      </div>
+        <%= text_area_tag "answers[#{brief_question.id}]", @answers[brief_question.alias], class: 'form-control', placeholder: 'Write your answer here', style: 'height: 91px;' %>
+        <%= fields_for @startup do |f| %>
+          <div class="checkbox checkbox_margin">
+            <div class="checkbox_item">
+              <%= f.check_box :share_info %>
+              <span class="check_icon_holder"><i class="icon icon_mark"></i></span>
+              <%= f.label :share_info, 'Evol8tion is always working hard to put startups like you in front of brands! By keeping this box checked, you are giving us permission to share the information in this profile directly with our brand clients' %>
+            </div>
+            <div class="checkbox_item">
+              <%= f.check_box :receive_emails %>
+              <span class="check_icon_holder"><i class="icon icon_mark"></i></span>
+              <%= f.label :receive_emails, 'I would like to receive emails about Evol8tion’s events, partnerships or news.' %>
+            </div>
+          </div>
+        <% end %>
+      <% unless current_user.active? %>
+        <div class="btn_step_holder control_nav_btns">
+          <% unless index == @questions.count - 1 %>
+            <a href="javascript:;" class="btn btn_step btn_back skip" data-disabled="false" >SKIP</a>
+            <%= link_to 'NEXT', 'javascript:;', class: brief_question.mandatory? ? "btn btn_step js_scroll disabled" : "btn btn_step js_scroll", data: { disabled: brief_question.mandatory? ? true : false } %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

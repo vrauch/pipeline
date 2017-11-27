@@ -1,0 +1,51 @@
+<div class="slide-panel_header">
+  <div class="slide-panel_header_bg" style="background-image: url(<%= @announcement.cover ? @announcement.cover.url : '' %>);"></div>
+  <% unless defined?(dont_show_exit) %>
+    <a id='announcement-hide-panel' href="#" class="link_nav"><i class="icon icon_close"></i></a>
+  <% end %>
+  <h2 class="slide-panel_title"><%= @announcement.title %></h2>
+  <div class="slide-panel_subtitle">
+    <span>sent: </span>
+    <% if @announcement.created_at? %>
+      <%= @announcement.created_at.strftime('%m/%e/%Y') %>
+    <% else %>
+      <%= Time.now.strftime('%m/%e/%Y') %>
+    <% end %>
+  </div>
+</div>
+<div class="slide-panel_body">
+  <% if current_user.evo_team? && @announcement.announcement_receivers.any? %>
+    <div class="list_logo list_logo_padd clearfix">
+      <span class="list_logo_text">TO:</span>
+      <% if @announcement.selected_u? %>
+        <% counter = 0 %>
+        <% @announcement.announcement_receivers.each_with_index do |receiver, i| %>
+          <span href="#" class="list_logo_item <%= i > 5 ? 'hidden' : ''%>">
+            <% if receiver.receiver_type %>
+              <% if receiver.brand.logo? %>
+                <%= image_tag receiver.brand.logo.thumb_small, alt: '', title: receiver.brand.title %>
+              <% else %>
+                <%= receiver.brand.initial %>
+              <% end %>
+            <% else %>
+              <% if receiver.startup.logo? %>
+                <%= image_tag receiver.startup.logo.thumb_small, alt: '', title: receiver.startup.title %>
+              <% else %>
+                <%= receiver.startup.initial %>
+              <% end %>
+            <% end %>
+          </span>
+          <% counter += 1 if i > 5 %>
+        <% end %>
+        <% if counter > 0 %>
+          <span href="#" class="show-hidden-users list_logo_item">
+            <span>+ <%= counter %></span>
+          </span>
+        <% end %>
+      <% else %>
+        <%= announcement_users_text(@announcement) %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= @announcement.content.html_safe %>
+</div>

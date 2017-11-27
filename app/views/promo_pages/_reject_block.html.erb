@@ -1,0 +1,22 @@
+<div class="promo__bar--reject">
+  <div class="promo__bar--reject_head">
+    ENTER RECOMMENDATION
+  </div>
+  <%= form_for :promo_page, url: reject_promo_page_path(promo_page), method: :patch, remote: true do |f| %>
+    <% if preview %>
+      <%= hidden_field_tag :preview, preview %>
+    <% end %>
+    <%= text_area_tag :reason, nil, class: 'promo__bar--reject_text',
+                      placeholder: 'Enter rejection reason and recommendation how Brand can fix it' %>
+    <div class="clearfix">
+      <a href="javascript:;" class="promo__bar--btn_disabled js__cancel__reject">
+        CANCEL
+      </a>
+      <%= f.button type: :submit,
+                   class: 'promo__bar--btn_secondary btn_show_mark reject' do %>
+        <i class="icon icon_mark"></i>
+        <span>REJECT</span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

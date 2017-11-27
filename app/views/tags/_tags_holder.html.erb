@@ -1,0 +1,8 @@
+<span class="dropdown-menu dropdown-menu_tags" id="menu4">
+  <span class="dropdown-menu_title">Tags</span>
+  <span class="tags_items">
+    <% tags.each do |tag| %>
+      <%= link_to tag.title, tag_path(tag), class: 'tag' %>
+    <% end %>
+  </span>
+</span>

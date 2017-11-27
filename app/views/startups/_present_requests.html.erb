@@ -1,0 +1,15 @@
+<div class="head_content hidden-xs">
+  <h1 class="h1_title">Ask Evol8tion</h1>
+  <div class="subtitle">Have a question about this startup? Or need more information about them? Send us a note.</div>
+</div>
+<% if current_user.evo_team? %>
+  <%= link_to 'Send Question', new_startup_profile_question_path(@startup), class:'btn btn_add btn_mobile visible-xs btn_open_panel', data: { panel: 'send_questions' }, remote: true %>
+<% else %>
+  <%= link_to 'Send Question', new_request_path(@startup), class:'btn btn_add btn_mobile visible-xs btn_open_panel', data: { panel: 'send_questions' }, remote: true %>
+<% end %>
+
+<div class="accordion_holder startup-requests-list">
+  <div class="panel-group startup_requests_table" id="accordion" role="tablist" aria-multiselectable="true">
+    <%= render partial: '/requests/request', collection: @requests %>
+  </div>
+</div>

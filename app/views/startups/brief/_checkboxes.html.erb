@@ -1,0 +1,9 @@
+<% if brief_question.detail? %>
+  <%= check_box("brief_answers[#{brief_question.id}]", :answers,
+                { multiple: true, checked: brief_question.checked?(answer) },
+                answer.id, nil) %>
+<% else %>
+  <%= check_box('brief_answers', brief_question.id,
+                { multiple: true, checked: brief_question.checked?(answer) },
+                answer.id, nil) %>
+<% end %>

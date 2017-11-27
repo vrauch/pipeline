@@ -1,0 +1,40 @@
+<div class="right_block_content half_block_content">
+  <div class="sign_up_form">
+    <%= form_for(resource, as: resource_name, url: @brand ? new_brand_session_path(@brand.alias) : session_path(resource_name)) do |f| %>
+      <h3 class="sign_up_form_title">Please sign into your account</h3>
+      <% if @promo_page %>
+        <%= hidden_field_tag :promo_token, @promo_page.token %>
+      <% end %>
+      <div class="form_body form_body_padd_md">
+        <% if flash[:alert] %>
+          <div class="form-group">
+            <div class="error_field">
+              <%= f.text_field :email, class: 'form-control input_styled', placeholder: 'Email', autofocus: true %>
+              <span class="error_text"><%= flash[:alert] %></span>
+            </div>
+          </div>
+        <% else %>
+          <div class="form-group">
+            <%= f.text_field :email, class: 'form-control input_styled', placeholder: 'Email', autofocus: true %>
+          </div>
+        <% end %>
+        <div class="form-group with_link">
+          <%= f.password_field :password, class: 'form-control input_styled', placeholder: 'Password', autocomplete: 'off' %>
+          <%= render 'devise/shared/forgot' %>
+        </div>
+        <div class="form_help_text hidden-xs">
+          Evol8tion has migrated the startup database to a new platform.
+          If you have already created a profile with Evol8tion, you must <br>
+          <%= link_to 'reset your password.', new_password_path(resource_name), class: 'link_sm' %>
+        </div>
+      </div>
+      <%= f.button  class:'btn btn_default btn_black btn_loader', type: 'submit' do %>
+        SIGN IN
+        <%= render '/layouts/loader' %>
+      <% end %>
+    <% end %>
+    <div class="sign_up_bot_text marg_top_lg">
+      <%= render 'devise/shared/register' %>
+    </div>
+  </div>
+</div>

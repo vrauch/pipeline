@@ -1,0 +1,9 @@
+$('.dismiss_one_panel').click();
+$('.content').after("<div id='search-restore' class='hidden'></div>");
+content = $('.content').children().detach();
+$('#search-restore').html(content);
+$('.content').html("<%= j(render 'advanced') %>");
+$('.advanced-search').removeClass('btn_load');
+$.controlMethods.removePlaceholder();
+$('html, body').animate({ scrollTop: 0 }, 1000);
+$('.toggle_search').addClass('hidden');

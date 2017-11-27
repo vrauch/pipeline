@@ -1,0 +1,17 @@
+el = $("#question-form")
+<% if @profile_question.errors.any? %>
+  el.html("<%= j(render 'new', object: @profile_question) %>")
+<% else %>
+  $.controlMethods.hidePanel("send_questions")
+
+  if ($(".empty_block").length) {
+    $(".empty_block").replaceWith("<%= j render partial: '/startups/present_questions', object: @profile_questions = @profile_question %>");
+  }
+
+  if ($(".startup_questions_table").length) {
+    $("<%= j render partial: '/profile_questions/question', locals: { question: @profile_question } %>").prependTo(".startup_questions_table")
+  }
+  $('body').css('overflow-y', 'auto');
+  $("#notification").html("<%= j(render('layouts/flash_message')) %>");
+  $('.top_notification').addClass('sm_size').showFlashMessage();
+<% end %>

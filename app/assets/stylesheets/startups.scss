@@ -1,0 +1,39 @@
+// Place all the styles related to the dashboard::startups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.startup_btn_step {
+  background-color: #25cc77;
+  border-radius: 5px;
+  min-width: 197px;
+  color: #fff;
+  font-family: "SFUIDisplayBold", sans-serif;
+  font-size: 16px;
+  line-height: 19px;
+  padding: 17px;
+}
+.startup_btn_step:focus,
+.startup_btn_step:hover {
+  color: #fff;  
+}
+.startup_btn_step:hover {
+  opacity: .8;
+}
+
+.startup_btn_step.btn_lg {
+  line-height: 18px;
+  padding: 20px 17px;
+  min-width: 257px;
+}
+.some-transparency,
+.detail_list > li > span.some-transparency {
+  opacity: 0.75;
+  font-family: "Lato", sans-serif;
+}
+
+.mark_span.black {
+  color: #000;
+}
+
+#startup_website {
+  padding-left: 65px;
+}

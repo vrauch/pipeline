@@ -1,0 +1,12 @@
+Hello!
+<br><br>
+You have been invited to join <%= @invite.brand.title %> Pipeline<% if @invite.brand_super? %> as a super user<% end %>. Please click the link  below to complete your
+registration.
+<br><br>
+<%= link_to 'Complete Your Registration', new_user_registration_url(invite_token: @invite.token) %>
+<br><br>
+Link not working? Click here: <%= url_for new_user_registration_url(invite_token: @invite.token) %>
+<br><br>
+Thank you,
+<br><br>
+The Pipeline Team

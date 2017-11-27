@@ -1,0 +1,13 @@
+<% if @requests.any? %>
+  <div class="head_content hidden-xs">
+    <h1 class="h1_title">Evol8tion Support</h1>
+    <div class="subtitle"> Listed below are answers to questions asked of the Evol8tion team.</div>
+  </div>
+  <div class="accordion_holder accordion_holder_padd">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <%= render @requests %>
+    </div>
+  </div>
+<% else %>
+  <%= render 'empty_requests' %>
+<% end %>

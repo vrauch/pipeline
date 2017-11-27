@@ -1,0 +1,11 @@
+<div id="collapse<%= cabinet_question.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= cabinet_question.id %>">
+  <div class="panel-body">
+    <%= form_for cabinet_question, url: startup_profile_question_path(@startup, cabinet_question), remote: true do |f| %>
+      <%= f.fields_for :answer, cabinet_question.build_answer do |a| %>
+        <%= a.text_area :body, class: 'form-control request_field', placeholder: 'Add your response here' %>
+        <%= f.hidden_field :answered, value: true %>
+        <%= a.submit "Send", class:'btn btn_add disabled' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

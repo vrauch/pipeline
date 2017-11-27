@@ -1,0 +1,68 @@
+<% startup = startup.decorate %>
+<div id="startup_<%= startup.id %>">
+  <div class="box_row clearfix <%= startup.elevator_pitch.blank? ? 'no_hover' : '' %>">
+    <%= render '/startups/blank_list_item' %>
+    <div class="box item_box">
+      <span class="list_item_detail">
+        <span class="brand_img_holder">
+          <%= startup.logo.present? ? image_tag(startup.logo.thumb_small, size: 50) : startup.initial %>
+        </span>
+        <% if current_user.try(:evo_team?) && !startup.confirmed? %>
+          <span class="item_label">!</span>
+        <% end %>
+        <span class="list_name <%= startup.website.present? ? '' : 'centered' %>">
+          <% if startup.owner || startup.prefilled_brief %>
+            <%= link_to startup.title, profile_startup_path(startup)  %>
+          <% else %>
+            <%= link_to startup.title, startup_path(startup), remote: true  %>
+          <% end %>
+        </span>
+        <span class="list_site"><%= startup.website %></span>
+      </span>
+    </div>
+    <div class="box hidden_box hidden-xs">
+      <div class="hidden_box_left"><%= startup.location? ? startup.location : "&nbsp;".html_safe %></div>
+      <% if current_user.evo_team? %>
+        <div class="hidden_box_right"><%= startup.created_at.strftime("%m/%d/%Y") %></div>
+      <% else %>
+        <div class="hidden_box_right">
+          <% if startup.brand_startups.any? %>
+            <% brand = startup.brand_startups.find_by(brand_id: current_user.brand.id) %>
+            <%= brand.created_at.strftime("%m/%d/%Y") if brand %>
+          <% else %>
+            <%= startup.created_at.strftime("%m/%d/%Y") %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="list_hovered_text">
+        <%= startup.elevator_pitch %>
+      </div>
+    </div>
+
+    <div class="box hidden-xs">
+      <span class="list_label <%= startup.type_of_startup(current_user)[:html_class] %>">
+        <%= startup.type_of_startup(current_user)[:value] %>
+      </span>
+      <%# render 'startups/startup_types', startup: startup %>
+    </div>
+
+    <div class="box text-center visible-lg">
+      <span class="dropdown custom_dropdown with_triangle">
+        <span class="tags">
+          <i class="icon icon_listings"></i><%= @startup_tags[startup.id].present? ? @startup_tags[startup.id][:tags_count] : 0 %>
+        </span>
+        <span id="tags_container_for_startup_<%= startup.id %>">
+          <% if @startup_tags[startup.id].present? %>
+            <%= render partial: 'tags/tags_holder', locals: { tags: @startup_tags[startup.id][:tags] } %>
+          <% end %>
+        </span>
+      </span>
+    </div>
+    <div class="box links_box text-center hidden-xs">
+      <div class="slide_icons xs_count">
+        <%= render '/startups/actions', startup: startup.decorate %>
+      </div>
+      <a href="#" class="dots_link"><i class="icon icon_dots"></i></a>
+    </div>
+  </div>
+</div>

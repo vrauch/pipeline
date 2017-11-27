@@ -1,0 +1,6 @@
+<%= f.fields_for :brand_questions do |brand_question| %>
+  <%= render 'brand_question_fields', f: brand_question %>
+<% end %>
+<div class="links add_question_button">
+  <%= link_to_add_association '+ Add more question', f, :brand_questions, class: 'btn btn-default' %>
+</div>

@@ -1,0 +1,22 @@
+<%= render 'layouts/startup/sidebar_details' %>
+<div class="content_sm content_pt">
+  <%= render 'layouts/startup/top_menu' %>
+  <% if @activities.empty? %>
+    <div class="empty_block empty_block_pt">
+      <i class="icon icon_user_round"></i>
+      <h1 class="empty_title">No Activity Yet!</h1>
+      <p class="empty_text">All activity will appear here.</p>
+    </div>
+  <% else %>
+    <div class="head_content hidden-xs">
+      <h1 class="h1_title">Startup Activity</h1>
+      <div class="subtitle">All startup activity including updates and edits.</div>
+    </div>
+
+    <div class="accordion_holder">
+      <div class="panel-group" id="accordion0" role="tablist" aria-multiselectable="true">
+        <%= render partial:'activities/activity', collection: @activities, locals: { accordion_id: 0 } %>
+      </div>
+    </div>
+  <% end %>
+</div>

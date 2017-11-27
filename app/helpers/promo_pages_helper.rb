@@ -1,0 +1,2 @@
+module PromoPagesHelper
+end

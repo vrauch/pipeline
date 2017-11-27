@@ -1,0 +1,2 @@
+module BrandStartupsHelper
+end

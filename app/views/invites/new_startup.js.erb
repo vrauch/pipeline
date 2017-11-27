@@ -1,0 +1,4 @@
+container = $(".invite_startup.clicked");
+if (container.find(".tip_holder").length == 0) {
+  container.addClass('visible').append("<%= j render 'new_startup' %>");
+}

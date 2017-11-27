@@ -1,0 +1,15 @@
+<div id="noteComment<%= comment.id %>" class="answer_block">
+  <div class="answer_title">COMMENT</div>
+  <div class="panel_info_name_date clearfix">
+    <span class="panel_info_name">By <%= comment.author.full_name %></span>
+    <span class="panel_info_date"><%= comment.added_at %></span>
+  </div>
+  <% if can?(:update, comment) %>
+    <%= link_to 'Edit', edit_note_comment_path(comment, note_id: comment.note.id),
+       class: 'edit_panel_item', remote: true %>
+   <% end %>
+  <div class="answer_text">
+    <%= auto_link(comment.body, html: { target: '_blank', class: 'pink_link' }) %>
+  </div>
+  <span class="panel_img_holder"><%= comment.author_photo %></span>
+</div>

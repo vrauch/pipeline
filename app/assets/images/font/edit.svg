@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>edit</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Basics" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Tool-Bar-Icons" transform="translate(-1015.000000, -102.000000)" fill="#FFFFFF">
+            <g id="Toolbar" transform="translate(992.000000, 100.000000)">
+                <g id="edit" transform="translate(23.000000, 2.000000)">
+                    <path d="M12.8328571,0.445714286 C12.5357143,0.148571429 12.1271429,0 11.7371429,0 C11.3471429,0 10.9385714,0.148571429 10.6414286,0.445714286 L2.61857143,8.46857143 L7.00142857,12.8514286 L15.0242857,4.82857143 C15.6371429,4.21571429 15.6371429,3.25 15.0242857,2.63714286 L12.8328571,0.445714286 L12.8328571,0.445714286 Z" id="Shape"></path>
+                    <path d="M5.85,13.8914286 L1.57857143,9.62 L4.4408921e-16,15.47 L5.85,13.8914286 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

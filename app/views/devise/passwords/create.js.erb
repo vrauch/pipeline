@@ -1,0 +1,5 @@
+<% if @successfully_sent %>
+  $("#reset-password").html("<%= j(render('done')) %>")
+<% else %>
+  $("#reset-password").html("<%= j(render('new')) %>")
+<% end %>

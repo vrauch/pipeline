@@ -1,0 +1,5 @@
+<% if @act.try(:diagnostic_type) %>
+  <%= render 'users/diagnostic' %>
+<% else %>
+  <%= render 'users/empty_diagnostic' %>
+<% end %>

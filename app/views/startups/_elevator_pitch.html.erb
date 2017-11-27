@@ -1,0 +1,360 @@
+<div class="text_block text_block_padd">
+  <h3 class="h3_title">Elevator Pitch</h3>
+  <% if @startup.elevator_pitch? %>
+    <%= auto_link(@startup.elevator_pitch, html: { target: '_blank', class: 'pink_link' }) %>
+  <% else %>
+    <div class='light_text'>none specified</div>
+  <% end %>
+</div>
+  <div class="text_block user_details_holder text_block_padd">
+    <h3 class="h3_title">Founders</h3>
+      <% if @startup.founders.any? %>
+        <div class="row">
+          <% @startup.founders.each do |founder| %>
+            <div class="col-md-4 col-sm-6">
+              <div class="user_details">
+                <% if current_user.brand_team? %>
+                  <div class="user_details_name"><%= founder.name %></div>
+                <% else  %>
+                  <div class="user_details_img">
+                    <%= image_tag founder.avatar.present? ? founder.avatar.thumb_small : "layout/user_mask.png", alt:'founder-avatar', size: 50 %>
+                  </div>
+                  <div class="user_details_info">
+                    <div class="user_details_name"><%= founder.name %></div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class='light_text'>none specified</div>
+      <% end %>
+  </div>
+<div class="text_block text_block_padd">
+  <h3 class="h3_title">Problem Startup Solves</h3>
+  <% if @summary && @summary[:problem_startup_solves].try(:present?) %>
+    <%= auto_link(@summary[:problem_startup_solves], html: { target: '_blank', class: 'pink_link' }) %>
+  <% else %>
+    <div class="light_text">none specified</div>
+  <% end %>
+</div>
+<% if @startup.try(:pdf_documents).try(:not_tmp).try(:any?) %>
+  <div class="text_block text_block_padd">
+    <h3 class="h3_title">Overview Deck</h3>
+    <div class="files_list">
+      <div class="row">
+        <% @startup.pdf_documents.not_tmp.each do |pdf| %>
+          <div class="col-sm-6">
+            <div class="file_link_wrap">
+              <%= link_to pdf.file.url, class: 'file_link', target: '_blank' do %>
+                <i class="icon icon_upload_file"></i><%= pdf.original_filename %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="text_block text_block_padd">
+  <div class="row">
+
+
+    <div class="col-sm-6">
+      <h3 class="h3_title">Verticals</h3>
+      <ul class="icon_list sm_size clearfix">
+      <% if @summary && @summary[:verticals].try(:present?) %>
+        <% @summary[:verticals].each do |vertical| %>
+          <li>
+            <%= content_tag(:i, '', class: "icon icon__#{vertical[:icon_name]}") %>
+            <%= vertical[:content] %>
+          </li>
+        <% end %>
+      <% else %>
+        <div class="light_text">none specified</div>
+      <% end %>
+      </ul>
+    </div>
+    <div class="col-sm-6">
+      <h3 class="h3_title">Tech Sectors</h3>
+      <ul class="icon_list clearfix">
+        <% if @summary && @summary[:tech_sectors].try(:present?) %>
+          <% @summary[:tech_sectors].each do |category| %>
+            <li>
+              <%= content_tag(:i, '', class: "icon icon__#{category[:icon_name]}") %>
+              <%= category[:content] %>
+            </li>
+          <% end %>
+        <% else %>
+          <div class="light_text">none specified</div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="text_block text_block_padd one_title">
+  <h3 class="h3_title">Target Audience</h3>
+    <% if @summary && @summary[:target_audience].try(:present?) %>
+      <div class="row">
+        <div class="col-sm-6">
+          <% @summary[:target_audience].each_slice( (@summary[:target_audience].size/2.0).round ).to_a[0].try(:each) do |audience| %>
+            <ul class="icon_list clearfix">
+              <li>
+                <%= content_tag(:i, '', class: "icon icon__#{audience[:icon_name]}") %>
+                <%= audience[:content] %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+        <div class="col-sm-6">
+          <% @summary[:target_audience].each_slice( (@summary[:target_audience].size/2.0).round ).to_a[1].try(:each) do |audience| %>
+            <ul class="icon_list clearfix">
+              <li>
+                <%= content_tag(:i, '', class: "icon icon__#{audience[:icon_name]}") %>
+                <%= audience[:content] %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+</div>
+<div class="text_block text_block_padd one_title">
+  <h3 class="h3_title">Development Stage</h3>
+    <% if @summary && @summary[:development_stage].try(:present?) %>
+      <div class="row">
+        <div class="col-sm-6">
+          <% @summary[:development_stage].each_slice( (@summary[:development_stage].size/2.0).round ).to_a[0].try(:each) do |stage| %>
+            <ul class="icon_list clearfix">
+              <li>
+                <%= content_tag(:i, '', class: "icon icon_gear") %>
+                <%= simple_format(stage[:content]) %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+        <div class="col-sm-6">
+          <% @summary[:development_stage].each_slice( (@summary[:development_stage].size/2.0).round ).to_a[1].try(:each) do |stage| %>
+            <ul class="icon_list clearfix">
+              <li>
+                <%= content_tag(:i, '', class: "icon icon_#{stage[:icon_name]}") %>
+                <%= simple_format(stage[:content]) %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+</div>
+<div class="text_block text_block_padd one_title">
+  <h3 class="h3_title">Funding Stage</h3>
+    <% if @summary && @summary[:funding_stage].try(:present?) %>
+      <div class="row">
+        <div class="col-sm-6">
+          <% @summary[:funding_stage].each_slice( (@summary[:funding_stage].size/2.0).round ).to_a[0].try(:each) do |stage| %>
+            <ul class="icon_list clearfix">
+              <li>
+                <%= content_tag(:i, '', class: "icon icon_#{stage[:icon_name]}") %>
+                <%= stage[:content] %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+        <div class="col-sm-6">
+          <% @summary[:funding_stage].each_slice( (@summary[:funding_stage].size/2.0).round ).to_a[1].try(:each) do |stage| %>
+            <ul class="icon_list clearfix">
+              <li>
+                <%= content_tag(:i, '', class: "icon icon_#{stage[:icon_name]}") %>
+                <%= stage[:content] %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+</div>
+<div class="text_block text_block_padd">
+  <h3 class="h3_title">Total Funding</h3>
+    <% if @summary && @summary[:total_funding].try(:present?) %>
+      <%= number_to_currency(@summary[:total_funding], precision: 0) %>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+</div>
+
+<div class="text_block text_block_padd">
+  <h3 class="h3_title">Accelerator Program</h3>
+  <% if @summary && @summary[:accelerator_program].try(:present?) %>
+    <% @summary[:accelerator_program].each do |accelerator_program| %>
+      <ul class="icon_list clearfix">
+        <li><i class="icon icon_pin"></i><%= accelerator_program[:content] %></li>
+      </ul>
+    <% end %>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+</div>
+
+<div class="text_block text_block_padd">
+  <h3 class="h3_title">Revenue Model</h3>
+    <% if @summary && @summary[:revenue_model].try(:present?) %>
+      <%= auto_link(@summary[:revenue_model], html: { target: '_blank', class: 'pink_link' }) %>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+</div>
+
+<div class="text_block text_block_padd">
+  <h3 class="h3_title">Market Strategy</h3>
+    <% if @summary && @summary[:market_strategy].try(:present?) %>
+      <%= auto_link(@summary[:market_strategy], html: { target: '_blank', class: 'pink_link' }) %>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+</div>
+
+<div class="text_block text_block_padd">
+  <h3 class="h3_title">Competitive Differentiation</h3>
+  <% if @summary && @summary[:competitive_differentiation].try(:present?) %>
+    <%= auto_link(simple_format(@summary[:competitive_differentiation]), html: { target: '_blank', class: 'pink_link' }) %>
+  <% else %>
+    <div class="light_text">none specified</div>
+  <% end %>
+</div>
+
+<div class="text_block text_block_padd one_title">
+  <h3 class="h3_title">Roadmap</h3>
+    <% if @summary && @summary[:roadmap].try(:present?)  %>
+      <div class="row">
+        <div class="col-sm-6">
+          <% @summary[:roadmap].each_slice( (@summary[:roadmap].size/2.0).round ).to_a[0].try(:each) do |roadmap| %>
+            <ul class="icon_list clearfix">
+              <li>
+                <%= content_tag(:i, '', class: "icon icon_#{roadmap[:icon_name]}") %>
+                <%= roadmap[:content] %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+        <div class="col-sm-6">
+          <% @summary[:roadmap].each_slice( (@summary[:roadmap].size/2.0).round ).to_a[1].try(:each) do |roadmap| %>
+            <ul class="icon_list clearfix">
+              <li>
+                <%= content_tag(:i, '', class: "icon icon_#{roadmap[:icon_name]}") %>
+                <%= roadmap[:content] %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+</div>
+
+<div class="text_block text_block_padd">
+  <h3 class="h3_title">Roadmap Details</h3>
+  <% if @summary && @summary[:roadmap] && @summary[:roadmap].first[:detail].try(:present?) %>
+    <%= auto_link(@summary[:roadmap].first[:detail], html: { target: '_blank', class: 'pink_link' }) %>
+  <% else %>
+    <div class="light_text">none specified</div>
+  <% end %>
+</div>
+<% unless current_user.brand_team? %>
+  <div class="text_block text_block_padd">
+    <h3 class="h3_title">Brand Experience</h3>
+    <% if @summary && @summary[:brand_experience].try(:present?) %>
+      <%= auto_link(@summary[:brand_experience], html: { target: '_blank', class: 'pink_link' }) %>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+  </div>
+
+  <div class="text_block text_block_padd">
+    <h3 class="h3_title">Brand Soulmates</h3>
+    <% if @summary && @summary[:brand_soulmates].try(:present?) %>
+      <%= auto_link(@summary[:brand_soulmates], html: { target: '_blank', class: 'pink_link' }) %>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+  </div>
+
+  <div class="text_block text_block_padd one_title">
+    <h3 class="h3_title">Brand Collaboration</h3>
+      <% if @summary && @summary[:brand_collaboration].try(:present?) %>
+        <div class="row">
+          <div class="col-sm-6">
+            <% @summary[:brand_collaboration].each_slice( (@summary[:brand_collaboration].size/2.0).round ).to_a[0].try(:each) do |stage| %>
+              <ul class="icon_list clearfix">
+                <li>
+                  <%= content_tag(:i, '', class: "icon icon_#{stage[:icon_name]}") %>
+                  <%= simple_format(stage[:content]) %>
+                </li>
+              </ul>
+            <% end %>
+          </div>
+          <div class="col-sm-6">
+            <% @summary[:brand_collaboration].each_slice( (@summary[:brand_collaboration].size/2.0).round ).to_a[1].try(:each) do |stage| %>
+              <ul class="icon_list clearfix">
+                <li>
+                  <%= content_tag(:i, '', class: "icon icon_#{stage[:icon_name]}") %>
+                  <%= simple_format(stage[:content]) %>
+                </li>
+              </ul>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="light_text">none specified</div>
+      <% end %>
+  </div>
+<% end %>
+
+<% unless current_user.brand_team? %>
+
+  <div class="text_block text_block_padd">
+    <h3 class="h3_title">Referral Information</h3>
+    <% if @summary && @summary[:referral_information].try(:present?) %>
+      <div class="text_mt">
+        <%= auto_link(@summary[:referral_information], html: { target: '_blank', class: 'pink_link' }) %>
+      </div>
+    <% else %>
+      <div class="light_text">none specified</div>
+    <% end %>
+  </div>
+
+  <div class="text_block text_block_padd">
+    <h3 class="h3_title">Evol8tion is always working hard to put startups like
+      you in front of brands! By keeping this box checked, you are giving us
+      permission to share the information in this profile directly with our
+      brand clients
+    </h3>
+    <%= @startup.share_info ? "Yes" : "No" %>
+  </div>
+
+  <div class="text_block text_block_padd">
+    <h3 class="h3_title">I would like to receive emails about Evol8tion’s events,
+      partnerships or news.
+    </h3>
+    <%= @startup.receive_emails ? "Yes" : "No" %>
+  </div>
+<% end %>
+
+<% unless @promo_questions.blank? %>
+  <% @promo_summary.keys.each do |promo_page_id| %>
+    <%= render 'promo_answers', questions: @promo_questions.where(promo_page_id: promo_page_id), summary: @promo_summary[promo_page_id], promo_page_id: promo_page_id %>
+  <% end %>
+<% end %>
+
+<% unless @brand_questions.blank? %>
+  <% @brand_summary.keys.each do |brand_id| %>
+    <%= render 'brand_answers', questions: @brand_questions.where(brand_id: brand_id), summary: @brand_summary[brand_id], brand_id: brand_id %>
+  <% end %>
+<% end %>

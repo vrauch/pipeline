@@ -1,0 +1,11 @@
+<div class="dashboard__pane--activity_empty <%= current_user.evo_team? ? '__tall' : '' %>">
+  <i class="icon icon_add_user_alt"></i>
+  <% if current_user.evo_team? %>
+    <strong>Welcome to pipeline</strong>
+  <% else %>
+    <strong>3 Things To Do:</strong>
+    <p style="padding:10px 20px 10px 20px; text-align: justify;"><b>1. Check in regularly. </b> You may be surprised with what's in store.</p>
+    <p style="padding:10px 20px 10px 20px; text-align: justify;"><b>2. Don't let the resource stand idle. </b> When you meet an interesting startup, make sure they get added to your database.</p>
+    <p style="padding:10px 20px 10px 20px; text-align: justify;"><b>3. Don't be afraid to ask. </b> Whether requesting a scorecard or getting in touch with a founder, you're always a brainstorm away from greatness.</p>
+  <% end %>
+</div>

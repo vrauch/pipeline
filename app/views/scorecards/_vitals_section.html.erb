@@ -1,0 +1,31 @@
+<div class="preview_block preview_block_vitals">
+  <h3 class="bordered_title">VITALS</h3>
+  <div class="row">
+    <div class="col-sm-3 preview_block_left">
+      <%= info_item(f, :location, 'LOCATION') %>
+    </div>
+    <div class="col-sm-9 preview_block_right">
+      <%= info_item(f, :fun_stage, 'FUNDING STAGE') %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3 preview_block_left">
+      <%= info_item(f, :date_founded, 'DATE FOUNDED', nil, { small_field: true }) %>
+    </div>
+    <div class="col-sm-9 preview_block_right">
+      <%= info_item(f, :brand_experience, 'BRAND EXPERIENCE') %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 preview_block_left">
+      <%= info_item(f, :dev_stage, 'DEVELOPMENT STAGE', nil, { small_field: true }) %>
+    </div>
+    <div class="col-sm-3 preview_block_right">
+      <%= info_item(f, :macro_trends, @scorecard.scorecard_template.macro_categories_title) %>
+    </div>
+    <div class="col-sm-6">
+      <%= info_item(f, :micro_trends, @scorecard.scorecard_template.micro_categories_title) %>
+    </div>
+  </div>
+</div>

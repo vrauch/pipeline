@@ -1,0 +1,74 @@
+<% if @scorecard_templates.nil? || @scorecard_templates.empty? %>
+  <%= render 'scorecards/empty_state' %>
+<% else %>
+  <div class="list_holder">
+    <div class="boxer boxer_cards">
+      <div class="box_row clearfix box_head hidden-xs">
+        <div class="box item_box">FOLDER</div>
+        <div class="box text-center hidden-xs">TYPE</div>
+        <div class="box text-center hidden-xs">SCORECARDS</div>
+        <div class="box links_box text-center">ACTIONS</div>
+        <div class="box arrow_box"></div>
+      </div>
+
+      <div class="box_row clearfix">
+        <div class="box item_box">
+          <span class="list_item_detail">
+            <span class="brand_img_holder">
+              <%= image_tag 'drafts.png' %>
+            </span>
+            <span class="list_name centered">
+              <a href="#boxer_collapse<%= @drafts.object_id %>" data-toggle="collapse" aria-expanded="false" aria-controls="boxer_collapse1">
+                Drafts
+              </a>
+            </span>
+          </span>
+        </div>
+        <div class="box text-center hidden-xs"><%= startup_model_for_drafts(@drafts) %></div>
+        <div class="box text-center hidden-xs"><%= @drafts.size %></div>
+        <%= render 'folder_actions' %>
+        <div class="box arrow_box"><a href="#boxer_collapse<%= @drafts.object_id %>" class="box_link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="boxer_collapse<%= @drafts.object_id %>"><i class="icon icon_arrow_down"></i></a></div>
+      </div>
+
+
+      <div class="collapse" id="boxer_collapse<%= @drafts.object_id %>">
+        <% if @drafts && @drafts.any? %>
+          <%= render 'scorecards/list', scorecards: @drafts %>
+        <% else %>
+          <%= render 'scorecards/empty_drafts' %>
+        <% end %>
+      </div>
+
+      <% @scorecard_templates.each do |scorecard_template| %>
+
+        <div class="box_row clearfix">
+          <div class="box item_box">
+            <span class="list_item_detail">
+              <span class="brand_img_holder">
+                <% if scorecard_template.get_logo %>
+                  <%= image_tag scorecard_template.get_logo.try(:thumb_medium) %>
+                <% else %>
+                  <%= scorecard_template.initial %>
+                <% end %>
+              </span>
+              <span class="list_name centered">
+                <a href="#boxer_collapse<%= scorecard_template.id %>" data-toggle="collapse" aria-expanded="false" aria-controls="boxer_collapse1">
+                  <%= scorecard_template.title %>
+                </a>
+              </span>
+            </span>
+          </div>
+          <div class="box text-center hidden-xs"><%= scorecard_template.startup_model.try(:upcase) %></div>
+          <div class="box text-center hidden-xs"><%= scorecard_template.scorecards.size %></div>
+          <%= render 'folder_actions', scorecard_template: scorecard_template %>
+          <div class="box arrow_box"><a href="#boxer_collapse<%= scorecard_template.id %>" class="box_link collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="boxer_collapse1"><i class="icon icon_arrow_down"></i></a></div>
+        </div>
+
+        <div class="collapse" id="boxer_collapse<%= scorecard_template.id %>">
+          <%= render 'scorecards/list', scorecards: scorecard_template.scorecards %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+<% end %>

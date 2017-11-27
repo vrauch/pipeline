@@ -1,0 +1,10 @@
+if (!$('#search-restore').length) {
+  $('.content').after("<div id='search-restore' class='hidden'></div>");
+  $('#search-restore').html($('.top_bar').nextAll());
+}
+$('.top_bar').nextAll().remove();
+$('#quick-search-btn').removeClass('btn_load');
+$('.content').append("<%= j(render 'quick') %>");
+$.controlMethods.removePlaceholder();
+$('.top_bar').addClass('active');
+$('.toggle_search').trigger('click');

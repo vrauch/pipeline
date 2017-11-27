@@ -1,0 +1,146 @@
+<%= render 'startups/steps/top_panel' %>
+
+<% if @startup.new_record? %>
+  <h1 class="h1_title">Create Startup Profile</h1>
+  <div class="subtitle">Complete as many fields as possible to generate a robust startup profile.</div>
+<% else %>
+  <h1 class="h1_title">Edit Startup Profile</h1>
+<% end %>
+
+<div class="grid_padding_sm form_container">
+  <div class="row">
+    <div class="col-xs-12 block_for_upload">
+      <div class="default_upload_file_holder">
+        <div class="default_upload_file lg_size apsolute <%= @startup.active_class? %>">
+          <div class="inner startup-logo-preview-image" style="<%= @startup.background %>">
+            <%= f.file_field :logo, class: 'upload_img cover-image-input', accept: 'image/png,image/jpeg' %>
+            <%= f.hidden_field :logo_cache %>
+            <%= f.hidden_field :prefilled_brief, value: true %>
+          </div>
+          <div class="progress_holder" id="upload_step" style="display:none;">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                <span class="sr-only"></span>
+              </div>
+            </div>
+            <div class="progress_text">uploading</div>
+          </div>
+          <div class="upload_text visible_before"><i class="icon icon_arrow_up_round"></i>
+            ADD LOGO
+          </div>
+          <div class="upload_text visible_after"><i class="icon icon_arrow_up_round"></i>
+            CHANGE IMAGE
+          </div>
+        </div>
+        <!--<div class="change_img_text" id="info_logo">-->
+          <!--<span>Change image</span>-->
+        <!--</div>-->
+      </div>
+      <div class="form-group">
+        <%= f.text_field :title, class: 'form-control', placeholder: 'Enter Startup Name*' %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :location, class: 'form-control', placeholder: 'Location (City, State)*' %>
+      </div>
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="choose_date choose_date_mb clearfix">
+            <span class="choose_date_text">DATE <br>FOUNDED</span>
+            <div class="custom_select custom_date_select grid_select sm_size pull-left">
+              <%= f.date_select :month, { use_month_numbers: true, discard_year: true,
+                                          discard_day: true, include_blank: true,
+                                          selected: f.object.date_founded },
+                                { class:'chosen-select', 'data-placeholder' => 'MM*' } %>
+            </div>
+            <div class="custom_select custom_date_select pull-right">
+              <%= f.date_select :year, { discard_month: true, start_year: Date.today.year, end_year: 1980,
+                                         discard_day: true, include_blank: true,
+                                         selected: f.object.date_founded },
+                                { class:'chosen-select', 'data-placeholder' => 'YYYY*' } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row_mt_sm">
+    <div id="founders" class="col-sm-6 founders_holder">
+      <label for="founders" class="label_relative">FOUNDERS</label>
+      <%= f.fields_for :founders, @startup.founders.any? ? @startup.founders : @startup.founders.build do |founder| %>
+        <%= render '/startups/founder_fields', f: founder %>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <div class="no_label_mt">
+        <%= link_to_add_association '+ Add more founders', f, :founders,
+                                    { partial: '/startups/founder_fields',
+                                      class: 'add_more_link',
+                                      'data-association-insertion-method' => 'append',
+                                      'data-association-insertion-node' => '#founders' } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row_mt_sm">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="details">DETAILS</label>
+        <%= f.text_area :elevator_pitch, class: 'form-control', placeholder: 'Elevator Pitch*', style:'height: 91px;' %>
+      </div>
+    </div>
+    <div class="col-xs-6 form-group_mb">
+      <div class="form-group with_mark">
+        <%= f.text_field :website, id: 'startup_website', class:'form-control', placeholder: 'www.website.com' %>
+        <span class="mark_span <%= 'black' unless f.object.website.blank? %>">http://</span>
+      </div>
+      <div class="form-group with_mark">
+        <%= f.text_field :twitter, id:'details', class: 'form-control twitter-input', placeholder: 'Twitter Username' %>
+        <span class="mark_span <%= 'black' unless f.object.twitter.blank? %>">@</span>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :video_url, class: 'form-control', placeholder: 'Video URL' %>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group">
+        <%= f.text_area :description, class: 'form-control textarea_md_size', placeholder: 'Startup Description' %>
+      </div>
+    </div>
+  </div>
+
+  <% if @startup.persisted? %>
+    <div id="startupPdfUploadCont" class="upload_block">
+      <%= render 'startups/setup-profile/upload_pdf' %>
+    </div>
+  <% end %>
+
+  <div class="row row_mt_sm">
+    <div class="col-xs-6">
+      <div class="form-group">
+        <label for="history">CONNECTION HISTORY</label>
+        <%= f.text_field :connection_source, class:'form-control', placeholder:'Source (example: event, friend, news...)' %>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group no_label_mt">
+        <%= f.text_field :outreach_status, class:'form-control', placeholder: 'Status (example: met for coffee, sent email)' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row_mt_sm">
+    <div class="col-xs-12">
+      <%= render 'startups/point_of_contact', f: f %>
+    </div>
+  </div>
+
+  <% if can?(:destroy, @startup) && @startup.persisted? %>
+    <%= link_to 'Delete Startup', delete_startup_path(@startup),
+                class: 'btn btn_bordered_const btn_bordered_red btn_delete_startup md_size',
+                remote: true %>
+  <% end %>
+
+</div>
+
+<%= render 'startups/steps/control_btns', f: f %>

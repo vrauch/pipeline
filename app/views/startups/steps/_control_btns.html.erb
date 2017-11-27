@@ -1,0 +1,24 @@
+<% if @startup.persisted? %>
+  <div class="bot_control_btns">
+    <div class="row">
+      <div class="col-xs-12 text-center more_control_btns">
+        <%= render 'startups/steps/btns/back_cancel', f: f %>
+        <%= render 'startups/steps/btns/save', f: f %>
+        <% if @startup.prefilled_brief? && !@startup.last_step? %>
+          <%= render 'startups/steps/btns/next_add', f: f %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="bot_control_btns">
+    <div class="row">
+      <div class="col-xs-6 left text-right">
+        <%= render 'startups/steps/btns/back_cancel', f: f %>
+      </div>
+      <div class="col-xs-6 right text-left">
+        <%= render 'startups/steps/btns/next_add', f: f %>
+      </div>
+    </div>
+  </div>
+<% end %>

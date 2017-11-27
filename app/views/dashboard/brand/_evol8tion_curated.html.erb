@@ -1,0 +1,17 @@
+<div class="dashboard__pane--logos">
+  <%= link_to 'view all', startups_path(type: :evolution), class: 'dashboard__pane--all' %>
+  <h4 class="dashboard__pane--title clearfix"><span class="num"><%= @startups_evolution.total_count %></span><span>EVOL8TION CURATED<br>LATEST STARTUPS</span></h4>
+  <div class="dashboard__logos clearfix">
+    <% @startups_evolution.each do |startup| %>
+      <%= link_to startup.owner ? profile_startup_path(startup) : startups_path, class: startup.logo.present? ? '' : 'dashboard_logo_empty' do %>
+        <%= startup.logo.present? ? image_tag(startup.logo.thumb_small, width: 56) : startup.initial %>
+        <%= render 'startups/startup_info_tip', startup: startup, pushed_time: true %>
+      <% end %>
+    <% end %>
+    <% if @startups_evolution.total_count > 4 %>
+      <%= link_to startups_path(type: :evolution) do %>
+        <span>+ <%= @startups_evolution.total_count - 4 %></span>
+      <% end %>
+    <% end %>
+  </div>
+</div>

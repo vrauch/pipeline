@@ -1,0 +1,11 @@
+$("#brand_questions").html("<%= j(render('new')) %>")
+$(".add_question_button").on('cocoon:before-insert', function(e, insertedItem) {
+  var question_data_id;
+  question_data_id = insertedItem.find("input.add_guestion").attr("id");
+  insertedItem.find("input.question_data_id").val(question_data_id);
+  insertedItem.attr('question-data-id', question_data_id);
+});
+$('.question_remove:lt(2)').remove();
+<% if @brand.errors.empty? %>
+  $("#created-questions").html("<%= j(render('created_questions', edit: true)) %>");
+<% end %>

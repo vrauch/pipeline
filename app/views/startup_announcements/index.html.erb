@@ -1,0 +1,10 @@
+<div class="startup_content">
+  <div class="container_md">
+    <h3 class="simple_title">
+      Latest news from M+MV
+    </h3>
+    <%= render partial: '/startup_announcements/announcement', collection: @announcements %>
+    <%= paginate @announcements %>
+  </div>
+</div>
+

@@ -1,0 +1,5 @@
+<% if user.instance_of?(Invite) %>
+  <%= render 'users/invited_user', invite: user %>
+<% else %>
+  <%= render 'users/existing_user', user: user %>
+<% end %>

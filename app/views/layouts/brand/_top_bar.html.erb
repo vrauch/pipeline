@@ -1,0 +1,11 @@
+<%= active_link_to brand_path(@brand.id), wrap_tag: :li, active: :exact do %>
+  <span class="<%= 'pointed' if @new_requests %>">REQUESTS</span>
+<% end %>
+<%= active_link_to 'BRIEF', brief_brand_path(@brand.id), wrap_tag: :li, active: :exact %>
+<%= active_link_to 'STARTUPS', brand_startups_path(@brand.id), wrap_tag: :li, active: :exact %>
+<%= active_link_to 'USERS', brand_users_path(@brand.id), wrap_tag: :li, active: :exact %>
+<%= active_link_to promo_pages_brand_path(@brand.id), wrap_tag: :li, active: :exact do %>
+  LANDING<span class='visible-xs-inline-block'>S</span><span class='hidden-xs'> PAGES</span>
+<% end %>
+<%= active_link_to 'SETTINGS', edit_brand_path(@brand.id), wrap_tag: :li, active: :exact, class: 'edit_brand hidden-xs', remote: true, data: { panel: 'info' } %>
+

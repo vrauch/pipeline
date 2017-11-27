@@ -1,0 +1,20 @@
+<div class="modal fade modal_small" tabindex="-1" role="dialog" id="<%= modal_id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="alert_content">
+        <i class="icon icon_info"></i>
+        <div class="card_alert_title">
+          <%= title %>
+        </div>
+        <div class="card_alert_text">
+          <%= text %>
+        </div>
+        <div class="modal_btns">
+          <a href="javascript:;" class="btn btn_bordered_const md_size" data-dismiss="modal">Cancel</a>
+          <%= link_to link[:button_text], link[:href], remote: link[:remote], method: link[:method],
+                      class: 'btn btn_default_round btn_red', data: { dismiss: 'modal' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

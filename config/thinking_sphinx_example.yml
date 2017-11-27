@@ -1,0 +1,18 @@
+development:
+  indices_location: /home/evol8tion/db/sphinx/development
+  configuration_file: /home/evol8tion/config/development.sphinx.conf
+  log: /home/evol8tion/log/searchd.log
+  query_log: /home/evol8tion/log/searchd.development-query.log
+  pid_file: /home/evol8tion/log/searchd.development.pid
+  mysql41: 9306
+  min_infix_len: 3
+
+production:
+  indices_location: /home/evol8tion/db/sphinx/production
+  configuration_file: /home/evol8tion/config/production.sphinx.conf
+  log: /home/evol8tion/log/searchd.log
+  query_log: /home/evol8tion/log/searchd.production-query.log
+  pid_file: /home/evol8tion/log/searchd.production.pid
+  mysql41: 9312
+  min_infix_len: 1
+  mem_limit: 512M

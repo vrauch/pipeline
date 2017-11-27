@@ -1,0 +1,17 @@
+<% if @promo_page.current_step == PromoPage::STEPS.first %>
+  $("#promo_page_cover_image_cache").val("<%= @promo_page.cover_image.cache_name %>");
+  $("#promo_page_cover_image").val('');
+<% elsif @promo_page.current_step == PromoPage::STEPS.second %>
+  <% if remotipart_submitted? %>
+    $("#promo_page_<%= @promo_page.current_step %>").html("<%= j "#{render('new')}" %>");
+  <% else %>
+    $("#promo_page_<%= @promo_page.current_step %>").html("<%= j(render 'new') %>");
+  <% end %>
+  $.promoPageMethods.videoBlock();
+<% elsif @promo_page.current_step == PromoPage::STEPS.third %>
+  $("#promo_page_form_image_cache").val("<%= @promo_page.form_image.cache_name %>");
+<% end %>
+$('.cover-image-input').previewImage('.cover-image-preview-image');
+$('.form-image-input').previewImage('.form-image-preview-image');
+$.controlMethods.removePlaceholder();
+<%= render 'partials/disable_spinner' %>

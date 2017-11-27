@@ -1,0 +1,4 @@
+$("#list_startups_table").html("<%= j render partial: '/startups/startup', collection: @startups %>");
+$('#list-startups-paginator').html("<%= j paginate @startups, remote: true %>")
+$('[data-toggle=tooltip]').tooltip();
+$.controlMethods.removePlaceholder();

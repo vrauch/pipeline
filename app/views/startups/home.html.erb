@@ -1,0 +1,31 @@
+<div class="startup_content">
+  <div class="container_md">
+    
+    <div class="accordion_holder md_size">
+      <h3 class="simple_title">
+        <div class="new_questions_count">
+          <%= render 'new_questions_count' %>
+        </div>
+      </h3>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <%= render partial: 'profile_questions/cabinet_question', collection: @profile_questions %>
+      </div>
+      <% if @questions_count > 5 %>
+        <div class="show_all_block">
+          <%= link_to 'SHOW ALL', all_questions_startup_path(@startup), remote: true, class:'btn btn_bordered_const lg_size' %>
+        </div>
+      <% end %>
+      <% if @announcements.any? %>
+        <h3 class="simple_title">
+          Latest news from M+MV
+        </h3>
+        <%= render partial: '/startup_announcements/announcement', collection: @announcements %>
+        <% if @m_mvs > 4 %>
+          <div class="show_all_block">
+            <%= link_to 'SHOW ALL', startup_announcements_path(@startup), class:'btn btn_bordered_const lg_size' %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

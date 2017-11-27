@@ -1,0 +1,5 @@
+el = $("#request-form")
+el.html("<%= j render 'new' %>")
+
+$.controlMethods.showPanel("send_request");
+$(".chosen-select").chosen({disable_search: true});

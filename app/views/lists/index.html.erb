@@ -1,0 +1,34 @@
+<div class="head_content head_content_padd_sm has_btn hidden-xs">
+  <h1 class="h1_title">Startup Lists</h1>
+  <div class="subtitle">Drag and drop to reorder.</div>
+  <%= link_to reset_list_sorting_path, method: :put,
+              class: 'btn btn_open_panel btn_add pull-right btn_loader',
+              id: 'resetSorting' do %>
+    Arrange by Date Added
+    <span class="loader">
+      <span class="circle"></span>
+      <span class="circle"></span>
+      <span class="circle"></span>
+    </span>
+  <% end %>
+</div>
+<div class="cards_holder clearfix">
+  <h2 class="mobile_title visible-xs">Lists</h2>
+  <ul class="card_list sortable-list clearfix">
+    <li>
+      <%= link_to new_list_path, remote: true, class: 'card_item add_card md_size user_card', id:'item_form' do %>
+        <span class="card_middle_block">
+          <i class="icon icon_add_list"></i>
+          <h3 class="card_title">
+            Create New List
+          </h3>
+        </span>
+      <% end %>
+      <div class="add_card_block with_delete" id="new_list_form"></div>
+    </li>
+    <%= render partial: 'list', locals: { list: @favorite_list } %>
+    <ul id="lists" class="card_list clearfix sortable" data-sort-url="<%= sort_lists_url %>">
+      <%= render @lists %>
+    </ul>
+  </ul>
+</div>

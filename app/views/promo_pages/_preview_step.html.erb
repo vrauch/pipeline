@@ -1,0 +1,163 @@
+<div class="promo__wrapper">
+  <% if params[:action] == 'show' || params[:action] == 'preview' %>
+    <%= render 'actions' %>
+  <% else %>
+    <%= render 'actions', f: f %>
+  <% end %>
+
+  <div class="promo__head">
+    <div class="promo__head--bg" style="<%= @promo_page.cover_image.present? ? "background-image: url(#{@promo_page.cover_image.url })" : 'background-color:  #D8D8D8' %>"></div>
+    <div class="container">
+      <div class="promo__head--links">
+        <% unless user_signed_in? %>
+          <%= link_to 'LOG IN', new_session_path(:user, promo_token: @promo_page.token)%>
+        <% end %>
+        <a class="goto_sign_up" href="javascript:;">HOW IT WORKS</a>
+      </div>
+    </div>
+    <div class="promo__head--center">
+      <div class="container">
+        <%= image_tag(@promo_page.brand.logo.url, alt: 'Brand Name', height: 150) %>
+        <h1 class="promo__head--title">
+          <%= @promo_page.name %>
+        </h1>
+        <p class="promo__head--text">
+          <%= @promo_page.intro_message %>
+        </p>
+        <% if user_signed_in? && current_user.startup? %>
+          <%= link_to 'APPLY NOW', new_startup_promo_brief_path(promo_alias: @promo_page.alias),
+                      class: 'btn btn_step btn_lg',
+                      style: @promo_page.brand_color ? "background-color: #{@promo_page.brand_color}" : '' %>
+        <% else %>
+          <%= link_to 'SIGN UP NOW', new_user_registration_path(promo_token: @promo_page[:token]),
+                      class: 'btn btn_step btn_lg',
+                      style: @promo_page.brand_color ? "background-color: #{@promo_page.brand_color}" : '' %>
+        <% end %>
+      </div>
+    </div>
+    <a href="javascript:;" class="icon icon_arrow_down js__smooth__scroll"></a>
+  </div>
+
+  <div class="promo__text">
+    <div class="container">
+      <div class="promo__text--title">
+        <%= @promo_page.inspirational_title %>
+      </div>
+      <div class="promo__text--desc">
+        <%= auto_link(simple_format(@promo_page.description), html: { target: '_blank', style: "color: #{ @promo_page.brand_color? ? @promo_page.brand_color : '#25cc77'}" }) %>
+      </div>
+    </div>
+  </div>
+
+  <% @promo_page.promo_page_details.each do |detail| %>
+    <% if detail.inspire_video? %>
+      <div class="promo__video">
+        <iframe src="<%= VideoInfo.new(detail.inspire_video).embed_url %>"></iframe>
+      </div>
+    <% elsif detail.inspire_image? %>
+      <div class="promo__img" style="background-image: url(<%= detail.inspire_image %>)"></div>
+    <% end %>
+    <div class="promo__text__alt">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="promo__text--title">
+              <%= detail.inspire_title %>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="promo__text--desc">
+              <%= auto_link(simple_format(detail.inspire_description),
+                            html: { target: '_blank', style: "color: #{ @promo_page.brand_color? ? @promo_page.brand_color : '#25cc77'}" }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="promo__form">
+    <div class="promo__form--bg"
+         style="<%= @promo_page.form_image.present? ? "background-image: url(#{@promo_page.form_image})" : 'background-color:  #D8D8D8' %>"></div>
+    <div class="container">
+      <div class="promo__form--title">
+        <%= @promo_page.form_title %>
+      </div>
+      <div class="promo__form--desc">
+        <%= @promo_page.form_copy %>
+      </div>
+      <% if user_signed_in? && current_user.startup? %>
+        <%= link_to 'APPLY NOW', new_startup_promo_brief_path(promo_alias: @promo_page.alias),
+                    class: 'btn btn_step btn_md',
+                    style: @promo_page.brand_color ? "background-color: #{@promo_page.brand_color}" : '' %>
+      <% else %>
+        <%= link_to 'SIGN UP NOW', new_user_registration_path(promo_token: @promo_page[:token]),
+                    class: 'btn btn_step btn_md',
+                    style: @promo_page.brand_color ? "background-color: #{@promo_page.brand_color}" : '' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="promo__steps">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="promo__steps--title">
+            How it works
+          </div>
+          <div class="promo__steps--desc">
+            <!--The latest company to enter the startup space by way of a business building competition is-->
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="promo__steps--list">
+            <div class="promo__steps--item">
+              <strong>Sign Up</strong>
+              <p>
+                Create an account with Evol8tion to start your profile.
+              </p>
+            </div>
+            <div class="promo__steps--item">
+              <strong>Describe Your Startup</strong>
+              <p>
+                Fill in as much information as you can to tell us all about your company.
+              </p>
+            </div>
+            <div class="promo__steps--item">
+              <strong>Answer Custom Questions</strong>
+              <p>
+                Share how your solution can help solve specific brand challenges.
+              </p>
+            </div>
+            <div class="promo__steps--item">
+              <strong>Submit Your Profile</strong>
+              <p>
+                You'll be contacted when the right opportunity for your company arises.
+              </p>
+            </div>
+            <div class="promo__steps--item">
+              <% if user_signed_in? && current_user.startup? %>
+                <strong>Apply Now</strong>
+                <%= link_to 'APPLY', new_startup_promo_brief_path(promo_alias: @promo_page.alias),
+                            class: 'btn btn_step btn_md sign-up-btn', id: 'sign_up' %>
+              <% else %>
+                <strong>Sign up Now</strong>
+                <%= link_to 'SIGN UP NOW', new_user_registration_path(promo_token: @promo_page[:token]),
+                            class: 'btn btn_step btn_md sign-up-btn', id: 'sign_up' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="promo__footer">
+    <div class="container">
+      <a href="javascript:;">
+        <%= image_tag('layout/logo.png', alt: 'EVOL8TION') %>
+      </a>
+      <span>Powered by Evol8tion</span>
+    </div>
+  </div>
+</div>

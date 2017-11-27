@@ -1,0 +1,12 @@
+startup_holder = $("#startup_<%= @startup.id %>");
+tags_holder = startup_holder.find("span.tags_items");
+count_holder = startup_holder.find("span.tags");
+tags_container = $("#tags_container_for_startup_<%= @startup.id %>");
+
+count_holder.html("<%= j render partial: 'tags/tags_count', locals: { tag_count: @tags_collection.count } %>");
+
+<% if @tags_collection.count == 1 %>
+  tags_container.html("<%= j render partial: 'tags/tags_holder', locals: { startup: @startup } %>");
+<% else %>
+  tags_holder.html("<%= j render partial: '/tags/list_tag', collection: @tags_collection %>");
+<% end %>

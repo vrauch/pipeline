@@ -1,0 +1,93 @@
+<% if @invite.startup? %>
+  <div class="tip_holder tip_small">
+    <%= form_for(@invite, remote: true) do |f| %>
+      <%= f.hidden_field :role %>
+      <div class="tip_body resend-invite-block">
+        <div class="tip_small_title">
+          Do you want to resend invite?
+        </div>
+        <div class="edit_email pre-resend <%= @invite.errors.any? ? 'hidden' : '' %>">
+          <div class="edit_email_text">This will send another copy of the message to:
+            <strong><%= @invite.email %></strong>
+          </div>
+          <a href="javascript:;" class="edit_email_link">Edit Email</a>
+        </div>
+        <div class="edit_email resend-form-input <%= @invite.errors.any? ? '' : 'hidden' %>">
+          <div class="edit_email_text">This will send another copy of the message to:</div>
+          <div class="form-group">
+            <%= f.text_field :email, class:'form-control', placeholder:'Enter new e-mail' %>
+          </div>
+        </div>
+      </div>
+      <div class="tip_group_btns double_btns clearfix">
+        <button type="button" href="javascript:;" class="btn btn_default btn_gray btn_tip_cancel">CANCEL</button>
+        <%= f.button class:'btn btn_default btn_black btn_tip_add btn_loader' do %>
+          <span>RESEND</span> <i class="icon icon_mark"></i>
+          <%= render '/layouts/loader' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+<% elsif @invite.evo_team? %>
+  <%= form_for(@invite, remote: true) do |f| %>
+    <%= f.hidden_field :role %>
+    <h3 class="card_title">Do you want to resend invite?</h3>
+    <div class="edit_email resend-invite-block">
+      <div class="pre-resend <%= @invite.errors.any? ? 'hidden' : '' %>">
+        <div class="edit_email_text">This will send another copy of the message to:
+          <strong><%= @invite.email %></strong>
+        </div>
+        <a href="javascript:;" class="edit_email_link">Edit Email</a>
+      </div>
+
+      <div class="resend-form-input <%= @invite.errors.any? ? '' : 'hidden' %>">
+        <div class="edit_email_text">This will send another copy of the message to:</div>
+        <div class="form-group">
+          <%= f.text_field :email, class: 'form-control' %>
+        </div>
+      </div>
+
+    </div>
+    <div class="add_card_btns clearfix">
+      <a href="javascript:;" class="btn btn_default btn_gray btn_cancel_card">CANCEL</a>
+      <%= f.button class:'btn btn_default btn_black' do %>
+        <span>RESEND</span>
+        <%= render '/layouts/loader' %>
+      <% end %>
+    </div>
+  <% end %>
+
+<% else %>
+  <%= form_for(@invite, remote: true) do |f| %>
+    <%= f.hidden_field :role %>
+    <%= f.hidden_field :resource_id %>
+    <%= f.hidden_field :user_group, value: 'brand_team' %>
+    <h3 class="card_title">Do you want to resend invite?</h3>
+    <div class="edit_email resend-invite-block">
+      <div class="pre-resend <%= @invite.errors.any? ? 'hidden' : '' %>">
+        <div class="edit_email_text">This will send another copy of the message to:
+          <strong><%= @invite.email %></strong>
+        </div>
+        <a href="javascript:;" class="edit_email_link">Edit Email</a>
+      </div>
+
+      <div class="resend-form-input <%= @invite.errors.any? ? '' : 'hidden' %>">
+        <div class="edit_email_text">This will send another copy of the message to:</div>
+        <div class="form-group">
+          <%= f.text_field :email, class: 'form-control' %>
+        </div>
+      </div>
+
+    </div>
+    <div class="add_card_btns clearfix">
+      <a href="javascript:;" class="btn btn_default btn_gray btn_cancel_card">CANCEL</a>
+      <%= f.button class:'btn btn_default btn_black' do %>
+        <span>RESEND</span>
+        <%= render '/layouts/loader' %>
+      <% end %>
+    </div>
+
+  <% end %>
+<% end %>
+

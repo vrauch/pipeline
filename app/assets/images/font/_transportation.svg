@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="19px" viewBox="0 0 16 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>Geo-location </title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-1" transform="translate(-530.000000, -556.000000)" fill="#000000">
+            <path d="M538,556 C533.581722,556 530,559.581722 530,564 C530,568.418 538,575 538,575 C538,575 546,568.418 546,564 C546,559.581722 542.418278,556 538,556 Z M538,557 C534.134007,557 531,560.134007 531,564 C531,567.86575 538,573.625 538,573.625 C538,573.625 545,567.86575 545,564 C545,560.134007 541.865993,557 538,557 Z M538,567 C536.343146,567 535,565.656854 535,564 C535,562.343146 536.343146,561 538,561 C539.656854,561 541,562.343146 541,564 C541,565.656854 539.656854,567 538,567 Z M538,566 C536.895431,566 536,565.104569 536,564 C536,562.895431 536.895431,562 538,562 C539.104569,562 540,562.895431 540,564 C540,565.104569 539.104569,566 538,566 Z" id="Geo-location-"></path>
+        </g>
+    </g>
+</svg>

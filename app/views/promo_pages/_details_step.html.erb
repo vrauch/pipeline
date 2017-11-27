@@ -1,0 +1,12 @@
+<h1 class="h1_title">Add additional sections</h1>
+<div class="subtitle">Add more details (why, what, how, ect…)</div>
+
+<div class="grid_padding_sm form_container">
+  <%= f.hidden_field :current_step %>
+  <%= f.fields_for :promo_page_details do |detail| %>
+    <%= render 'promo_page_detail_fields', f: detail %>
+  <% end %>
+  <div class="links">
+    <%= link_to_add_association '+ Add more sections', f, :promo_page_details, class: 'btn btn-default' %>
+  </div>
+</div>

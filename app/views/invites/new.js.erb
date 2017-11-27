@@ -1,0 +1,7 @@
+<% if can? :create, Invite %>
+  $("#new-user-block").html("<%= j(render 'new') %>");
+  $('.invite_new_user').fadeIn(400);
+<% else %>
+  $("#new-user-block").html("<%= j(render 'reached_limit') %>");
+  $('.invite_new_user').fadeIn(400);
+<% end %>

@@ -1,0 +1,52 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  errors:
+    messages:
+      wrong_size: "is the wrong size (should be %{file_size})"
+      size_too_small: "is too small (should be at least %{file_size})"
+      size_too_big: "is too big (should be at most %{file_size})"
+      blank: "Field required"
+
+  activerecord:
+    errors:
+      models:
+        list:
+          attributes:
+            name:
+              blank: "Required Field"
+        brand:
+          attributes:
+            color:
+              invalid: "Format color is invalid"
+              too_short: "Format color is too short (minimum is 7 characters)"
+              too_long: "Format color is too short (maximum is 7 characters)"
+            contact_email:
+              invalid: "Contact email format is invalid"
+        email_template:
+          attributes:
+            email_color:
+              invalid: "Format color is invalid"
+              too_short: "Format color is too short (minimum is 7 characters)"
+              too_long: "Format color is too long (maximum is 7 characters)"
+            copy_for_email:
+              too_long: "Copy for e-mail is too long (maximum is 255 characters)"

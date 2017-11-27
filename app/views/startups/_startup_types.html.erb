@@ -1,0 +1,20 @@
+<% if current_user.evo_team? %>
+  <% if startup.owner && startup.owner.invite.blank? && startup.promo_briefs.empty? ||
+        startup.owner && startup.owner.invite.try(:sender).try(:evo_team?) %>
+    <span class="list_label founder_label">Founder Evol8tion</span>
+  <% elsif startup.prefilled_brief? && startup.owner.blank? %>
+    <span class="list_label generated_label">Evol8tion Generated</span>
+  <% elsif startup.owner.blank? %>
+    <span class="list_label evo_label">Watchlist</span>
+  <% elsif startup.owner && startup.owner.invite.try(:sender).try(:brand_team?) || startup.owner && startup.promo_briefs.any? %>
+    <span class="list_label founder_brand_label">Founder-Brand</span>
+  <% end %>
+<% else %>
+  <% if startup.brand_startups.any? %>
+    <span class="list_label founder_label">Evol8tion</span>
+  <% elsif startup.owner && startup.owner.invite.try(:sender).try(:brand_team?) || startup.promo_briefs.any? %>
+    <span class="list_label founder_brand_label">Founder</span>
+  <% elsif startup.owner.blank? %>
+    <span class="list_label evo_label">Watchlist</span>
+  <% end %>
+<% end %>

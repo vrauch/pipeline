@@ -1,0 +1,72 @@
+<div class="dashboard__wrapper">
+  <div class="dashboard__head">
+    <div class="dashboard__head--title">
+      Hi, <%= current_user.f_name %>. Welcome back.
+    </div>
+    <div class="dashboard__head--desc">
+      Check out the latest updates and activity.
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-xs-4">
+          <%= link_to brands_path, class: 'dashboard__pane--info' do %>
+            <h4 class="dashboard__pane--title clearfix"><span class="num"><%= @total_pipelines %></span><span>total brand<br>pipelines</span></h4>
+          <% end %>
+        </div>
+        <div class="col-xs-4">
+          <%= link_to activities_path, class: 'dashboard__pane--info' do %>
+            <h4 class="dashboard__pane--title clearfix"><span class="num"><%= @total_brand_logins %></span><span>total brand<br>log-ins</span></h4>
+          <% end %>
+        </div>
+        <div class="col-xs-4">
+          <%= link_to requests_activities_path, class: "dashboard__pane--info" do %>
+            <h4 class="dashboard__pane--title clearfix"><span class="num"><%= @new_requests %></span><span>new brand<br>requests</span></h4>
+          <% end %>
+        </div>
+      </div>
+      <%= render 'total_statistic' %>
+      <div class="row">
+        <div class="col-sm-6<%= @startups_founder.empty? ? ' logos_empty_wrap' : ' logos_wrap' %>">
+          <% if @startups_founder.empty? %>
+            <%= render 'founder_submitted_empty' %>
+          <% else %>
+            <%= render 'founder_submitted' %>
+          <% end %>
+        </div>
+        <div class="col-sm-6<%= @startups_founder_brand.empty? ? ' logos_empty_wrap' : ' logos_wrap' %>">
+          <% if @startups_founder_brand.empty? %>
+            <%= render 'dashboard/evo/via_brand_empty' %>
+          <% else %>
+            <%= render 'dashboard/evo/via_brand' %>
+          <% end %>
+        </div>
+      </div>
+      <%= render 'dashboard/evo/entry_history' %>
+      <% if @saved_searches.empty? %>
+        <%= render 'saved_searches_empty' %>
+      <% else %>
+        <%= render 'saved_searches' %>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-sm-4 col-md-12">
+          <% if @notifications.empty? %>
+            <%= render 'dashboard/evo/notifications_empty' %>
+          <% else %>
+            <%= render 'dashboard/evo/notifications' %>
+          <% end %>
+        </div>
+        <div class="col-sm-8 col-md-12">
+          <% if @activities.empty? %>
+            <%= render 'activities_empty' %>
+          <% else %>
+            <%= render 'activities' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

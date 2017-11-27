@@ -1,0 +1,15 @@
+<div class="card_alert limit" style="display: block;">
+  <div class="card_alert_content">
+    <i class="icon icon_speedo"></i>
+    <div class="card_alert_title">
+      It's time to upgrade
+    </div>
+    <div class="card_alert_text">
+      This request takes you over your brand (<%= current_user.brand.package.number_users %>) users limit
+    </div>
+    <% if can? :create, Request %>
+      <%= link_to 'Request Upgrade', new_request_path(setting: 'profile_update'), remote: true,
+                  class: 'btn btn_default_round btn_pink btn_request_upgrade' %>
+    <% end %>
+  </div>
+</div>

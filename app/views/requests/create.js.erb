@@ -1,0 +1,26 @@
+el = $("#request-form")
+<% if @request.persisted? && @request.errors.empty? %>
+  $.controlMethods.hidePanel("send_request")
+  
+  if ($(".empty_block").length) {
+    $(".empty_block").replaceWith("<%= j render '/startups/present_requests' %>")
+    $("#notification").html("<%= j(render('layouts/flash_message')) %>")
+    $('.top_notification').addClass('sm_size').showFlashMessage()
+
+  } else if ($(".startup_requests_table").length || ($(".text_content").length && $(".startup_requests_table").length == 0)) {
+    $("<%= j render partial: '/requests/request', locals: { request: @request } %>").prependTo(".startup_requests_table")
+    $("#notification").html("<%= j(render('layouts/flash_message')) %>")
+    $('.top_notification').addClass('sm_size').showFlashMessage()
+  } else if ($(".startup_requests_table").length == 0) {
+    $("#notification").html("<%= j(render('layouts/flash_message')) %>")
+    $('.top_notification').showFlashMessage()
+  } else {
+    $("#notification").html("<%= j(render('layouts/flash_message')) %>")
+    $('.top_notification').showFlashMessage()
+  }
+  $('body').css('overflow-y', 'auto');
+<% else %>
+  el.html("<%= j render '/requests/new' %>")
+  $(".chosen-select").chosen({disable_search: true});
+<% end %>
+$.controlMethods.removePlaceholder();

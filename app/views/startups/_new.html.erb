@@ -1,0 +1,104 @@
+<h1 class="h1_title"><%= @startup.new_record? ? 'Add a startup to  the watchlist' : 'Edit Startup Info' %></h1>
+<div class="subtitle">Keep a record about the startups you read about, hear about, or meet.
+  Fill out a few details and then optionally invite them to join your Pipeline
+</div>
+<%= form_for @startup, url: @startup.new_record? ? startups_path : update_watchlist_startup_path(@startup), remote: true do |f| %>
+  <div class="grid_padding_sm form_container">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <label for="summary">OVERVIEW</label>
+          <%= f.text_field :title, class:'form-control', placeholder: 'Startup Name' %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group no_label_mt">
+          <%= f.text_field :location, class:'form-control', placeholder: 'Location' %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= f.fields_for :founders, @startup.persisted? ? @startup.founders : @startup.founders.new do |founder_fileds| %>
+          <div class="form-group">
+            <%= founder_fileds.text_field :name, class:'form-control', placeholder:'Founder Name(s)' %>
+            <%= founder_fileds.hidden_field :skip_validation, value: true %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% if false %>
+      <div class="row row_mt_sm">
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="contact_person_name">STARTUP CONTACT</label>
+            <%= f.text_field :contact_name, class:'form-control', placeholder: 'Contact Person Name' %>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="form-group no_label_mt">
+            <%= f.text_field :contact_email, class:'form-control', placeholder:'Contact Person Email' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="row row_mt_sm">
+      <div class="col-xs-6 form-group_mb">
+        <div class="form-group">
+          <label for="details">DETAILS</label>
+          <%= f.text_field :website, id:'details', class:'form-control', placeholder:'Website (http://www.website.com)' %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :twitter, class:'form-control', placeholder:'Twitter Username' %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :video_url, class:'form-control', placeholder: 'Video URL' %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group no_label_mt">
+          <%= f.text_area :description, class:'form-control textarea_md_size', placeholder: 'Enter Startup Description' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row_mt_sm">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <label for="summary">CONNECTION HISTORY</label>
+          <%= f.text_field :connection_source, id:'summary', class:'form-control', placeholder:'Source (example: event, friend, news...)' %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group no_label_mt">
+          <%= f.text_field :outreach_status, class:'form-control', placeholder: 'Status (example: met for coffee, sent email)' %>
+        </div>
+      </div>
+    </div>
+    <div class="row row_mt_sm">
+      <div class="col-xs-12">
+        <%= render 'startups/point_of_contact', f: f %>
+      </div>
+    </div>
+    <% if can?(:destroy, @startup) && @startup.persisted? %>
+      <%= link_to 'Delete Startup', delete_startup_path(@startup),
+                  class: 'btn btn_bordered_const btn_bordered_red btn_delete_startup md_size',
+                  remote: true %>
+    <% end %>
+  </div>
+
+  <div class="bot_control_btns">
+    <div class="row">
+      <div class="col-xs-6 left text-right">
+        <%= link_to 'CANCEL', "javascript:;", class:'control_link dismiss_panels' %>
+      </div>
+      <div class="col-xs-6 right text-left">
+        <%= f.hidden_field :skip_validation, value: true %>
+        <%= f.button  class:'control_link btn_show_mark btn_loader', type: 'submit' do %>
+          <span><%= f.object.persisted? ? 'UPDATE' : 'ADD STARTUP' %></span><i class="icon icon_mark"></i>
+          <%= render '/layouts/loader' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

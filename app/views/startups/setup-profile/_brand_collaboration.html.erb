@@ -1,0 +1,8 @@
+<div class="btn-group btn_input_inline_group checkbox-group" data-toggle="buttons" data-limit="<%= brief_question.up_to %>">
+  <% brief_question.answers.each do |answer| %>
+    <%= label_tag "answers[#{brief_question.id}]", class: @answers[brief_question.alias].present? && @answers[brief_question.alias].include?(answer.id) ? 'btn btn_input_inline active checkbox-answer' : 'btn btn_input_inline checkbox-answer' do %>
+      <%= check_box_tag "answers[#{brief_question.id}][]", answer.id, @answers[brief_question.alias].present? && @answers[brief_question.alias].include?(answer.id), autocomplete: 'off'  %>
+      <span><i class="icon icon_<%= answer.category_value.icon_name %>"></i><%= answer.category_value.content %></span>
+    <% end %>
+  <% end %>
+</div>

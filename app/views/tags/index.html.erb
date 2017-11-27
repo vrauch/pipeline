@@ -1,0 +1,23 @@
+<% if @tags.any? || @search %>
+  <div class="head_content head_content_padd hidden-xs">
+    <h1 class="h1_title">Keyword Tags</h1>
+    <div class="subtitle">Below are the list of keywords added to startup profiles.</div>
+  </div>
+
+  <div class="light_block">
+    <div class="light_block_body">
+      <%= render 'tags_search' %>
+      <div class="tags_holder">
+        <% if @tags.any? %>
+          <%= render 'tags' %>
+        <% else %>
+          <%= render 'nothing_found' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render 'empty_tags' %>
+<% end %>
+
+<div id="startups-index"></div>

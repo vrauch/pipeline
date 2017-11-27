@@ -1,0 +1,5 @@
+el = $("#watchlist-form")
+el.html("<%= j(render partial: 'new') %>")
+
+$.controlMethods.showPanel("watchlist-form")
+$.controlMethods.hidePanel("invers_panel");

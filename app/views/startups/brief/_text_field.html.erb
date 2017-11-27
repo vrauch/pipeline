@@ -1,0 +1,11 @@
+<% if brief_question.money_field? %>
+  <div class="form-group amount_group">
+    <%= text_field_tag "brief_answers[#{brief_question.id}]", brief_question.field_value, class: 'form-control',
+                      placeholder: 'Total Amount' %>
+    <span class="amount_sign">$</span>
+  </div>
+<% else %>
+  <%= text_area_tag "brief_answers[#{brief_question.id}]", brief_question.field_value, class: 'form-control',
+                    placeholder: 'please describe in details' %>
+<% end %>
+

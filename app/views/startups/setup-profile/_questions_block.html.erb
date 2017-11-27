@@ -1,0 +1,28 @@
+<% questions.each_with_index do |brief_question, index| %>
+  <% if brief_question.single? %>
+    <%= render partial: brief_question.class.name == "StartupBriefQuestion" ?
+                                '/startups/setup-profile/single_test' :
+                                '/startups/setup-profile/promo_single',
+               locals: { brief_question: brief_question,
+                         index: brief_question.class.name == "StartupBriefQuestion" ?
+                                                 index : (index + rand(1..10000)),
+                         last_question: (index == questions.count - 1) ? true : false } %>
+  <% elsif brief_question.multi? %>
+    <%= render partial: brief_question.class.name == "StartupBriefQuestion" ?
+                                '/startups/setup-profile/multi_test'  :
+                                '/startups/setup-profile/promo_multi',
+               locals: { brief_question: brief_question,
+                         index: brief_question.class.name == "StartupBriefQuestion" ?
+                                                 index : (index + rand(1..10000)),
+                         last_question: (index == questions.count - 1) ? true : false } %>
+  <% else %>
+    <%= render partial: brief_question.class.name == "StartupBriefQuestion" ?
+                                '/startups/setup-profile/text_test'   :
+                                '/startups/setup-profile/promo_text',
+               locals: { brief_question: brief_question,
+                         index: brief_question.class.name == "StartupBriefQuestion" ?
+                                                 index : (index + rand(1..10000)),
+                         last_question: (index == questions.count - 1) ? true : false } %>
+  <% end %>
+<% end %>
+

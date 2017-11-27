@@ -1,0 +1,164 @@
+<div class="print_content">
+  <div class="grid_padding_sm">
+
+    <div class="template_preview">
+      <h2 class="h2_title title_img">
+        STARTUP SCORECARD
+        <%= wicked_pdf_image_tag(scorecard.scorecard_template.try(:get_logo)) if scorecard.scorecard_template.try(:get_logo) %>
+      </h2>
+      <div class="template_preview_inner">
+
+        <div class="preview_block preview_block_head">
+          <div class="row">
+            <div class="col-sm-3 preview_block_left">
+              <div class="centered_img">
+                <%= wicked_pdf_image_tag(scorecard.logo) if scorecard.logo? %>
+              </div>
+            </div>
+            <div class="col-sm-9 preview_block_right">
+              <h2><%= scorecard.title_fv %></h2>
+              <p>
+                <%= scorecard.description_fv %>
+              </p>
+              <p class="site_text">
+                <%= link_to(scorecard.website_fv, '#') %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview_block preview_block_vitals">
+          <h3 class="bordered_title">VITALS</h3>
+          <div class="row">
+            <div class="col-sm-3 preview_block_left">
+              <div class="info_item">
+                <div class="info_item_title">
+                  LOCATION
+                </div>
+                <p><%= scorecard.location_fv %></p>
+              </div>
+            </div>
+            <div class="col-sm-9 preview_block_right">
+              <div class="info_item">
+                <div class="info_item_title">
+                  FUNDING STAGE
+                </div>
+                <p><%= scorecard.fun_stage_fv %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3 preview_block_left">
+              <div class="info_item">
+                <div class="info_item_title">
+                  DATE FOUNDED
+                </div>
+                <p><%= scorecard.date_founded_fv %></p>
+              </div>
+            </div>
+            <div class="col-sm-9 preview_block_right">
+              <div class="info_item">
+                <div class="info_item_title">
+                  BRAND EXPERIENCE
+                </div>
+                <p><%= scorecard.brand_experience_fv %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3 preview_block_left">
+              <div class="info_item">
+                <div class="info_item_title">
+                  DEVELOPMENT STAGE
+                </div>
+                <p><%= scorecard.dev_stage_fv %></p>
+              </div>
+            </div>
+            <div class="col-sm-3 preview_block_right">
+              <div class="info_item">
+                <div class="info_item_title">
+                  <%= scorecard.scorecard_template.macro_categories_title.try(:upcase) %>
+                </div>
+                <p><%= scorecard.macro_trends_fv %></p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="info_item">
+                <div class="info_item_title">
+                  <%= scorecard.scorecard_template.micro_categories_title.try(:upcase) %>
+                </div>
+                <p><%= scorecard.micro_trends_fv %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview_block preview_block_product">
+          <h3 class="bordered_title">PRODUCT</h3>
+          <div class="row">
+
+            <%= render 'scorecards/product_section_type_show',
+              scorecard: scorecard,
+              section_type: scorecard.scorecard_template.ls_product_section_type,
+              side: 'left' %>
+            <%= render 'scorecards/product_section_type_show',
+              scorecard: scorecard,
+              section_type: scorecard.scorecard_template.rs_product_section_type,
+              side: 'right' %>
+          </div>
+        </div>
+
+        <div class="preview_block">
+          <h3 class="bordered_title">SCORING</h3>
+          <div class="row">
+            <div class="col-lg-6">
+              <%= render 'scorecards/graph', scorecard: scorecard %>
+            </div>
+            <div class="col-lg-6 graph_desc graph_desc_active">
+              <div class="custom_graph_values_list clearfix">
+                <div class="custom_graph_value_item">
+                  <div class="custom_graph_value">
+                    <span><%= scorecard.product_total_score %></span>/10
+                  </div>
+                  <div class="custom_graph_value_descr">
+                    product<br> quality
+                  </div>
+                </div>
+                <div class="custom_graph_value_item">
+                  <div class="custom_graph_value">
+                    <span><%= scorecard.collaboration_total_score %></span>/10
+                  </div>
+                  <div class="custom_graph_value_descr">
+                    CORPORATE<br> COLLABORATION
+                  </div>
+                </div>
+                <div class="custom_graph_value_item">
+                  <div class="custom_graph_value">
+                    <span><%= scorecard.business_total_score %></span>/10
+                  </div>
+                  <div class="custom_graph_value_descr">
+                    BUSINESS<br> ALIGNMENT
+                  </div>
+                </div>
+              </div>
+              <div class="info_item">
+                <div class="info_item_title graph_title">
+                  RECOMMENDATION:
+                  <div><%= scorecard.recommendation_title %></div>
+                </div>
+                <p>
+                  <%= scorecard.recommendation_fv %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="powered_by">
+        <span>POWERED BY</span> <%= wicked_pdf_image_tag 'layout/logo03.png', alt: 'Evol8tion' %>
+      </div>
+    </div>
+  </div>
+</div>

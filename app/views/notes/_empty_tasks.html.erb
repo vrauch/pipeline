@@ -1,0 +1,8 @@
+<div class="empty_block empty_block_pt">
+  <div class="curved_lines" style="left: 628.5px; bottom: 276px;"></div>
+  <%= link_to '+ Add Task', new_note_path(startup_id: @startup.id, type: 'task'),
+              class:'btn btn_add btn_in_empty absolute', remote: true  %>
+  <i class="icon icon_checkboxes"></i>
+  <h1 class="empty_title"><span class="empty_title_inner">Tasks</span></h1>
+  <p class="empty_text">Assign a task to a teammate or send yourself a reminder</p>
+</div>
